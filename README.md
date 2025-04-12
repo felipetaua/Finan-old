@@ -1,4 +1,5 @@
-# finan
+# ![AppSplash](https://github.com/user-attachments/assets/72ae74d2-ef4d-4fe6-ad4c-2d670a2b94e9)
+Finan
 
 A new Flutter project.
 
