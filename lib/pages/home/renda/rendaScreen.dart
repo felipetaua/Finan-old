@@ -144,6 +144,7 @@ class _RendaScreenState extends State<RendaScreen> {
                 controller: _salarioController,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
+                  // ignore: deprecated_member_use
                   MoneyInputFormatter(
                     leadingSymbol: 'R\$',
                     thousandSeparator: ThousandSeparator.Period,
