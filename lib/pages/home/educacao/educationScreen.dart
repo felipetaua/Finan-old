@@ -48,19 +48,19 @@ class EducationPage extends StatelessWidget {
                     controller: PageController(viewportFraction: 0.9),
                     children: [
                       _buildCard(
-                        title: 'Tutoriais e\nCursos',
-                        color: const Color(0xFFF3B53E),
-                        imagePath: 'assets/images/Edu-carteira.jpg',
+                        title: 'Crie sua reserva \n de Emergência',
+                        color: const Color(0xFFF33D3D),
+                        imagePath: 'assets/images/Edu-red.png',
                       ),
                       _buildCard(
                         title: 'Dicas de\nInvestimento',
                         color: const Color(0xFF4CAF50),
-                        imagePath: 'assets/images/Edu-porco.jpg',
+                        imagePath: 'assets/images/Edu-green.png',
                       ),
                       _buildCard(
                         title: 'Planejamento\nFinanceiro',
                         color: const Color(0xFF2196F3),
-                        imagePath: 'assets/images/Edu-planejamento.jpg',
+                        imagePath: 'assets/images/Edu-blue.png',
                       ),
                     ],
                   ),
@@ -148,6 +148,7 @@ class EducationPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
+                // Card 1: Controle de gastos de forma eficiente
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -168,7 +169,8 @@ class EducationPage extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey[700],
+                                backgroundColor: Colors.grey[500],
+                                foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -184,8 +186,149 @@ class EducationPage extends StatelessWidget {
                       const SizedBox(width: 16),
                       Image.asset(
                         'assets/images/educacao-icon.png',
-                        height: 60,
-                        width: 60,
+                        height: 120,
+                        width: 120,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Card 2: Formas de conseguir poupar
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF1E6),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Formas de\nconseguir poupar',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey[500],
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                ),
+                              ),
+                              child: const Text('Iniciar'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Image.asset(
+                        'assets/images/educacao-white.png',
+                        height: 120,
+                        width: 120,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Card 3: Cortando gastos pela raiz
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE0C1EB),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Cortando gastos\npela raiz',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey[500],
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                ),
+                              ),
+                              child: const Text('Iniciar'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Image.asset(
+                        'assets/images/educacao-purple.png',
+                        height: 120,
+                        width: 120,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Card 4: Como utilizar cartão de crédito da maneira correta
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF28180),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Como utilizar\ncartão de crédito\nda maneira correta',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey[500],
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                ),
+                              ),
+                              child: const Text('Iniciar'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Image.asset(
+                        'assets/images/educacao-red.png',
+                        height: 120,
+                        width: 120,
                       ),
                     ],
                   ),

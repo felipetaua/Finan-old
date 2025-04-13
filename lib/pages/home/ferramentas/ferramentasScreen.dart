@@ -1,6 +1,7 @@
 import 'package:finan/pages/home/ferramentas/calculadora.dart';
 import 'package:finan/pages/home/ferramentas/conversorMoeda.dart';
 import 'package:finan/pages/home/ferramentas/porcentagem.dart';
+import 'package:finan/pages/home/investimentos/cryptoPage.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -331,18 +332,6 @@ class CryptoCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CryptoDetailsPage extends StatelessWidget {
-  const CryptoDetailsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Detalhes da Crypto')),
-      body: const Center(child: Text('Detalhes sobre a Crypto selecionada.')),
     );
   }
 }
