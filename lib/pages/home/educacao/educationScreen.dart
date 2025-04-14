@@ -1,10 +1,18 @@
+import 'package:finan/pages/home/educacao/dicasInvestimentos.dart';
+import 'package:finan/pages/home/educacao/planejamentoFinanceiro.dart';
+import 'package:finan/pages/home/educacao/reservaEmergencia.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class EducationPage extends StatelessWidget {
   const EducationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final PageController pageController = PageController(
+      viewportFraction: 1.05,
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -42,32 +50,6 @@ class EducationPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                SizedBox(
-                  height: 150,
-                  child: PageView(
-                    controller: PageController(viewportFraction: 0.9),
-                    children: [
-                      _buildCard(
-                        title: 'Crie sua reserva \n de Emergência',
-                        color: const Color(0xFFF33D3D),
-                        imagePath: 'assets/images/Edu-red.png',
-                      ),
-                      _buildCard(
-                        title: 'Dicas de\nInvestimento',
-                        color: const Color(0xFF4CAF50),
-                        imagePath: 'assets/images/Edu-green.png',
-                      ),
-                      _buildCard(
-                        title: 'Planejamento\nFinanceiro',
-                        color: const Color(0xFF2196F3),
-                        imagePath: 'assets/images/Edu-blue.png',
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -91,6 +73,81 @@ class EducationPage extends StatelessWidget {
                         width: 50,
                       ),
                     ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                SizedBox(
+                  height: 162,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: PageView(
+                          controller: pageController,
+
+                          children: [
+                            _buildCard(
+                              title: 'Crie sua reserva \n de Emergência',
+                              color: const Color(0xFFF33D3D),
+                              imagePath: 'assets/images/Edu-red.png',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ReservaEmergencia(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildCard(
+                              title: 'Dicas de\nInvestimento',
+                              color: const Color(0xFF4CAF50),
+                              imagePath: 'assets/images/Edu-green.png',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DicasInvestimentos(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildCard(
+                              title: 'Planejamento\nFinanceiro',
+                              color: const Color(0xFF2196F3),
+                              imagePath: 'assets/images/Edu-blue.png',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => PlanejamentoFinanceiro(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Indicador deslizante
+                Center(
+                  child: SmoothPageIndicator(
+                    controller: pageController,
+                    count: 3, // Número de cards
+                    effect: const ExpandingDotsEffect(
+                      activeDotColor: Color(0xFF368DF7),
+                      dotColor: Colors.grey,
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      expansionFactor: 3,
+                    ),
                   ),
                 ),
 
@@ -246,7 +303,7 @@ class EducationPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE0C1EB),
+                    color: const Color(0xFFf7ecd2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -293,7 +350,7 @@ class EducationPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF28180),
+                    color: const Color(0xFFff6766),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -346,27 +403,31 @@ Widget _buildCard({
   required String title,
   required Color color,
   required String imagePath,
+  required VoidCallback onTap,
 }) {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 8),
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: color,
-      borderRadius: BorderRadius.circular(16),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        Image.asset(imagePath, height: 130, width: 130),
-      ],
+          Image.asset(imagePath, height: 130, width: 120),
+        ],
+      ),
     ),
   );
 }
