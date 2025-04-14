@@ -178,7 +178,7 @@ class _GastosPageState extends State<GastosPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (_) => ConfigPage(),
+                                        builder: (_) => ConfiguracoesPage(),
                                       ),
                                     );
                                   },
