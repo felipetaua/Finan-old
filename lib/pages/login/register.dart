@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:finan/pages/login/feedbackRegister.dart';
 import 'package:finan/pages/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,6 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
       final idUsuario = jsonDecode(resposta.body)['name'];
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('userId', idUsuario);
+
+      // Navega para a tela de feedback e remove todas as telas anteriores
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const FeedbackPage()),
+        (route) => false, // Remove todas as telas anteriores
+      );
     } else {
       erro = "Erro ao cadastrar usuário";
     }

@@ -108,7 +108,8 @@ class EducationPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DicasInvestimentos(),
+                                    builder:
+                                        (context) => const DicasInvestimentos(),
                                   ),
                                 );
                               },
@@ -122,7 +123,8 @@ class EducationPage extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (context) => PlanejamentoFinanceiro(),
+                                        (context) =>
+                                            const PlanejamentoFinanceiro(),
                                   ),
                                 );
                               },

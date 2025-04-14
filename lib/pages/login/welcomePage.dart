@@ -1,4 +1,4 @@
-import 'package:finan/pages/home/main/mainScreen.dart';
+import 'package:finan/pages/home/main/homeScreen.dart';
 import 'package:finan/pages/login/login.dart';
 import 'package:finan/pages/login/register.dart';
 import 'package:flutter/material.dart';

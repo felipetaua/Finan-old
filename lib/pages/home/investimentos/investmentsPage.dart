@@ -248,7 +248,7 @@ class _AtivoItemState extends State<_AtivoItem> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withAlpha((0.2 * 255).toInt()),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
