@@ -44,40 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  // Exibir o diálogo de logout
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Deseja sair?'),
-            content: const Text(
-              'Você tem certeza que deseja sair da sua conta?',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context), // Fecha o diálogo
-                child: const Text('Cancelar'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context); // Fecha o diálogo
-                  Navigator.pushReplacementNamed(
-                    context,
-                    '/inicio',
-                  ); // Navega para a tela inicial
-                },
-                child: const Text('Sair'),
-              ),
-            ],
-          ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,23 +118,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 hintText: '  /  /',
               ),
               const SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: () => _showLogoutDialog(context),
-                icon: const Icon(Icons.logout),
-                label: const Text('Logout'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade600,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 12,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    side: const BorderSide(color: Colors.red),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

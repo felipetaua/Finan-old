@@ -1,6 +1,10 @@
+import 'package:finan/pages/login/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfiguracoesPage extends StatefulWidget {
+  const ConfiguracoesPage({super.key});
+
   @override
   State<ConfiguracoesPage> createState() => _ConfiguracoesPageState();
 }
@@ -156,6 +160,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               subtitle: 'Encerrar sessão atual',
               icon: Icons.logout,
               trailing: Icon(Icons.exit_to_app),
+              onTap: () => _showLogoutDialog(context),
             ),
           ],
         ),
@@ -182,11 +187,10 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     required String subtitle,
     required IconData icon,
     required Widget trailing,
+    VoidCallback? onTap,
   }) {
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 300),
-      transitionBuilder:
-          (child, animation) => ScaleTransition(scale: animation, child: child),
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
         key: ValueKey(title + subtitle),
         margin: const EdgeInsets.only(bottom: 12),
@@ -200,7 +204,9 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                   ? Border.all(
                     color: const Color.fromARGB(255, 255, 95, 84),
                     width: 2,
-                  ) // Borda vermelha
+                  )
+                  : title == 'Editar Perfil'
+                  ? Border.all(color: Colors.grey, width: 2) // Borda vermelha
                   : null,
           boxShadow: [
             BoxShadow(
@@ -235,4 +241,42 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       ),
     );
   }
+}
+
+// Exibir o diálogo de logout
+void _showLogoutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          title: const Text('Deseja sair?'),
+          content: const Text('Você tem certeza que deseja sair da sua conta?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context), // Fecha o diálogo
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.clear(); // Limpa os dados do usuário
+
+                Navigator.pop(context); // Fecha o diálogo
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WelcomeScreen(),
+                  ),
+                  (route) => false, // Remove todas as telas anteriores
+                );
+              },
+              child: const Text('Sair'),
+            ),
+          ],
+        ),
+  );
 }
