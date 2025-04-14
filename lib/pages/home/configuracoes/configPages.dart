@@ -1,3 +1,6 @@
+import 'package:finan/pages/home/configuracoes/informacoesLegais.dart';
+import 'package:finan/pages/home/configuracoes/termosDePrivacidade.dart';
+import 'package:finan/pages/home/configuracoes/termosDeUso.dart';
 import 'package:finan/pages/login/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -96,6 +99,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               subtitle: 'Direitos e deveres do usuário',
               icon: Icons.description,
               trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TermosDeUsoPage()),
+                );
+              },
             ),
 
             _buildCard(
@@ -103,6 +111,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               subtitle: 'Como seus dados são tratados',
               icon: Icons.privacy_tip,
               trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PoliticaDePrivacidadePage()),
+                );
+              },
             ),
 
             _buildCard(
@@ -110,6 +123,14 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               subtitle: 'Conformidade e regulamentações',
               icon: Icons.gavel,
               trailing: Icon(Icons.chevron_right),
+              onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InformacoesLegaisPage(), // Substitua pela página correspondente
+                ),
+              );
+            },
             ),
 
             const SizedBox(height: 24),

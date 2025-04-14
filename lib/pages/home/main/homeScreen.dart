@@ -1,5 +1,5 @@
 import 'package:finan/pages/home/educacao/educationScreen.dart';
-import 'package:finan/pages/home/ferramentas/configPages.dart';
+import 'package:finan/pages/home/configuracoes/configPages.dart';
 import 'package:finan/pages/home/ferramentas/ferramentasScreen.dart';
 import 'package:finan/pages/home/ferramentas/notificacoesScreen.dart';
 import 'package:finan/pages/home/ferramentas/outrosScreen.dart';
