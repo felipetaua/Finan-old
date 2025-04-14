@@ -77,6 +77,7 @@ class InvestimentosPage extends StatelessWidget {
               SizedBox(
                 height: 150,
                 child: PageView(
+                  controller: PageController(viewportFraction: 1.00),
                   children: [
                     CryptoCard(
                       title: 'Explore o mundo das Cryptos!',
@@ -91,6 +92,7 @@ class InvestimentosPage extends StatelessWidget {
                         );
                       },
                     ),
+
                     CryptoCard(
                       title: 'Invista em Bitcoin!',
                       description: 'A moeda digital mais popular do mundo.',
@@ -335,6 +337,7 @@ class CryptoCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 2),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFF2B2E6F), Color(0xFF1E2337)],
