@@ -1,3 +1,4 @@
+import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -98,7 +99,14 @@ class PouparPage extends StatelessWidget {
               // Botão para adicionar reservas e objetivos
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GoalsPage(),
+                      ), // Substitua pela sua página
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent, // Cor do botão
                     shape: RoundedRectangleBorder(
