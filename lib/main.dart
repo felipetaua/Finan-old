@@ -12,13 +12,29 @@ import 'package:finan/pages/login/register.dart';
 import 'package:finan/pages/login/screenSplash.dart';
 import 'package:finan/pages/login/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Color(0xFF368DF7),
+      statusBarIconBrightness: Brightness.light,
+    ),
+  );
+
+  runApp(const FinanApp()); // Agora sim usa seu widget principal
+}
+
+class FinanApp extends StatelessWidget {
+  const FinanApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Finan - Login',
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(), // default home: const WelcomeScreen(),
+      theme: ThemeData(fontFamily: 'Poppins', primarySwatch: Colors.blue),
       routes: {
         '/inicio': (context) => const WelcomeScreen(),
         '/poupar': (context) => const PouparPage(),
@@ -34,23 +50,11 @@ void main() {
         '/notificacao': (context) => NotificacoesPage(),
         '/gerenciamento': (context) => AdicionarTransacaoPage(),
       },
-    ),
-  );
-}
-
-class FinanApp extends StatelessWidget {
-  const FinanApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Finan - Login',
-      theme: ThemeData(fontFamily: 'Poppins', primarySwatch: Colors.blue),
       home: FutureBuilder(
         future: _checkLoginStatus(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const SplashScreen();
           } else {
             final isLoggedIn = snapshot.data as bool;
             return isLoggedIn
