@@ -32,7 +32,7 @@ class FocoPage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFF4EBEB),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -49,11 +49,12 @@ class FocoPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              Expanded(
+              Flexible(
                 child: GridView.count(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
+                  childAspectRatio: 0.8,
                   children: [
                     _buildCard(
                       context,
@@ -127,13 +128,13 @@ class FocoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, size: 28, color: Colors.black87),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
             Text(
               title,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const SizedBox(height: 8),
-            Text(description, style: const TextStyle(fontSize: 13)),
+            Text(description, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),

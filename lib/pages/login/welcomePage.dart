@@ -1,4 +1,5 @@
 import 'package:finan/pages/home/main/homeScreen.dart';
+import 'package:finan/pages/login/foco.dart';
 import 'package:finan/pages/login/login.dart';
 import 'package:finan/pages/login/register.dart';
 import 'package:flutter/material.dart';
@@ -105,8 +106,7 @@ class WelcomeScreen extends StatelessWidget {
                         context,
                         PageRouteBuilder(
                           transitionDuration: const Duration(milliseconds: 500),
-                          pageBuilder:
-                              (_, __, ___) => const GastosPage(nomeUsuario: ''),
+                          pageBuilder: (_, __, ___) => const FocoPage(),
                           transitionsBuilder: (_, animation, __, child) {
                             const begin = Offset(
                               1.0,

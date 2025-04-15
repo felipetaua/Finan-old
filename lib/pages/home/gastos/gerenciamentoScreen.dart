@@ -152,9 +152,7 @@ class AdicionarTransacaoPage extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Ação ao clicar no botão
-        },
+        onPressed: () {},
         backgroundColor: const Color(0xFF368DF7),
         shape: const CircleBorder(),
         heroTag: 'adicionar_transacao_fab', // Tag única para este botão

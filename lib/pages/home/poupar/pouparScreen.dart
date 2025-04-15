@@ -98,11 +98,7 @@ class PouparPage extends StatelessWidget {
               // Botão para adicionar reservas e objetivos
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Ação ao clicar no botão
-                    // ignore: avoid_print
-                    print('Botão "Crie sua caixinha de metas" clicado!');
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent, // Cor do botão
                     shape: RoundedRectangleBorder(

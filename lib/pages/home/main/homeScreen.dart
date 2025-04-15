@@ -368,7 +368,9 @@ class _GastosContent extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => InvestimentosScreenCard(),
+                            builder:
+                                (context) =>
+                                    InvestimentosScreenCard(), //InvestimentosScreenCard
                           ),
                         );
                       },
