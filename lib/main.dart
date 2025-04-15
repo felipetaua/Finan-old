@@ -22,7 +22,6 @@ void main() {
       statusBarIconBrightness: Brightness.light,
     ),
   );
-
   runApp(const FinanApp()); // Agora sim usa seu widget principal
 }
 
