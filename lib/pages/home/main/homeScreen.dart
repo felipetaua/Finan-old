@@ -131,7 +131,8 @@ class _GastosPageState extends State<GastosPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(top: 20),
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
