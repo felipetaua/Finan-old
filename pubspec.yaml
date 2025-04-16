@@ -72,6 +72,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/avatares/
+    - assets/fonts/
     - assets/images/ipva.png
     - assets/images/imposto.png
     - assets/images/iptu.png
@@ -79,6 +80,10 @@ flutter:
     - assets/images/faculdade.png
     - assets/images/seguro.png
 
+fonts:
+    - family: Madimi One
+      fonts:
+        -  asset: assets/fonts/MadimiOne-Regular.ttf
 
 flutter_launcher_icons:
   android: true
