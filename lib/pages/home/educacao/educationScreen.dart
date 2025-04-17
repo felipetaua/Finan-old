@@ -211,7 +211,7 @@ class EducationPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFF4CE),
+                    color: const Color(0xFFf7ecd2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -305,7 +305,7 @@ class EducationPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFf7ecd2),
+                    color: const Color(0xFFE0C1EB),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
