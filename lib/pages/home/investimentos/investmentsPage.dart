@@ -418,9 +418,12 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
                         final ativo = _searchResults[index];
                         return ListTile(
                           leading: Image.asset(
-                            ativo['icon'],
+                            ativo['icon'] ?? '',
                             width: 30,
                             height: 30,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Icon(Icons.image_not_supported);
+                            },
                           ),
                           title: Text(ativo['nome']),
                           subtitle: Text(ativo['preco']),
