@@ -16,7 +16,13 @@ class WelcomeScreen extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
           child: AppBar(
-            title: Text('Finan', style: GoogleFonts.getFont('Aoboshi One')),
+            title: Text(
+              'Finan',
+              style: const TextStyle(
+                fontFamily: 'Madimi One',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
           ),
@@ -35,8 +41,9 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 Text(
                   'Welcome, Finan',
-                  style: GoogleFonts.nunito(
+                  style: const TextStyle(
                     fontSize: 24,
+                    fontFamily: 'Madimi One',
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF377DFF),
                   ),

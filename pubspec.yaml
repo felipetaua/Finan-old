@@ -81,9 +81,9 @@ flutter:
     - assets/images/seguro.png
 
 fonts:
-    - family: Madimi One
-      fonts:
-        -  asset: assets/fonts/MadimiOne-Regular.ttf
+  - family: Madimi One
+    fonts:
+      - asset: assets/fonts/MadimiOne-Regular.ttf
 
 flutter_launcher_icons:
   android: true
