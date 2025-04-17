@@ -26,8 +26,7 @@ class InvestimentosScreenCard extends StatelessWidget {
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed:
-                  () => Navigator.pop(context), // Voltar para a tela anterior
+              onPressed: () => Navigator.pop(context),
             ),
             actions: [
               IconButton(
@@ -35,11 +34,7 @@ class InvestimentosScreenCard extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) =>
-                              ShowWalletPage(), // Substitua pelo nome correto da página
-                    ),
+                    MaterialPageRoute(builder: (context) => ShowWalletPage()),
                   );
                 }, // Abrir a página de seleção de avatar
                 color: Colors.white,
