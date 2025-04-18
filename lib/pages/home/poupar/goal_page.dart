@@ -29,14 +29,14 @@ class _GoalsPageState extends State<GoalsPage> {
   final List<GoalModel> _goals = [];
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController targetValueController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController targetValueController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
 
   void _showCreateGoalModal() {
     nameController.clear();
-    targetValueController.clear();
     descriptionController.clear();
+    targetValueController.clear();
 
     showModalBottomSheet(
       context: context,
@@ -58,15 +58,15 @@ class _GoalsPageState extends State<GoalsPage> {
                 ),
               ),
               TextField(
+                controller: descriptionController,
+                decoration: const InputDecoration(labelText: "Descrição"),
+              ),
+              TextField(
                 controller: targetValueController,
                 decoration: const InputDecoration(
                   labelText: "Valor necessário",
                 ),
                 keyboardType: TextInputType.number,
-              ),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(labelText: "Descrição"),
               ),
               const SizedBox(height: 20),
               ElevatedButton(

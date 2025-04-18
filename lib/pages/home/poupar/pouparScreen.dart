@@ -2,8 +2,283 @@ import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class PouparPage extends StatelessWidget {
+class MoneyModel {
+  final String id;
+  final String name;
+  final String description;
+  final double targetValue;
+  double currentValue;
+  final DateTime createdAt;
+
+  MoneyModel({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.targetValue,
+    required this.currentValue,
+    required this.createdAt,
+  });
+}
+
+class PouparPage extends StatefulWidget {
   const PouparPage({super.key});
+
+  @override
+  State<PouparPage> createState() => _PouparPageState();
+}
+
+class _PouparPageState extends State<PouparPage> {
+  final List<GoalModel> _money = [];
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController targetValueController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController valueController = TextEditingController();
+
+  void _showCreateBoxModal() {
+    nameController.clear();
+    targetValueController.clear();
+    descriptionController.clear();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent, // Para bordas arredondadas
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Nova Caixinha',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: "Nome do objetivo",
+                    labelStyle: const TextStyle(color: Colors.black38),
+                    prefixIcon: const Icon(Icons.flag),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.blueAccent,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: descriptionController,
+                  decoration: InputDecoration(
+                    labelText: "Descrição",
+                    labelStyle: const TextStyle(color: Colors.black38),
+                    prefixIcon: const Icon(Icons.description),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.blueAccent,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                TextField(
+                  controller: targetValueController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Valor necessário",
+                    labelStyle: const TextStyle(color: Colors.black38),
+                    prefixIcon: const Icon(Icons.attach_money),
+                    suffix: Text('reais'),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.green,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    final goal = GoalModel(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      name: nameController.text,
+                      description: descriptionController.text,
+                      targetValue:
+                          double.tryParse(targetValueController.text) ?? 0,
+                      currentValue: 0,
+                      createdAt: DateTime.now(),
+                    );
+                    setState(() {
+                      _money.add(goal);
+                    });
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    "Criar caixinha",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showAddMoneyDialog(GoalModel meta) {
+    valueController.clear();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Adicionar Dinheiro',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: valueController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Valor",
+                    labelStyle: const TextStyle(color: Colors.black38),
+                    prefixIcon: const Icon(Icons.attach_money),
+                    suffix: const Text('reais'),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.blueAccent,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text(
+                          "Cancelar",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          double value =
+                              double.tryParse(valueController.text) ?? 0;
+                          setState(() {
+                            meta.currentValue += value;
+                          });
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          "Adicionar",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +375,7 @@ class PouparPage extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GoalsPage(),
-                      ), // Substitua pela sua página
-                    );
+                    _showCreateBoxModal();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent, // Cor do botão
@@ -137,27 +407,122 @@ class PouparPage extends StatelessWidget {
                 'Reservas e Objetivos',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
-              // Lista de metas como cards
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.only(bottom: 16),
-                  itemCount: reservas.length,
+                  itemCount: _money.length,
                   itemBuilder: (context, index) {
-                    final reserva = reservas[index];
-                    return ReservaItem(
-                      titulo: reserva['titulo'],
-                      local: reserva['local'],
-                      progresso: reserva['progresso'],
-                      valorTotal:
-                          (reserva['valorTotal'] as num)
-                              .toDouble(), // Conversão segura
-                      valorRestante:
-                          (reserva['valorRestante'] as num)
-                              .toDouble(), // Conversão segura
-                      data: reserva['data'],
-                      image: reserva['image'],
+                    final meta = _money[index];
+                    final progresso = (meta.currentValue / meta.targetValue)
+                        .clamp(0.0, 1.0);
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.15),
+                            blurRadius: 10,
+                            offset: const Offset(0, 7),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          // Ícone ou imagem à esquerda
+                          Container(
+                            width: 80,
+                            height: 80,
+                            margin: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: const Icon(
+                              Icons.savings,
+                              color: Colors.blueAccent,
+                              size: 36,
+                            ),
+                          ),
+
+                          // Informações da meta
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                right: 12,
+                                top: 12,
+                                bottom: 12,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Título e botão de adicionar
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          meta.name,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () => _showAddMoneyDialog(meta),
+                                        child: const Icon(
+                                          Icons.add_circle,
+                                          color: Colors.blueAccent,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  const SizedBox(height: 6),
+
+                                  Text(
+                                    'Guardado: R\$ ${meta.currentValue.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Meta: R\$ ${meta.targetValue.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 8),
+
+                                  // Barra de progresso
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: LinearProgressIndicator(
+                                      value: progresso,
+                                      minHeight: 6,
+                                      backgroundColor: Colors.grey[300],
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        progresso >= 1.0
+                                            ? Colors.green
+                                            : Colors.blueAccent,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -304,7 +669,8 @@ class ReservaItem extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: ElevatedButton(
                 onPressed: () {
-                  // Ação ao clicar no botão
+                  // Ação ao clicar no botão()
+                  // _showAddMoneyDialog();
                   // print('Adicionar dinheiro para $titulo');
                 },
                 style: ElevatedButton.styleFrom(
