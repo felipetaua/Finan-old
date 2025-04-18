@@ -29,7 +29,7 @@ class ShowWalletPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "\$12,547.50",
+                "R\$12,547.50",
                 style: TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.bold,
@@ -72,19 +72,19 @@ class ShowWalletPage extends StatelessWidget {
               _buildTransaction(
                 "LiL",
                 "Venda de LilusCrypto",
-                "-\$550.00",
+                "-R\$550.00",
                 Colors.black,
               ),
               _buildTransaction(
                 "Etherium",
                 "Completado por FinanCorp.",
-                "+\$39.99",
+                "+R\$39.99",
                 Colors.green,
               ),
               _buildTransaction(
                 "DogeCoin",
                 "Completado por FinanCorp.",
-                "+\$14.98",
+                "+R\$14.98",
                 Colors.green,
               ),
               const SizedBox(height: 24),

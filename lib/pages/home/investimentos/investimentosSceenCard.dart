@@ -51,9 +51,9 @@ class InvestimentosScreenCard extends StatelessWidget {
             children: const [
               PortfolioCard(
                 title: "Seus Ativos",
-                value: "\$115,087.80",
+                value: "R\$115,087.80",
                 percentage: "+12.8%",
-                amountChange: "\$58,105",
+                amountChange: "R\$58,105",
                 isPositive: true,
                 lineColor: Colors.green,
               ),
@@ -62,7 +62,7 @@ class InvestimentosScreenCard extends StatelessWidget {
                 title: "Sua Carteira de Ativos",
                 value: "\$385,115.02",
                 percentage: "-12.8%",
-                amountChange: "\$58,105",
+                amountChange: "R\$58,105",
                 isPositive: false,
                 lineColor: Colors.red,
               ),

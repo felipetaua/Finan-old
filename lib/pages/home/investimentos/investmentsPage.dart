@@ -230,7 +230,7 @@ const listaEtfs = [
     'preco': 'R\$300,00',
     'variacao': '+1.7%',
     'up': true,
-    'icon': 'assets/images/ivvb11.png',
+    'icon': 'assets/images/investimento/ivvb11.png',
   },
   {
     'nome': 'BOVA11',
