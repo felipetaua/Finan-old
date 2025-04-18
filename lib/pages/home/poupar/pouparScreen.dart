@@ -311,60 +311,175 @@ class _PouparPageState extends State<PouparPage> {
               const SizedBox(height: 24),
 
               // Gráfico com Card
-              const Text(
-                'Frequência de Depósitos',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              Center(
+                child: const Text(
+                  'Frequência de Depósitos',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(height: 12),
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                elevation: 4,
+                elevation: 6,
+                shadowColor: Colors.black.withOpacity(0.1),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: SizedBox(
-                    height: 150,
-                    child: LineChart(
-                      LineChartData(
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: const [
-                              FlSpot(0, 3),
-                              FlSpot(1, 10),
-                              FlSpot(2, 7),
-                              FlSpot(3, 4),
-                              FlSpot(4, 1),
-                            ],
-                            isCurved: true,
-                            color: Colors.blueAccent,
-                            belowBarData: BarAreaData(
-                              show: true,
-                              color: Colors.blue.withAlpha((0.2 * 255).toInt()),
-                            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: const Text(
+                          'Ultimas semanas - 2025',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black45,
                           ),
-                          LineChartBarData(
-                            spots: const [
-                              FlSpot(1, 2),
-                              FlSpot(2, 1),
-                              FlSpot(3, 6),
-                              FlSpot(4, 3),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        height: 200,
+                        child: LineChart(
+                          LineChartData(
+                            lineBarsData: [
+                              LineChartBarData(
+                                spots: const [
+                                  FlSpot(0, 3),
+                                  FlSpot(1, 10),
+                                  FlSpot(2, 7),
+                                  FlSpot(3, 4),
+                                  FlSpot(4, 1),
+                                ],
+                                isCurved: true,
+                                color: Colors.blueAccent,
+                                barWidth: 3,
+                                dotData: FlDotData(show: true),
+                                belowBarData: BarAreaData(
+                                  show: true,
+                                  color: Colors.blue.withOpacity(0.2),
+                                ),
+                              ),
+                              LineChartBarData(
+                                spots: const [
+                                  FlSpot(1, 2),
+                                  FlSpot(2, 1),
+                                  FlSpot(3, 6),
+                                  FlSpot(4, 3),
+                                ],
+                                isCurved: true,
+                                color: Colors.green,
+                                barWidth: 3,
+                                dotData: FlDotData(show: true),
+                                belowBarData: BarAreaData(
+                                  show: true,
+                                  color: Colors.green.withOpacity(0.2),
+                                ),
+                              ),
                             ],
-                            isCurved: true,
-                            color: Colors.green,
-                            belowBarData: BarAreaData(
-                              show: true,
-                              color: Colors.green.withAlpha(
-                                (0.2 * 255).toInt(),
+                            titlesData: FlTitlesData(
+                              bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  reservedSize: 28,
+                                  interval: 1,
+                                  getTitlesWidget: (value, meta) {
+                                    const days = [
+                                      'Seg',
+                                      'Ter',
+                                      'Qua',
+                                      'Qui',
+                                      'Sex',
+                                    ];
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Text(
+                                        days[value.toInt() % days.length],
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              leftTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  interval: 2,
+                                  getTitlesWidget: (value, meta) {
+                                    return Text(
+                                      value.toInt().toString(),
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black45,
+                                      ),
+                                    );
+                                  },
+                                  reservedSize: 28,
+                                ),
+                              ),
+                              topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
                               ),
                             ),
+                            gridData: FlGridData(
+                              show: true,
+                              drawVerticalLine: true,
+                              horizontalInterval: 2,
+                              verticalInterval: 1,
+                              getDrawingHorizontalLine:
+                                  (value) => FlLine(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    strokeWidth: 1,
+                                  ),
+                              getDrawingVerticalLine:
+                                  (value) => FlLine(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    strokeWidth: 1,
+                                  ),
+                            ),
+                            borderData: FlBorderData(
+                              show: true,
+                              border: Border.all(
+                                color: Colors.grey.withOpacity(0.2),
+                                width: 1,
+                              ),
+                            ),
+                            lineTouchData: LineTouchData(
+                              handleBuiltInTouches: true,
+                              touchTooltipData: LineTouchTooltipData(
+                                tooltipRoundedRadius: 12,
+                                fitInsideHorizontally: true,
+                                fitInsideVertically: true,
+                                showOnTopOfTheChartBoxArea: true,
+                                tooltipPadding: const EdgeInsets.all(8),
+                                getTooltipItems: (touchedSpots) {
+                                  return touchedSpots.map((spot) {
+                                    return LineTooltipItem(
+                                      "R\$ ${spot.y.toStringAsFixed(2)}",
+                                      const TextStyle(
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    );
+                                  }).toList();
+                                },
+                              ),
+                            ),
+                            minY: 0,
+                            maxY: 12,
                           ),
-                        ],
-                        titlesData: FlTitlesData(show: false),
-                        gridData: FlGridData(show: false),
-                        borderData: FlBorderData(show: false),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
