@@ -73,6 +73,7 @@ flutter:
     - assets/icons/
     - assets/avatares/
     - assets/fonts/
+    - assets/images/investimentos/abstratos/
     - assets/images/ipva.png
     - assets/images/imposto.png
     - assets/images/iptu.png
