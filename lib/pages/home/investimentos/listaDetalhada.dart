@@ -86,11 +86,11 @@ class ListaDetalhadaPage extends StatelessWidget {
   final List<String> imagens;
 
   const ListaDetalhadaPage({
-    Key? key,
+    super.key,
     required this.titulo,
     required this.ativos,
     required this.imagens,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
