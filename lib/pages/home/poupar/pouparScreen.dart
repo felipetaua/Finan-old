@@ -522,7 +522,7 @@ class _PouparPageState extends State<PouparPage> {
                 'Reservas e Objetivos',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
 
               Expanded(
                 child: ListView.builder(

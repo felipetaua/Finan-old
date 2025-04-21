@@ -404,7 +404,7 @@ class _GastosContent extends StatelessWidget {
               _TransacaoItem(
                 categoria: 'Entretenimento',
                 descricao: 'Cartão de crédito',
-                valor: '-65,50 R\$',
+                valor: '-R\$65,50 ',
                 data: '15/01/2025',
                 icone: 'assets/icons/entretenimento.png',
                 cor: Colors.red,
@@ -412,7 +412,7 @@ class _GastosContent extends StatelessWidget {
               _TransacaoItem(
                 categoria: 'Casa',
                 descricao: 'Aluguel da casa',
-                valor: '-990,00 R\$',
+                valor: '-R\$990,00 ',
                 data: '15/01/2025',
                 icone: 'assets/icons/casa.png',
                 cor: Colors.red,
@@ -420,7 +420,7 @@ class _GastosContent extends StatelessWidget {
               _TransacaoItem(
                 categoria: 'Combustível',
                 descricao: 'Cartão de crédito',
-                valor: '-105,00 R\$',
+                valor: '-R\$105,00 ',
                 data: '15/01/2025',
                 icone: 'assets/icons/combustivel.png',
                 cor: Colors.red,
@@ -428,7 +428,7 @@ class _GastosContent extends StatelessWidget {
               _TransacaoItem(
                 categoria: 'Salário',
                 descricao: 'Conta bancária',
-                valor: '+4.500,00 R\$',
+                valor: '+R\$4.500,00 ',
                 data: '15/01/2025',
                 icone: 'assets/icons/salario.png',
                 cor: Colors.green,
