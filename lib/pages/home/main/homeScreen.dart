@@ -12,6 +12,7 @@ import 'package:finan/pages/home/profile/avatarSelector.dart';
 import 'package:finan/pages/home/profile/perfil.dart';
 import 'package:finan/pages/home/renda/rendaScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -53,6 +54,13 @@ class _GastosPageState extends State<GastosPage> {
       InvestimentosPage(),
       AdicionarTransacaoPage(),
     ];
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF368DF7), // Cor da barra de status
+        statusBarIconBrightness: Brightness.light, // Ícones brancos
+      ),
+    );
   }
 
   // Função para carregar o avatar armazenado
@@ -128,156 +136,166 @@ class _GastosPageState extends State<GastosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: Container(
-          padding: const EdgeInsets.only(top: 20),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF368DF7),
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
           child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
-              color: Color(0xFF368DF7),
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-            ),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                      ),
-                      builder:
-                          (context) => SizedBox(
-                            height: 200, //
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: const Icon(Icons.person),
-                                  title: const Text('Ver perfil'),
-                                  onTap: () {
-                                    Navigator.pop(context); // Fecha o modal
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (_) => ProfilePage(
-                                              currentAvatar: _currentAvatar,
-                                            ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                ListTile(
-                                  leading: const Icon(Icons.settings),
-                                  title: const Text('Configurações'),
-                                  onTap: () {
-                                    Navigator.pop(context); // Fecha o modal
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => ConfiguracoesPage(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                ListTile(
-                                  leading: const Icon(Icons.edit),
-                                  title: const Text('Editar avatar'),
-                                  onTap: () {
-                                    Navigator.pop(context); // Fecha o modal
-                                    _openAvatarSelector(); // Abre a página de seleção de avatar
-                                  },
-                                ),
-                              ],
-                            ),
+            padding: const EdgeInsets.only(top: 20),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                color: Color(0xFF368DF7),
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
+              ),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
                           ),
-                    );
-                  },
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(
-                      _currentAvatar ??
-                          'assets/images/profile.png', // Avatar atual ou padrão
-                    ),
-                    radius: 25,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'Olá ${widget.nomeUsuario}!',
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.notifications_none,
-                    color: Colors.white,
-                  ),
-                  onPressed:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => NotificacoesPage()),
-                      ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.star_border, color: Colors.white),
-                  onPressed:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const FavoritesPage(),
                         ),
+                        builder:
+                            (context) => SizedBox(
+                              height: 200, //
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(Icons.person),
+                                    title: const Text('Ver perfil'),
+                                    onTap: () {
+                                      Navigator.pop(context); // Fecha o modal
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (_) => ProfilePage(
+                                                currentAvatar: _currentAvatar,
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: const Icon(Icons.settings),
+                                    title: const Text('Configurações'),
+                                    onTap: () {
+                                      Navigator.pop(context); // Fecha o modal
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => ConfiguracoesPage(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: const Icon(Icons.edit),
+                                    title: const Text('Editar avatar'),
+                                    onTap: () {
+                                      Navigator.pop(context); // Fecha o modal
+                                      _openAvatarSelector(); // Abre a página de seleção de avatar
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(
+                        _currentAvatar ??
+                            'assets/images/profile.png', // Avatar atual ou padrão
                       ),
-                ),
-              ],
+                      radius: 25,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Olá ${widget.nomeUsuario}!',
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.notifications_none,
+                      color: Colors.white,
+                    ),
+                    onPressed:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => NotificacoesPage()),
+                        ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.star_border, color: Colors.white),
+                    onPressed:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const FavoritesPage(),
+                          ),
+                        ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      backgroundColor: Colors.white,
-      body: _pages[_selectedIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddTransactionPage()),
-          );
-        },
-        backgroundColor: const Color(0xFF368DF7),
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: const Color(0xFF368DF7),
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.attach_money_rounded),
-            label: 'Poupar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school_outlined),
-            label: 'Educação',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.swap_horiz),
-            label: 'Gastos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart),
-            label: 'Investimentos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long),
-            label: 'Receitas',
-          ),
-        ],
+        backgroundColor: Colors.white,
+        body: _pages[_selectedIndex],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddTransactionPage(),
+              ),
+            );
+          },
+          backgroundColor: const Color(0xFF368DF7),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: const Color(0xFF368DF7),
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money_rounded),
+              label: 'Poupar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school_outlined),
+              label: 'Educação',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.swap_horiz),
+              label: 'Gastos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.show_chart),
+              label: 'Investimentos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.receipt_long),
+              label: 'Receitas',
+            ),
+          ],
+        ),
       ),
     );
   }
