@@ -1,4 +1,3 @@
-import 'package:finan/pages/home/profile/avatarSelector.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,37 +10,42 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String? selectedAvatar;
+  final nomeController = TextEditingController();
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+  final dataNascController = TextEditingController();
+
+  bool isEditing = false;
 
   @override
   void initState() {
     super.initState();
-    _loadAvatar(); // Carrega o avatar ao abrir a tela
+    _loadProfileData();
   }
 
-  // Carregar o avatar salvo em SharedPreferences
-  Future<void> _loadAvatar() async {
+  Future<void> _loadProfileData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedAvatar = prefs.getString('avatarPath');
+      nomeController.text = prefs.getString('nome') ?? '';
+      emailController.text = prefs.getString('email') ?? '';
+      senhaController.text = prefs.getString('senha') ?? '';
+      dataNascController.text = prefs.getString('dataNascimento') ?? '';
     });
   }
 
-  // Abrir a página de seleção de avatar
-  Future<void> _showAvatarSelector() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => AvatarSelectorPage(currentAvatar: selectedAvatar),
-      ),
-    );
+  Future<void> _saveProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('nome', nomeController.text);
+    await prefs.setString('email', emailController.text);
+    await prefs.setString('senha', senhaController.text);
+    await prefs.setString('dataNascimento', dataNascController.text);
+  }
 
-    // Atualizar o avatar selecionado
-    if (result != null && result is String?) {
-      setState(() {
-        selectedAvatar = result;
-      });
-    }
+  void _toggleEditing() {
+    setState(() {
+      if (isEditing) _saveProfileData();
+      isEditing = !isEditing;
+    });
   }
 
   @override
@@ -65,14 +69,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed:
-                  () => Navigator.pop(context), // Voltar para a tela anterior
+              onPressed: () => Navigator.pop(context),
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed:
-                    _showAvatarSelector, // Abrir a página de seleção de avatar
+                icon: Icon(isEditing ? Icons.check : Icons.edit),
+                onPressed: _toggleEditing,
                 color: Colors.white,
               ),
             ],
@@ -85,39 +87,36 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50,
-                backgroundImage:
-                    selectedAvatar != null
-                        ? AssetImage(selectedAvatar!) // Avatar selecionado
-                        : const AssetImage(
-                          'assets/images/avatar.png',
-                        ), // Avatar padrão
+                backgroundImage: AssetImage('assets/images/avatar.png'),
               ),
               const SizedBox(height: 20),
-              const InputField(
+              InputField(
                 label: 'Seu nome:',
                 icon: Icons.person,
-                hintText: 'Bruno do Morro do Grau',
+                controller: nomeController,
+                enabled: isEditing,
               ),
-              const InputField(
+              InputField(
                 label: 'Email:',
                 icon: Icons.email,
-                hintText: 'brunograu@gmail.com',
+                controller: emailController,
+                enabled: isEditing,
               ),
-              const InputField(
+              InputField(
                 label: 'Senha:',
                 icon: Icons.lock,
-                hintText: '**********',
+                controller: senhaController,
                 obscureText: true,
-                suffixIcon: Icons.visibility_off,
+                enabled: isEditing,
               ),
-              const InputField(
+              InputField(
                 label: 'Data de nascimento:',
                 icon: Icons.calendar_today,
-                hintText: '  /  /',
+                controller: dataNascController,
+                enabled: isEditing,
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -129,17 +128,17 @@ class _ProfilePageState extends State<ProfilePage> {
 class InputField extends StatelessWidget {
   final String label;
   final IconData icon;
-  final String hintText;
+  final TextEditingController controller;
   final bool obscureText;
-  final IconData? suffixIcon;
+  final bool enabled;
 
   const InputField({
     super.key,
     required this.label,
     required this.icon,
-    required this.hintText,
+    required this.controller,
     this.obscureText = false,
-    this.suffixIcon,
+    this.enabled = false,
   });
 
   @override
@@ -150,13 +149,14 @@ class InputField extends StatelessWidget {
         Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 6),
         TextField(
+          controller: controller,
           obscureText: obscureText,
+          enabled: enabled,
           decoration: InputDecoration(
             prefixIcon: Icon(icon),
-            suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
-            hintText: hintText,
+            hintText: label,
             filled: true,
-            fillColor: Colors.white,
+            fillColor: enabled ? Colors.white : Colors.grey.shade200,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 14,
