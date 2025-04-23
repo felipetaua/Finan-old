@@ -7,10 +7,12 @@ import 'package:finan/pages/home/gastos/gerenciamentoScreen.dart';
 import 'package:finan/pages/home/investimentos/investimentosSceenCard.dart';
 import 'package:finan/pages/home/investimentos/investmentsPage.dart';
 import 'package:finan/pages/home/main/add_despesas.dart';
+import 'package:finan/pages/home/main/gerenciamentoPage.dart';
 import 'package:finan/pages/home/poupar/pouparScreen.dart';
 import 'package:finan/pages/home/profile/avatarSelector.dart';
 import 'package:finan/pages/home/profile/perfil.dart';
 import 'package:finan/pages/home/renda/rendaScreen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +35,20 @@ class _GastosPageState extends State<GastosPage> {
   double _salario = 0.0; // Para armazenar o salário
 
   late List<Widget> _pages; // Declare _pages como late
+  List<Map<String, dynamic>> _transacoes = [];
+
+  void _adicionarTransacao() async {
+    final novaTransacao = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AddTransactionPage()),
+    );
+
+    if (novaTransacao != null && novaTransacao is Map<String, dynamic>) {
+      setState(() {
+        _transacoes.add(novaTransacao);
+      });
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,7 +66,10 @@ class _GastosPageState extends State<GastosPage> {
     _pages = [
       PouparPage(),
       EducationPage(),
-      _GastosContent(salario: _salario), // Passe o salário como parâmetro
+      _GastosContent(
+        salario: _salario,
+        transacoes: _transacoes,
+      ), // Passe o salário como parâmetro
       InvestimentosPage(),
       AdicionarTransacaoPage(),
     ];
@@ -299,13 +318,31 @@ class _GastosPageState extends State<GastosPage> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      IterableProperty<Map<String, dynamic>>('_transacoes', _transacoes),
+    );
+  }
 }
 
-class _GastosContent extends StatelessWidget {
-  final double salario; // Adicione o parâmetro salário
+class _GastosContent extends StatefulWidget {
+  final double salario;
+  final List<Map<String, dynamic>> transacoes;
 
-  const _GastosContent({required this.salario});
+  const _GastosContent({
+    required this.salario,
+    required this.transacoes,
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<_GastosContent> createState() => _GastosContentState();
+}
+
+class _GastosContentState extends State<_GastosContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -333,7 +370,7 @@ class _GastosContent extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'R\$${salario.toStringAsFixed(2).replaceAll('.', ',')}', // Exibe o salário formatado
+                      'R\$${widget.salario.toStringAsFixed(2).replaceAll('.', ',')}', // Exibe o salário formatado
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -418,38 +455,57 @@ class _GastosContent extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Column(
-            children: const [
-              _TransacaoItem(
-                categoria: 'Entretenimento',
-                descricao: 'Cartão de crédito',
-                valor: '-R\$65,50 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/entretenimento.png',
-                cor: Colors.red,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.fastfood),
+                title: const Text('Alimentação'),
+                subtitle: const Text('R\$ 50,00'),
+                trailing: const Text(
+                  '- R\$ 50,00',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-              _TransacaoItem(
-                categoria: 'Casa',
-                descricao: 'Aluguel da casa',
-                valor: '-R\$990,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/casa.png',
-                cor: Colors.red,
+              ListTile(
+                leading: const Icon(Icons.local_gas_station),
+                title: const Text('Combustível'),
+                subtitle: const Text('R\$ 120,00'),
+                trailing: const Text(
+                  '- R\$ 120,00',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-              _TransacaoItem(
-                categoria: 'Combustível',
-                descricao: 'Cartão de crédito',
-                valor: '-R\$105,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/combustivel.png',
-                cor: Colors.red,
+              ListTile(
+                leading: const Icon(Icons.shopping_cart),
+                title: const Text('Supermercado'),
+                subtitle: const Text('R\$ 200,00'),
+                trailing: const Text(
+                  '- R\$ 200,00',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-              _TransacaoItem(
-                categoria: 'Salário',
-                descricao: 'Conta bancária',
-                valor: '+R\$4.500,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/salario.png',
-                cor: Colors.green,
+              const SizedBox(height: 20),
+              Center(
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.manage_search),
+                  label: const Text("Gerenciar Gastos"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF368DF7),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => GerenciamentoScreen()),
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -460,11 +516,10 @@ class _GastosContent extends StatelessWidget {
   }
 }
 
-// Widget de categoria de renda
 class _RendaCategoria extends StatelessWidget {
   final String label;
   final IconData icon;
-  final VoidCallback onTap; // Função personalizada para navegação
+  final VoidCallback onTap;
 
   const _RendaCategoria({
     required this.label,
@@ -475,12 +530,16 @@ class _RendaCategoria extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Executa a função personalizada ao clicar
+      onTap: onTap,
       child: Column(
         children: [
-          Icon(icon, size: 28, color: Colors.blueGrey),
+          CircleAvatar(
+            backgroundColor: const Color(0xFF368DF7),
+            foregroundColor: Colors.white,
+            child: Icon(icon),
+          ),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(fontSize: 13)),
+          Text(label),
         ],
       ),
     );
