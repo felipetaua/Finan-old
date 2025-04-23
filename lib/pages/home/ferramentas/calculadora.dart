@@ -1,3 +1,4 @@
+import 'package:finan/pages/home/ferramentas/ferramentasScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -214,6 +215,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculadora'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed:
+              () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => FavoritesPage()),
+              ),
+        ),
         actions: [
           IconButton(
             onPressed: widget.onToggleTheme,
