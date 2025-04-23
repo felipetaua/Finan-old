@@ -16,6 +16,10 @@ class _AddTransactionPageState extends State<AddTransactionPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) return;
+      setState(() {}); // Atualiza a cor quando desliza entre as abas
+    });
   }
 
   void _onKeyboardTap(String value) {
@@ -92,6 +96,42 @@ class _AddTransactionPageState extends State<AddTransactionPage>
     return 'R\$ ${reais.isEmpty ? '0' : reais},$cents';
   }
 
+  Widget _buildTransactionTab(String tipo) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: const Row(
+              children: [
+                Text(
+                  'Categorias',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Text('ver tudo', style: TextStyle(color: Colors.blue)),
+              ],
+            ),
+          ),
+          _buildKeyboard(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTransferTab() {
+    return const Center(
+      child: Padding(
+        padding: EdgeInsets.all(32.0),
+        child: Text(
+          'A funcionalidade de transferência ainda não está disponível.',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabColors = [Colors.red, Colors.green, Colors.grey];
@@ -101,9 +141,7 @@ class _AddTransactionPageState extends State<AddTransactionPage>
       body: Column(
         children: [
           Container(
-            color: tabColors[_tabController.index].withAlpha(
-              (1.0 * 255).toInt(),
-            ),
+            color: tabColors[_tabController.index],
             padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
             child: Column(
               children: [
@@ -141,31 +179,13 @@ class _AddTransactionPageState extends State<AddTransactionPage>
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: const Row(
-                      children: [
-                        Text(
-                          'Categorias',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Spacer(),
-                        Text('ver tudo', style: TextStyle(color: Colors.blue)),
-                      ],
-                    ),
-                  ),
-                  _buildKeyboard(),
-                ],
-              ),
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                _buildTransactionTab('Despesas'),
+                _buildTransactionTab('Receita'),
+                _buildTransferTab(),
+              ],
             ),
           ),
         ],
