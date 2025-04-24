@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddTransactionPage extends StatefulWidget {
   final Function(Map<String, dynamic>) onSave; // Função para salvar a transação
@@ -6,200 +8,256 @@ class AddTransactionPage extends StatefulWidget {
   const AddTransactionPage({super.key, required this.onSave});
 
   @override
-  State<AddTransactionPage> createState() => _AddTransactionPageState();
+  _AddTransactionPageState createState() => _AddTransactionPageState();
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _inputValue = '0';
+  String _nome = '';
+  String _frequencia = '';
+  String _observacao = '';
+  IconData? _categoriaSelecionada;
+  Color _categoriaCor = Colors.grey;
+
+  final Map<IconData, Color> _categorias = {
+    Icons.article: Colors.grey,
+    Icons.map: Colors.purple,
+    Icons.favorite: Colors.green,
+    Icons.credit_card: Colors.purpleAccent,
+    Icons.sports_basketball: Colors.orange,
+    Icons.percent: Colors.red,
+  };
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(() {
-      if (_tabController.indexIsChanging) return;
-      setState(() {}); // Atualiza a cor quando desliza entre as abas
-    });
   }
 
-  void _onKeyboardTap(String value) {
-    setState(() {
-      if (value == 'del') {
-        if (_inputValue.length > 1) {
-          _inputValue = _inputValue.substring(0, _inputValue.length - 1);
-        } else {
-          _inputValue = '0';
-        }
-      } else if (value == 'ok') {
-        widget.onSave({
-          'categoria': 'Despesas', // Exemplo de categoria
-          'descricao': 'Nova transação', // Exemplo de descrição
-          'valor': _inputValue, // Valor inserido pelo usuário
-          'data': DateTime.now().toString(), // Data atual
-        });
-        Navigator.pop(context); // Fecha a tela após salvar
-      } else {
-        if (_inputValue == '0') {
-          _inputValue = value;
-        } else {
-          _inputValue += value;
-        }
-      }
-    });
-  }
-
-  Widget _buildKeyboard() {
-    final keys = [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'del',
-      '0',
-      'ok',
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(12),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
-      itemCount: keys.length,
-      itemBuilder: (context, index) {
-        final key = keys[index];
-        IconData? icon;
-        if (key == 'del') icon = Icons.backspace_outlined;
-        if (key == 'ok') icon = Icons.check;
-
-        return ElevatedButton(
-          onPressed: () => _onKeyboardTap(key),
-          style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            backgroundColor: Colors.grey[300],
-            foregroundColor: Colors.black,
-          ),
-          child:
-              icon != null
-                  ? Icon(icon)
-                  : Text(key, style: const TextStyle(fontSize: 20)),
-        );
-      },
-    );
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   String _formatCurrency(String value) {
-    final digits = value.padLeft(3, '0');
-    final cents = digits.substring(digits.length - 2);
-    final reais = digits.substring(0, digits.length - 2);
-    return 'R\$ ${reais.isEmpty ? '0' : reais},$cents';
+    final number =
+        double.tryParse(value.replaceAll(',', '').replaceAll('.', '')) ?? 0.0;
+    final formatter = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+    return formatter.format(number / 100);
   }
 
-  Widget _buildTransactionTab(String tipo) {
-    return SingleChildScrollView(
-      child: Column(
+  void _salvarTransacao() {
+    if (_categoriaSelecionada == null ||
+        _nome.isEmpty ||
+        _frequencia.isEmpty ||
+        _inputValue == '0') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos obrigatórios.')),
+      );
+      return;
+    }
+
+    Navigator.pop(context, {
+      'categoria': _categoriaSelecionada,
+      'cor': _categoriaCor,
+      'descricao': _nome,
+      'valor':
+          (_tabController.index == 0 ? '-' : '+') +
+          _formatCurrency(_inputValue),
+      'data': DateFormat('dd/MM/yyyy').format(DateTime.now()),
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          'Controle de Gastos',
+          style: TextStyle(color: Colors.black),
+        ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        bottom: TabBar(
+          controller: _tabController,
+          labelColor: Colors.blue,
+          unselectedLabelColor: Colors.grey,
+          tabs: const [
+            Tab(text: 'Despesas'),
+            Tab(text: 'Receitas'),
+            Tab(text: 'Transferências'),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: const Row(
-              children: [
-                Text(
-                  'Categorias',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Text('ver tudo', style: TextStyle(color: Colors.blue)),
-              ],
-            ),
-          ),
-          _buildKeyboard(),
+          _buildTransactionForm('despesa'),
+          _buildTransactionForm('receita'),
+          _buildTransactionForm('transferência'),
         ],
       ),
     );
   }
 
-  Widget _buildTransferTab() {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(32.0),
-        child: Text(
-          'A funcionalidade de transferência ainda não está disponível.',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18),
-        ),
+  Widget _buildTransactionForm(String tipo) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                final result = await showDialog<String>(
+                  context: context,
+                  builder: (context) {
+                    String tempValue = _inputValue;
+                    return AlertDialog(
+                      title: const Text('Digite o valor'),
+                      content: TextField(
+                        autofocus: true,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(hintText: 'Ex: 1050'),
+                        onChanged: (value) => tempValue = value,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Cancelar'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(context, tempValue),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                if (result != null && result.isNotEmpty) {
+                  setState(() {
+                    _inputValue = result;
+                  });
+                }
+              },
+              child: Text(
+                _formatCurrency(_inputValue),
+                style: const TextStyle(
+                  fontSize: 36,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Center(
+            child: Text(
+              'Saldo disponível',
+              style: TextStyle(color: Colors.black54),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Categorias',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 12,
+            children:
+                _categorias.entries.map((entry) {
+                  final isSelected = _categoriaSelecionada == entry.key;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _categoriaSelecionada = entry.key;
+                        _categoriaCor = entry.value;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color:
+                            isSelected
+                                ? entry.value.withOpacity(0.2)
+                                : Colors.transparent,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: entry.value),
+                      ),
+                      padding: const EdgeInsets.all(12),
+                      child: Icon(entry.key, color: entry.value),
+                    ),
+                  );
+                }).toList(),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Nome da transação',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          TextField(
+            onChanged: (value) => _nome = value,
+            decoration: const InputDecoration(hintText: 'Digite o nome...'),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Frequência',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            onChanged: (value) => _frequencia = value ?? '',
+            items: const [
+              DropdownMenuItem(
+                value: 'Diariamente',
+                child: Text('Diariamente'),
+              ),
+              DropdownMenuItem(
+                value: 'Semanalmente',
+                child: Text('Semanalmente'),
+              ),
+              DropdownMenuItem(
+                value: 'Mensalmente',
+                child: Text('Mensalmente'),
+              ),
+              DropdownMenuItem(value: 'Anualmente', child: Text('Anualmente')),
+            ],
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Observação',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            onChanged: (value) => _observacao = value,
+            maxLines: 3,
+            decoration: const InputDecoration(
+              hintText: 'Digite uma observação...',
+            ),
+          ),
+          const SizedBox(height: 32),
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: _salvarTransacao,
+              icon: const Icon(Icons.check),
+              label: const Text('Salvar'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
-    final tabColors = [Colors.red, Colors.green, Colors.grey];
-    final tabLabels = ['Despesas', 'Receita', 'Transferência'];
-
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: tabColors[_tabController.index],
-            padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                TabBar(
-                  controller: _tabController,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.white70,
-                  indicatorColor: Colors.white,
-                  onTap: (_) => setState(() {}),
-                  tabs: tabLabels.map((label) => Tab(text: label)).toList(),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  _formatCurrency(_inputValue),
-                  style: const TextStyle(
-                    fontSize: 36,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildTransactionTab('Despesas'),
-                _buildTransactionTab('Receita'),
-                _buildTransferTab(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('_observacao', _observacao));
   }
 }
