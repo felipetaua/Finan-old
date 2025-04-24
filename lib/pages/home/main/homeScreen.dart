@@ -31,12 +31,19 @@ class _GastosPageState extends State<GastosPage> {
   int _selectedIndex = 2; // Começa na aba de Gastos
   String? _currentAvatar; // Para armazenar o avatar atual
   double _salario = 0.0; // Para armazenar o salário
+  List<Map<String, dynamic>> _transacoes = []; // Lista de transações
 
   late List<Widget> _pages; // Declare _pages como late
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _adicionarTransacao(Map<String, dynamic> novaTransacao) {
+    setState(() {
+      _transacoes.add(novaTransacao); // Adiciona a nova transação à lista
     });
   }
 
@@ -50,7 +57,10 @@ class _GastosPageState extends State<GastosPage> {
     _pages = [
       PouparPage(),
       EducationPage(),
-      _GastosContent(salario: _salario), // Passe o salário como parâmetro
+      _GastosContent(
+        salario: _salario,
+        transacoes: _transacoes,
+      ), // Passe o salário e transações como parâmetros
       InvestimentosPage(),
       AdicionarTransacaoPage(),
     ];
@@ -260,7 +270,11 @@ class _GastosPageState extends State<GastosPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddTransactionPage(),
+                builder:
+                    (context) => AddTransactionPage(
+                      onSave:
+                          _adicionarTransacao, // Passa a função como parâmetro
+                    ),
               ),
             );
           },
@@ -303,8 +317,10 @@ class _GastosPageState extends State<GastosPage> {
 
 class _GastosContent extends StatelessWidget {
   final double salario; // Adicione o parâmetro salário
+  final List<Map<String, dynamic>>
+  transacoes; // Adicione o parâmetro transações
 
-  const _GastosContent({required this.salario});
+  const _GastosContent({required this.salario, required this.transacoes});
 
   @override
   Widget build(BuildContext context) {
@@ -418,40 +434,30 @@ class _GastosContent extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Column(
-            children: const [
-              _TransacaoItem(
-                categoria: 'Entretenimento',
-                descricao: 'Cartão de crédito',
-                valor: '-R\$65,50 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/entretenimento.png',
-                cor: Colors.red,
-              ),
-              _TransacaoItem(
-                categoria: 'Casa',
-                descricao: 'Aluguel da casa',
-                valor: '-R\$990,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/casa.png',
-                cor: Colors.red,
-              ),
-              _TransacaoItem(
-                categoria: 'Combustível',
-                descricao: 'Cartão de crédito',
-                valor: '-R\$105,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/combustivel.png',
-                cor: Colors.red,
-              ),
-              _TransacaoItem(
-                categoria: 'Salário',
-                descricao: 'Conta bancária',
-                valor: '+R\$4.500,00 ',
-                data: '15/01/2025',
-                icone: 'assets/icons/salario.png',
-                cor: Colors.green,
-              ),
-            ],
+            children:
+                transacoes.map((transacao) {
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: ListTile(
+                      leading: const CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        child: Icon(Icons.attach_money, color: Colors.white),
+                      ),
+                      title: Text(transacao['categoria']),
+                      subtitle: Text(
+                        '${transacao['descricao']}\n${transacao['data']}',
+                      ),
+                      isThreeLine: true,
+                      trailing: Text(
+                        'R\$ ${transacao['valor']}',
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
           ),
           const SizedBox(height: 100),
         ],

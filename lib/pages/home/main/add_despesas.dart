@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddTransactionPage extends StatefulWidget {
-  const AddTransactionPage({super.key});
+  final Function(Map<String, dynamic>) onSave; // Função para salvar a transação
+
+  const AddTransactionPage({super.key, required this.onSave});
 
   @override
   State<AddTransactionPage> createState() => _AddTransactionPageState();
@@ -30,6 +32,14 @@ class _AddTransactionPageState extends State<AddTransactionPage>
         } else {
           _inputValue = '0';
         }
+      } else if (value == 'ok') {
+        widget.onSave({
+          'categoria': 'Despesas', // Exemplo de categoria
+          'descricao': 'Nova transação', // Exemplo de descrição
+          'valor': _inputValue, // Valor inserido pelo usuário
+          'data': DateTime.now().toString(), // Data atual
+        });
+        Navigator.pop(context); // Fecha a tela após salvar
       } else {
         if (_inputValue == '0') {
           _inputValue = value;
