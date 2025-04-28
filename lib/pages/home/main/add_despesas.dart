@@ -21,6 +21,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
   IconData? _categoriaSelecionada;
   Color _categoriaCor = Colors.grey;
   final List<Map<String, dynamic>> _transacoes = [];
+  bool _mostrarTodasCategorias = false;
 
   final Map<IconData, Color> _categorias = {
     Icons.article: Colors.grey,
@@ -29,6 +30,32 @@ class AddTransactionPageState extends State<AddTransactionPage>
     Icons.credit_card: Colors.purpleAccent,
     Icons.sports_basketball: Colors.orange,
     Icons.percent: Colors.red,
+    Icons.shopping_cart: Colors.blue,
+    Icons.home: Colors.brown,
+    Icons.school: Colors.indigo,
+    Icons.work: Colors.teal,
+    Icons.car_rental: Colors.cyan,
+    Icons.fastfood: Colors.amber,
+    Icons.local_hospital: Colors.pink,
+    Icons.flight: Colors.deepPurple,
+    Icons.movie: Colors.lime,
+    Icons.music_note: Colors.deepOrange,
+    Icons.pets: Colors.lightGreen,
+    Icons.phone: Colors.lightBlue,
+    Icons.computer: Colors.yellow,
+    Icons.book: Colors.blueGrey,
+    Icons.beach_access: Colors.tealAccent,
+    Icons.cake: Colors.pinkAccent,
+    Icons.camera: Colors.orangeAccent,
+    Icons.directions_bike: Colors.greenAccent,
+    Icons.directions_boat: Colors.cyanAccent,
+    Icons.directions_bus: Colors.redAccent,
+    Icons.directions_car: Colors.purpleAccent,
+    Icons.directions_railway: Colors.indigoAccent,
+    Icons.directions_walk: Colors.amberAccent,
+    Icons.eco: Colors.lightGreenAccent,
+    Icons.electric_bike: Colors.blueAccent,
+    Icons.electric_car: Colors.deepPurpleAccent,
   };
 
   @override
@@ -179,37 +206,59 @@ class AddTransactionPageState extends State<AddTransactionPage>
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Categorias',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Categorias',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _mostrarTodasCategorias = !_mostrarTodasCategorias;
+                  });
+                },
+                child: Text(
+                  _mostrarTodasCategorias ? 'Ver menos' : 'Ver mais',
+                  style: const TextStyle(color: Colors.blue),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 12,
             children:
-                _categorias.entries.map((entry) {
-                  final isSelected = _categoriaSelecionada == entry.key;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _categoriaSelecionada = entry.key;
-                        _categoriaCor = entry.value;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected
-                                ? entry.value.withOpacity(0.2)
-                                : Colors.transparent,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: entry.value),
-                      ),
-                      padding: const EdgeInsets.all(12),
-                      child: Icon(entry.key, color: entry.value),
-                    ),
-                  );
-                }).toList(),
+                (_mostrarTodasCategorias
+                        ? _categorias.entries
+                        : _categorias.entries.take(
+                          6,
+                        )) // Mostra apenas as primeiras 6 categorias inicialmente
+                    .map((entry) {
+                      final isSelected = _categoriaSelecionada == entry.key;
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _categoriaSelecionada = entry.key;
+                            _categoriaCor = entry.value;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                isSelected
+                                    ? entry.value.withOpacity(0.2)
+                                    : Colors.transparent,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: entry.value),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Icon(entry.key, color: entry.value),
+                        ),
+                      );
+                    })
+                    .toList(),
           ),
           const SizedBox(height: 24),
           const Text(
@@ -263,7 +312,10 @@ class AddTransactionPageState extends State<AddTransactionPage>
               onPressed: _salvarTransacao,
               icon: const Icon(Icons.check),
               label: const Text('Salvar'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
             ),
           ),
         ],
