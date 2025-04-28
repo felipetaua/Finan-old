@@ -1,3 +1,4 @@
+import 'package:finan/feedback/congratulationsPage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -105,7 +106,14 @@ class AddTransactionPageState extends State<AddTransactionPage>
     _adicionarTransacao(novaTransacao);
     widget.onSave(novaTransacao);
 
-    Navigator.pop(context); // Fecha a tela após salvar
+    // Navega para a tela de carregamento
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterExpensePage()),
+    ).then((_) {
+      // Retorna para a tela anterior após o carregamento
+      Navigator.pop(context);
+    });
   }
 
   void _adicionarTransacao(Map<String, dynamic> novaTransacao) {
