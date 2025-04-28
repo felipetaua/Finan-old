@@ -436,32 +436,7 @@ class _GastosContent extends StatelessWidget {
           Column(
             children:
                 transacoes.map((transacao) {
-                  return Card(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: transacao['cor'],
-                        child: Icon(
-                          transacao['categoria'],
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text(transacao['descricao']),
-                      subtitle: Text(transacao['data']),
-                      trailing: Text(
-                        transacao['valor'],
-                        style: TextStyle(
-                          color:
-                              transacao['valor'].startsWith('+')
-                                  ? Colors.green
-                                  : transacao['valor'].startsWith('-')
-                                  ? Colors.red
-                                  : Colors.grey,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  );
+                  return TransacaoCard(transacao: transacao);
                 }).toList(),
           ),
           const SizedBox(height: 100),
@@ -498,45 +473,119 @@ class _RendaCategoria extends StatelessWidget {
   }
 }
 
-// Widget de transação
-// não esta sendo usado
-class _TransacaoItem extends StatefulWidget {
-  final String categoria;
-  final String descricao;
-  final String valor;
-  final String data;
-  final String icone;
-  final Color cor;
+class TransacaoCard extends StatefulWidget {
+  final Map<String, dynamic> transacao;
 
-  const _TransacaoItem({
-    required this.categoria,
-    required this.descricao,
-    required this.valor,
-    required this.data,
-    required this.icone,
-    required this.cor,
-  });
+  const TransacaoCard({super.key, required this.transacao});
 
   @override
-  State<_TransacaoItem> createState() => _TransacaoItemState();
+  State<TransacaoCard> createState() => _TransacaoCardState();
 }
 
-class _TransacaoItemState extends State<_TransacaoItem> {
+class _TransacaoCardState extends State<TransacaoCard> {
+  bool _isExpanded = false; // Controla se o card está expandido
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: CircleAvatar(backgroundImage: AssetImage(widget.icone)),
-        title: Text(widget.categoria),
-        subtitle: Text('${widget.descricao}\n${widget.data}'),
-        isThreeLine: true,
-        trailing: Text(
-          widget.valor,
-          style: TextStyle(
-            color: widget.cor.withAlpha((1.0 * 255).toInt()),
-            fontWeight: FontWeight.bold,
-          ),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isExpanded = !_isExpanded; // Alterna entre expandido e contraído
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Cabeçalho do card
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: widget.transacao['cor'],
+                  child: Icon(
+                    widget.transacao['categoria'],
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    widget.transacao['descricao'],
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      widget.transacao['valor'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color:
+                            widget.transacao['valor'].startsWith('+')
+                                ? Colors.green
+                                : widget.transacao['valor'].startsWith('-')
+                                ? Colors.red
+                                : Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      widget.transacao['data'],
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            if (_isExpanded) ...[
+              const SizedBox(height: 16),
+              const Divider(), // Linha horizontal
+              const SizedBox(height: 8),
+              const Text(
+                'Detalhes da Transação:',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Categoria: ${widget.transacao['categoria']}',
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+              Text(
+                'Descrição: ${widget.transacao['descricao']}',
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+              Text(
+                'Data: ${widget.transacao['data']}',
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+              Text(
+                'Valor: ${widget.transacao['valor']}',
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ],
         ),
       ),
     );

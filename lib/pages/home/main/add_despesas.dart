@@ -206,59 +206,90 @@ class AddTransactionPageState extends State<AddTransactionPage>
             ),
           ),
           const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Categorias',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Categorias',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _mostrarTodasCategorias = !_mostrarTodasCategorias;
+                      });
+                    },
+                    child: Text(
+                      _mostrarTodasCategorias ? 'Ver menos' : 'Ver mais',
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    _mostrarTodasCategorias = !_mostrarTodasCategorias;
-                  });
-                },
-                child: Text(
-                  _mostrarTodasCategorias ? 'Ver menos' : 'Ver mais',
-                  style: const TextStyle(color: Colors.blue),
-                ),
-              ),
+              const SizedBox(height: 8),
+              _mostrarTodasCategorias
+                  ? Wrap(
+                    spacing: 12,
+                    children:
+                        _categorias.entries.map((entry) {
+                          final isSelected = _categoriaSelecionada == entry.key;
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _categoriaSelecionada = entry.key;
+                                _categoriaCor = entry.value;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    isSelected
+                                        ? entry.value.withOpacity(0.2)
+                                        : Colors.transparent,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: entry.value),
+                              ),
+                              padding: const EdgeInsets.all(12),
+                              child: Icon(entry.key, color: entry.value),
+                            ),
+                          );
+                        }).toList(),
+                  )
+                  : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children:
+                          _categorias.entries.take(6).map((entry) {
+                            final isSelected =
+                                _categoriaSelecionada == entry.key;
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _categoriaSelecionada = entry.key;
+                                  _categoriaCor = entry.value;
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 12),
+                                decoration: BoxDecoration(
+                                  color:
+                                      isSelected
+                                          ? entry.value.withOpacity(0.2)
+                                          : Colors.transparent,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: entry.value),
+                                ),
+                                padding: const EdgeInsets.all(12),
+                                child: Icon(entry.key, color: entry.value),
+                              ),
+                            );
+                          }).toList(),
+                    ),
+                  ),
             ],
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 12,
-            children:
-                (_mostrarTodasCategorias
-                        ? _categorias.entries
-                        : _categorias.entries.take(
-                          6,
-                        )) // Mostra apenas as primeiras 6 categorias inicialmente
-                    .map((entry) {
-                      final isSelected = _categoriaSelecionada == entry.key;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _categoriaSelecionada = entry.key;
-                            _categoriaCor = entry.value;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color:
-                                isSelected
-                                    ? entry.value.withOpacity(0.2)
-                                    : Colors.transparent,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: entry.value),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Icon(entry.key, color: entry.value),
-                        ),
-                      );
-                    })
-                    .toList(),
           ),
           const SizedBox(height: 24),
           const Text(
