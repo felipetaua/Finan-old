@@ -32,6 +32,7 @@ class _GastosPageState extends State<GastosPage> {
   String? _currentAvatar; // Para armazenar o avatar atual
   double _salario = 0.0; // Para armazenar o salário
   final List<Map<String, dynamic>> _transacoes = []; // Lista de transações
+  bool temaEscuro = false; // Controla o estado do tema
 
   late List<Widget> _pages; // Declare _pages como late
 
@@ -200,11 +201,19 @@ class _GastosPageState extends State<GastosPage> {
                                     leading: const Icon(Icons.settings),
                                     title: const Text('Configurações'),
                                     onTap: () {
-                                      Navigator.pop(context); // Fecha o modal
+                                      Navigator.pop(context);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => ConfiguracoesPage(),
+                                          builder:
+                                              (_) => ConfiguracoesPage(
+                                                temaEscuro: temaEscuro,
+                                                onTemaAlterado: (novoValor) {
+                                                  setState(() {
+                                                    temaEscuro = novoValor;
+                                                  });
+                                                },
+                                              ),
                                         ),
                                       );
                                     },

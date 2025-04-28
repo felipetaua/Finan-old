@@ -1,4 +1,4 @@
-import 'package:finan/pages/login/welcomePage.dart';
+import 'package:finan/pages/login/welcomeScreen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

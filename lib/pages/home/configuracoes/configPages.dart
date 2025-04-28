@@ -1,19 +1,25 @@
 import 'package:finan/pages/home/configuracoes/informacoesLegais.dart';
 import 'package:finan/pages/home/configuracoes/termosDePrivacidade.dart';
 import 'package:finan/pages/home/configuracoes/termosDeUso.dart';
-import 'package:finan/pages/login/welcomePage.dart';
+import 'package:finan/pages/login/welcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfiguracoesPage extends StatefulWidget {
-  const ConfiguracoesPage({super.key});
+  final bool temaEscuro;
+  final ValueChanged<bool> onTemaAlterado;
+
+  const ConfiguracoesPage({
+    super.key,
+    required this.temaEscuro,
+    required this.onTemaAlterado,
+  });
 
   @override
   State<ConfiguracoesPage> createState() => _ConfiguracoesPageState();
 }
 
 class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
-  bool temaEscuro = false;
   bool notificacoesAtivadas = true;
   bool modoCompacto = false;
   bool biometria = true;
@@ -22,42 +28,34 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
-      appBar: AppBar(
-        title: Text('Configurações'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Colors.black,
-      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(title: const Text('Configurações')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Preferências'),
-
             _buildCard(
               title: 'Tema',
-              subtitle: temaEscuro ? 'Escuro' : 'Claro',
+              subtitle: widget.temaEscuro ? 'Escuro' : 'Claro',
               icon: Icons.color_lens,
               trailing: Switch(
-                value: temaEscuro,
-                onChanged: (value) {
-                  setState(() {
-                    temaEscuro = value;
-                  });
+                value: widget.temaEscuro,
+                onChanged: (bool value) {
+                  widget.onTemaAlterado(
+                    value,
+                  ); // Chama a função passada para alterar o tema
                 },
                 activeTrackColor: const Color(0xFF368DF7),
               ),
             ),
-
             _buildCard(
               title: 'Idioma',
               subtitle: 'Português (Brasil)',
               icon: Icons.language,
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
             ),
-
             _buildCard(
               title: 'Notificações',
               subtitle: notificacoesAtivadas ? 'Ativadas' : 'Desativadas',
@@ -72,10 +70,8 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                 activeTrackColor: const Color(0xFF368DF7),
               ),
             ),
-
             const SizedBox(height: 24),
             _buildSectionTitle('Layout'),
-
             _buildCard(
               title: 'Modo Compacto',
               subtitle: modoCompacto ? 'Ativado' : 'Desativado',
@@ -90,52 +86,50 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                 activeTrackColor: const Color(0xFF368DF7),
               ),
             ),
-
             const SizedBox(height: 24),
             _buildSectionTitle('Privacidade'),
-
             _buildCard(
               title: 'Termos de Uso',
               subtitle: 'Direitos e deveres do usuário',
               icon: Icons.description,
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
-                Navigator.push(context,
+                Navigator.push(
+                  context,
                   MaterialPageRoute(builder: (context) => TermosDeUsoPage()),
                 );
               },
             ),
-
             _buildCard(
               title: 'Política de Privacidade',
               subtitle: 'Como seus dados são tratados',
               icon: Icons.privacy_tip,
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PoliticaDePrivacidadePage()),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PoliticaDePrivacidadePage(),
+                  ),
                 );
               },
             ),
-
             _buildCard(
               title: 'Informações Legais',
               subtitle: 'Conformidade e regulamentações',
               icon: Icons.gavel,
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InformacoesLegaisPage(), // Substitua pela página correspondente
-                ),
-              );
-            },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InformacoesLegaisPage(),
+                  ),
+                );
+              },
             ),
-
             const SizedBox(height: 24),
             _buildSectionTitle('Segurança'),
-
             _buildCard(
               title: 'Autenticação Biométrica',
               subtitle: biometria ? 'Ativada' : 'Desativada',
@@ -150,7 +144,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                 activeTrackColor: const Color(0xFF368DF7),
               ),
             ),
-
             _buildCard(
               title: 'PIN de Segurança',
               subtitle: pinAtivado ? 'PIN Ativo' : 'PIN Inativo',
@@ -165,22 +158,19 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                 activeTrackColor: const Color(0xFF368DF7),
               ),
             ),
-
             const SizedBox(height: 24),
             _buildSectionTitle('Conta'),
-
             _buildCard(
               title: 'Editar Perfil',
               subtitle: 'Nome, e-mail, avatar',
               icon: Icons.person,
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
             ),
-
             _buildCard(
               title: 'Sair da Conta',
               subtitle: 'Encerrar sessão atual',
               icon: Icons.logout,
-              trailing: Icon(Icons.exit_to_app),
+              trailing: const Icon(Icons.exit_to_app),
               onTap: () => _showLogoutDialog(context),
             ),
           ],
@@ -197,7 +187,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          color: Theme.of(context).textTheme.bodyMedium?.color,
         ),
       ),
     );
@@ -213,46 +203,29 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        key: ValueKey(title + subtitle),
         margin: const EdgeInsets.only(bottom: 12),
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border:
-              title ==
-                      'Sair da Conta' // Verifica se o título é "Sair da Conta"
-                  ? Border.all(
-                    color: const Color.fromARGB(255, 255, 95, 84),
-                    width: 2,
-                  )
-                  : title == 'Editar Perfil'
-                  ? Border.all(color: Colors.grey, width: 2) // Borda vermelha
-                  : null,
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black12,
+              color: Colors.grey.withOpacity(0.2),
               blurRadius: 6,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Row(
           children: [
-            Icon(icon, color: Colors.black54),
-            SizedBox(width: 16),
+            Icon(icon, color: Theme.of(context).iconTheme.color),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  ),
+                  Text(title, style: Theme.of(context).textTheme.bodyLarge),
+                  Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
                 ],
               ),
             ),
@@ -262,42 +235,44 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       ),
     );
   }
-}
 
-// Exibir o diálogo de logout
-void _showLogoutDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder:
-        (context) => AlertDialog(
-          title: const Text('Deseja sair?'),
-          content: const Text('Você tem certeza que deseja sair da sua conta?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context), // Fecha o diálogo
-              child: const Text('Cancelar'),
+  // Exibir o diálogo de logout
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Deseja sair?'),
+            content: const Text(
+              'Você tem certeza que deseja sair da sua conta?',
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancelar'),
               ),
-              onPressed: () async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.clear(); // Limpa os dados do usuário
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.clear();
 
-                Navigator.pop(context); // Fecha o diálogo
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WelcomeScreen(),
-                  ),
-                  (route) => false, // Remove todas as telas anteriores
-                );
-              },
-              child: const Text('Sair'),
-            ),
-          ],
-        ),
-  );
+                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                child: const Text('Sair'),
+              ),
+            ],
+          ),
+    );
+  }
 }
