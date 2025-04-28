@@ -450,8 +450,13 @@ class _GastosContent extends StatelessWidget {
                       subtitle: Text(transacao['data']),
                       trailing: Text(
                         transacao['valor'],
-                        style: const TextStyle(
-                          color: Colors.red,
+                        style: TextStyle(
+                          color:
+                              transacao['valor'].startsWith('+')
+                                  ? Colors.green
+                                  : transacao['valor'].startsWith('-')
+                                  ? Colors.red
+                                  : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
