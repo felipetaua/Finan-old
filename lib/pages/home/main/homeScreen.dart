@@ -31,7 +31,7 @@ class _GastosPageState extends State<GastosPage> {
   int _selectedIndex = 2; // Começa na aba de Gastos
   String? _currentAvatar; // Para armazenar o avatar atual
   double _salario = 0.0; // Para armazenar o salário
-  List<Map<String, dynamic>> _transacoes = []; // Lista de transações
+  final List<Map<String, dynamic>> _transacoes = []; // Lista de transações
 
   late List<Widget> _pages; // Declare _pages como late
 
@@ -439,17 +439,17 @@ class _GastosContent extends StatelessWidget {
                   return Card(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ListTile(
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        child: Icon(Icons.attach_money, color: Colors.white),
+                      leading: CircleAvatar(
+                        backgroundColor: transacao['cor'],
+                        child: Icon(
+                          transacao['categoria'],
+                          color: Colors.white,
+                        ),
                       ),
-                      title: Text(transacao['categoria']),
-                      subtitle: Text(
-                        '${transacao['descricao']}\n${transacao['data']}',
-                      ),
-                      isThreeLine: true,
+                      title: Text(transacao['descricao']),
+                      subtitle: Text(transacao['data']),
                       trailing: Text(
-                        'R\$ ${transacao['valor']}',
+                        transacao['valor'],
                         style: const TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
@@ -494,7 +494,8 @@ class _RendaCategoria extends StatelessWidget {
 }
 
 // Widget de transação
-class _TransacaoItem extends StatelessWidget {
+// não esta sendo usado
+class _TransacaoItem extends StatefulWidget {
   final String categoria;
   final String descricao;
   final String valor;
@@ -512,18 +513,23 @@ class _TransacaoItem extends StatelessWidget {
   });
 
   @override
+  State<_TransacaoItem> createState() => _TransacaoItemState();
+}
+
+class _TransacaoItemState extends State<_TransacaoItem> {
+  @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        leading: CircleAvatar(backgroundImage: AssetImage(icone)),
-        title: Text(categoria),
-        subtitle: Text('$descricao\n$data'),
+        leading: CircleAvatar(backgroundImage: AssetImage(widget.icone)),
+        title: Text(widget.categoria),
+        subtitle: Text('${widget.descricao}\n${widget.data}'),
         isThreeLine: true,
         trailing: Text(
-          valor,
+          widget.valor,
           style: TextStyle(
-            color: cor.withAlpha((1.0 * 255).toInt()),
+            color: widget.cor.withAlpha((1.0 * 255).toInt()),
             fontWeight: FontWeight.bold,
           ),
         ),

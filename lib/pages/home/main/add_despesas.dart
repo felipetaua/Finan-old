@@ -8,10 +8,10 @@ class AddTransactionPage extends StatefulWidget {
   const AddTransactionPage({super.key, required this.onSave});
 
   @override
-  _AddTransactionPageState createState() => _AddTransactionPageState();
+  AddTransactionPageState createState() => AddTransactionPageState();
 }
 
-class _AddTransactionPageState extends State<AddTransactionPage>
+class AddTransactionPageState extends State<AddTransactionPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _inputValue = '0';
@@ -20,6 +20,7 @@ class _AddTransactionPageState extends State<AddTransactionPage>
   String _observacao = '';
   IconData? _categoriaSelecionada;
   Color _categoriaCor = Colors.grey;
+  final List<Map<String, dynamic>> _transacoes = [];
 
   final Map<IconData, Color> _categorias = {
     Icons.article: Colors.grey,
@@ -34,6 +35,10 @@ class _AddTransactionPageState extends State<AddTransactionPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) return;
+      setState(() {}); // Atualiza a cor quando desliza entre as abas
+    });
   }
 
   @override
@@ -60,7 +65,7 @@ class _AddTransactionPageState extends State<AddTransactionPage>
       return;
     }
 
-    Navigator.pop(context, {
+    final novaTransacao = {
       'categoria': _categoriaSelecionada,
       'cor': _categoriaCor,
       'descricao': _nome,
@@ -68,6 +73,17 @@ class _AddTransactionPageState extends State<AddTransactionPage>
           (_tabController.index == 0 ? '-' : '+') +
           _formatCurrency(_inputValue),
       'data': DateFormat('dd/MM/yyyy').format(DateTime.now()),
+    };
+
+    _adicionarTransacao(novaTransacao);
+    widget.onSave(novaTransacao);
+
+    Navigator.pop(context); // Fecha a tela após salvar
+  }
+
+  void _adicionarTransacao(Map<String, dynamic> novaTransacao) {
+    setState(() {
+      _transacoes.add(novaTransacao); // Adiciona a nova transação à lista
     });
   }
 
