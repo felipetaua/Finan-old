@@ -322,6 +322,7 @@ class _PouparPageState extends State<PouparPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
+                color: const Color(0xFF1b1d2e),
                 elevation: 6,
                 shadowColor: Colors.black.withOpacity(0.1),
                 child: Padding(
@@ -335,7 +336,7 @@ class _PouparPageState extends State<PouparPage> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black45,
+                            color: Colors.white60,
                           ),
                           textAlign: TextAlign.right,
                         ),
@@ -400,7 +401,7 @@ class _PouparPageState extends State<PouparPage> {
                                         days[value.toInt() % days.length],
                                         style: const TextStyle(
                                           fontSize: 12,
-                                          color: Colors.black54,
+                                          color: Colors.white54,
                                         ),
                                       ),
                                     );
@@ -416,7 +417,7 @@ class _PouparPageState extends State<PouparPage> {
                                       value.toInt().toString(),
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        color: Colors.black45,
+                                        color: Colors.white60,
                                       ),
                                     );
                                   },
