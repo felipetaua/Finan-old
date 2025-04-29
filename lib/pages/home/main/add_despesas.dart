@@ -66,7 +66,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) return;
-      setState(() {}); // Atualiza a cor quando desliza entre as abas
+      setState(() {}); // Atualiza o estado para refletir a aba atual
     });
   }
 
@@ -81,6 +81,32 @@ class AddTransactionPageState extends State<AddTransactionPage>
         double.tryParse(value.replaceAll(',', '').replaceAll('.', '')) ?? 0.0;
     final formatter = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
     return formatter.format(number / 100);
+  }
+
+  String _getTextoValor() {
+    switch (_tabController.index) {
+      case 0:
+        return 'Valor de Despesas';
+      case 1:
+        return 'Valor de Receitas';
+      case 2:
+        return 'Valor de Transferências';
+      default:
+        return 'Valor';
+    }
+  }
+
+  Color _getBackgroundColor() {
+    switch (_tabController.index) {
+      case 0:
+        return Colors.redAccent; // Cor para Despesas
+      case 1:
+        return Colors.green; // Cor para Receitas
+      case 2:
+        return Colors.grey; // Cor para Transferências
+      default:
+        return Colors.white; // Cor padrão
+    }
   }
 
   void _salvarTransacao() {
@@ -128,17 +154,18 @@ class AddTransactionPageState extends State<AddTransactionPage>
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: _getBackgroundColor(), // Cor dinâmica
         elevation: 0,
         title: const Text(
           'Controle de Gastos',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.white),
         bottom: TabBar(
           controller: _tabController,
-          labelColor: Colors.blue,
-          unselectedLabelColor: Colors.grey,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
           tabs: const [
             Tab(text: 'Despesas'),
             Tab(text: 'Receitas'),
@@ -302,10 +329,10 @@ class AddTransactionPageState extends State<AddTransactionPage>
             ),
           ),
           const SizedBox(height: 8),
-          const Center(
+          Center(
             child: Text(
-              'Saldo disponível',
-              style: TextStyle(color: Colors.black54),
+              _getTextoValor(),
+              style: const TextStyle(color: Colors.black54),
             ),
           ),
           const SizedBox(height: 24),
