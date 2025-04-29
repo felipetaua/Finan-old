@@ -198,6 +198,14 @@ class _GastosPageState extends State<GastosPage> {
                                     },
                                   ),
                                   ListTile(
+                                    leading: const Icon(Icons.edit),
+                                    title: const Text('Editar avatar'),
+                                    onTap: () {
+                                      Navigator.pop(context); // Fecha o modal
+                                      _openAvatarSelector(); // Abre a página de seleção de avatar
+                                    },
+                                  ),
+                                  ListTile(
                                     leading: const Icon(Icons.settings),
                                     title: const Text('Configurações'),
                                     onTap: () {
@@ -216,14 +224,6 @@ class _GastosPageState extends State<GastosPage> {
                                               ),
                                         ),
                                       );
-                                    },
-                                  ),
-                                  ListTile(
-                                    leading: const Icon(Icons.edit),
-                                    title: const Text('Editar avatar'),
-                                    onTap: () {
-                                      Navigator.pop(context); // Fecha o modal
-                                      _openAvatarSelector(); // Abre a página de seleção de avatar
                                     },
                                   ),
                                 ],
