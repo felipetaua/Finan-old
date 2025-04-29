@@ -152,7 +152,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: _getBackgroundColor(), // Cor dinâmica
         elevation: 0,
@@ -362,7 +362,8 @@ class AddTransactionPageState extends State<AddTransactionPage>
               const SizedBox(height: 8),
               _mostrarTodasCategorias
                   ? Wrap(
-                    spacing: 12,
+                    spacing: 10,
+                    runSpacing: 10,
                     children:
                         _categorias.entries.map((entry) {
                           final isSelected = _categoriaSelecionada == entry.key;
@@ -426,9 +427,22 @@ class AddTransactionPageState extends State<AddTransactionPage>
             'Nome da transação',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 8),
           TextField(
             onChanged: (value) => _nome = value,
-            decoration: const InputDecoration(hintText: 'Digite o nome...'),
+            decoration: InputDecoration(
+              hintText: 'Digite o nome...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.blue, // Cor do foco alterada para verde
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
           ),
           const SizedBox(height: 24),
           const Text(
@@ -438,6 +452,18 @@ class AddTransactionPageState extends State<AddTransactionPage>
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
             onChanged: (value) => _frequencia = value ?? '',
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.blue, // Cor do foco alterada para verde
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
             items: const [
               DropdownMenuItem(
                 value: 'Diariamente',
@@ -463,8 +489,18 @@ class AddTransactionPageState extends State<AddTransactionPage>
           TextField(
             onChanged: (value) => _observacao = value,
             maxLines: 3,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Digite uma observação...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.blue, // Cor do foco alterada para verde
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
           const SizedBox(height: 32),
