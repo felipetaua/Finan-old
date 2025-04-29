@@ -28,8 +28,12 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(title: const Text('Configurações')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Configurações'),
+        backgroundColor: Colors.white, // Fundo do AppBar branco
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -208,6 +212,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
+          border:
+              title ==
+                      'Sair da Conta' // Verifica se é o card "Sair da Conta"
+                  ? Border.all(color: Colors.red, width: 2) // Borda vermelha
+                  : null, // Sem borda para os outros cards
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
