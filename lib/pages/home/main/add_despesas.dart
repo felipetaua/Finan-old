@@ -26,38 +26,37 @@ class AddTransactionPageState extends State<AddTransactionPage>
   bool _mostrarTodasCategorias = false;
 
   final Map<IconData, Color> _categorias = {
-    Icons.article: Colors.grey,
-    Icons.map: Colors.purple,
-    Icons.favorite: Colors.green,
-    Icons.credit_card: Colors.purpleAccent,
-    Icons.sports_basketball: Colors.orange,
-    Icons.percent: Colors.red,
-    Icons.shopping_cart: Colors.blue,
-    Icons.home: Colors.brown,
-    Icons.school: Colors.indigo,
-    Icons.work: Colors.teal,
-    Icons.car_rental: Colors.cyan,
-    Icons.fastfood: Colors.amber,
-    Icons.local_hospital: Colors.pink,
-    Icons.flight: Colors.deepPurple,
-    Icons.movie: Colors.lime,
-    Icons.music_note: Colors.deepOrange,
-    Icons.pets: Colors.lightGreen,
-    Icons.phone: Colors.lightBlue,
-    Icons.computer: Colors.yellow,
-    Icons.book: Colors.blueGrey,
-    Icons.beach_access: Colors.tealAccent,
-    Icons.cake: Colors.pinkAccent,
-    Icons.camera: Colors.orangeAccent,
-    Icons.directions_bike: Colors.greenAccent,
-    Icons.directions_boat: Colors.cyanAccent,
-    Icons.directions_bus: Colors.redAccent,
-    Icons.directions_car: Colors.purpleAccent,
-    Icons.directions_railway: Colors.indigoAccent,
-    Icons.directions_walk: Colors.amberAccent,
-    Icons.eco: Colors.lightGreenAccent,
-    Icons.electric_bike: Colors.blueAccent,
-    Icons.electric_car: Colors.deepPurpleAccent,
+    Icons.fastfood: Colors.amber, // Alimentação
+    Icons.shopping_cart: Colors.blue, // Compras
+    Icons.credit_card: Colors.purpleAccent, // Cartão de crédito
+    Icons.directions_car: Colors.purpleAccent, // Transporte (carro)
+    Icons.home: Colors.brown, // Moradia
+    Icons.phone: Colors.lightBlue, // Telefone / Utilidades
+    Icons.local_hospital: Colors.pink, // Saúde
+    Icons.work: Colors.teal, // Trabalho
+    Icons.percent: Colors.red, // Juros / Finanças
+    Icons.map: Colors.purple, // Localizações / Viagens
+    Icons.flight: Colors.deepPurple, // Viagens
+    Icons.movie: Colors.lime, // Lazer
+    Icons.music_note: Colors.lightGreen, // Música / Assinaturas
+    Icons.pets: Colors.deepOrange, // Animais de estimação
+    Icons.school: Colors.indigo, // Educação
+    Icons.car_rental: Colors.cyan, // Aluguel de carro
+    Icons.article: Colors.grey, // Informações / Outros
+    Icons.favorite: Colors.green, // Favoritos / Doações
+    Icons.computer: Colors.yellow, // Tecnologia
+    Icons.book: Colors.blueGrey, // Livros / Educação
+    Icons.beach_access: Colors.tealAccent, // Lazer / Férias
+    Icons.cake: Colors.pinkAccent, // Festas / Presentes
+    Icons.camera: Colors.orangeAccent, // Fotografia
+    Icons.directions_bike: Colors.greenAccent, // Transporte alternativo
+    Icons.directions_boat: Colors.cyanAccent, // Transporte / Lazer
+    Icons.directions_bus: Colors.redAccent, // Transporte público
+    Icons.directions_railway: Colors.indigoAccent, // Transporte ferroviário
+    Icons.directions_walk: Colors.amberAccent, // Caminhada
+    Icons.eco: Colors.lightGreenAccent, // Sustentabilidade
+    Icons.electric_bike: Colors.blueAccent, // Transporte elétrico
+    Icons.electric_car: Colors.deepPurpleAccent, // Transporte elétrico
   };
 
   @override
@@ -362,7 +361,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
               const SizedBox(height: 8),
               _mostrarTodasCategorias
                   ? Wrap(
-                    spacing: 10,
+                    spacing: 19,
                     runSpacing: 10,
                     children:
                         _categorias.entries.map((entry) {
@@ -393,7 +392,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children:
-                          _categorias.entries.take(6).map((entry) {
+                          _categorias.entries.map((entry) {
                             final isSelected =
                                 _categoriaSelecionada == entry.key;
                             return GestureDetector(

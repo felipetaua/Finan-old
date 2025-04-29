@@ -512,7 +512,7 @@ class _TransacaoCardState extends State<TransacaoCard> {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacity(0.3),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -558,7 +558,10 @@ class _TransacaoCardState extends State<TransacaoCard> {
                     ),
                     Text(
                       widget.transacao['data'],
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black54,
+                      ),
                     ),
                   ],
                 ),
@@ -573,25 +576,29 @@ class _TransacaoCardState extends State<TransacaoCard> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Categoria: ${widget.transacao['categoria']}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
               ),
               Text(
                 'Descrição: ${widget.transacao['descricao']}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
               ),
               Text(
                 'Data: ${widget.transacao['data']}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
               ),
               Text(
                 'Valor: ${widget.transacao['valor']}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
+              ),
+              Text(
+                'Obs: ${widget.transacao['observacao']}',
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
               ),
             ],
           ],
