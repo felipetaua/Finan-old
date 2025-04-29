@@ -28,35 +28,58 @@ class AddTransactionPageState extends State<AddTransactionPage>
   final Map<IconData, Color> _categorias = {
     Icons.fastfood: Colors.amber, // Alimentação
     Icons.shopping_cart: Colors.blue, // Compras
-    Icons.credit_card: Colors.purpleAccent, // Cartão de crédito
-    Icons.directions_car: Colors.purpleAccent, // Transporte (carro)
     Icons.home: Colors.brown, // Moradia
-    Icons.phone: Colors.lightBlue, // Telefone / Utilidades
-    Icons.local_hospital: Colors.pink, // Saúde
-    Icons.work: Colors.teal, // Trabalho
-    Icons.percent: Colors.red, // Juros / Finanças
-    Icons.map: Colors.purple, // Localizações / Viagens
-    Icons.flight: Colors.deepPurple, // Viagens
-    Icons.movie: Colors.lime, // Lazer
-    Icons.music_note: Colors.lightGreen, // Música / Assinaturas
-    Icons.pets: Colors.deepOrange, // Animais de estimação
-    Icons.school: Colors.indigo, // Educação
-    Icons.car_rental: Colors.cyan, // Aluguel de carro
-    Icons.article: Colors.grey, // Informações / Outros
-    Icons.favorite: Colors.green, // Favoritos / Doações
-    Icons.computer: Colors.yellow, // Tecnologia
-    Icons.book: Colors.blueGrey, // Livros / Educação
-    Icons.beach_access: Colors.tealAccent, // Lazer / Férias
-    Icons.cake: Colors.pinkAccent, // Festas / Presentes
-    Icons.camera: Colors.orangeAccent, // Fotografia
-    Icons.directions_bike: Colors.greenAccent, // Transporte alternativo
-    Icons.directions_boat: Colors.cyanAccent, // Transporte / Lazer
+    Icons.lightbulb: Colors.amber, // Conta de luz
+    Icons.water_drop: Colors.lightBlueAccent, // Conta de água
+    Icons.gas_meter: Colors.deepOrangeAccent, // Gás
+    Icons.phone: Colors.lightBlue, // Telefone / Internet
+    Icons.local_gas_station: Colors.orange, // Combustível
+    Icons.cleaning_services: Colors.teal, // Limpeza / Serviços
+    Icons.lock: Colors.grey, // Seguro residencial
+    Icons.build: Colors.blueGrey, // Manutenção / Reformas
+
+    Icons.directions_car: Colors.purpleAccent, // Transporte (carro)
     Icons.directions_bus: Colors.redAccent, // Transporte público
-    Icons.directions_railway: Colors.indigoAccent, // Transporte ferroviário
-    Icons.directions_walk: Colors.amberAccent, // Caminhada
+    Icons.directions_railway: Colors.indigoAccent, // Trem / Metrô
+    Icons.directions_bike: Colors.greenAccent, // Bicicleta
+    Icons.electric_bike: Colors.blueAccent, // Bike elétrica
+    Icons.electric_car: Colors.deepPurpleAccent, // Carro elétrico
+    Icons.car_rental: Colors.cyan, // Aluguel de carro
+    Icons.flight: Colors.deepPurple, // Viagens aéreas
+    Icons.map: Colors.purple, // Viagens / Localizações
+    Icons.directions_boat: Colors.cyanAccent, // Barco / Passeios
+
+    Icons.local_hospital: Colors.pink, // Saúde
+    Icons.health_and_safety: Colors.red, // Seguro saúde
+    Icons.work: Colors.teal, // Trabalho / Renda fixa
+    Icons.attach_money: Colors.green, // Renda extra / Ganhos
+    Icons.paid: Colors.green, // Pagamento recebido
+    Icons.percent: Colors.red, // Juros / Impostos
+    Icons.money_off: Colors.redAccent, // Multas / Dívidas
+    Icons.credit_card: Colors.purpleAccent, // Cartão de crédito
+    Icons.account_balance: Colors.indigo, // Banco / Conta
+    Icons.savings: Colors.greenAccent, // Poupança / Reservas
+
+    Icons.receipt: Colors.deepOrange, // Contas / Faturas
+    Icons.redeem: Colors.cyan, // Recompensas / Cashback
+    Icons.favorite: Colors.green, // Doações / Causas
+    Icons.handshake: Colors.deepPurple, // Contratos / Parcerias
+
+    Icons.school: Colors.indigo, // Educação
+    Icons.book: Colors.blueGrey, // Materiais / Estudos
+    Icons.baby_changing_station: Colors.pink, // Despesas com filhos
+    Icons.pets: Colors.deepOrange, // Pets
+
+    Icons.movie: Colors.lime, // Cinema / Entretenimento
+    Icons.music_note: Colors.lightGreen, // Música / Streaming
+    Icons.beach_access: Colors.tealAccent, // Férias / Viagens
+    Icons.cake: Colors.pinkAccent, // Presentes / Festas
+    Icons.camera: Colors.orangeAccent, // Fotografia / Hobby
+    Icons.computer: Colors.yellow, // Eletrônicos
+    Icons.emoji_events: Colors.yellowAccent, // Prêmios / Incentivos
+    Icons.store: Colors.brown, // Loja / Negócio próprio
     Icons.eco: Colors.lightGreenAccent, // Sustentabilidade
-    Icons.electric_bike: Colors.blueAccent, // Transporte elétrico
-    Icons.electric_car: Colors.deepPurpleAccent, // Transporte elétrico
+    Icons.article: Colors.grey, // Outros / Geral
   };
 
   @override

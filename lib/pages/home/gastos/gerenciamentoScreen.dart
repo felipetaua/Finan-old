@@ -234,7 +234,7 @@ class AdicionarTransacaoPage extends StatelessWidget {
             Text("Renda", style: TextStyle(color: Colors.blue)),
             SizedBox(height: 4),
             Text(
-              "\$2,450",
+              "R\$2.450",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -244,7 +244,7 @@ class AdicionarTransacaoPage extends StatelessWidget {
             Text("Despesa", style: TextStyle(color: Colors.pink)),
             SizedBox(height: 4),
             Text(
-              "\$2,535",
+              "R\$2.535",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -301,7 +301,7 @@ class AdicionarTransacaoPage extends StatelessWidget {
       ),
       title: Text(label),
       subtitle: Text("$percent%"),
-      trailing: Text("R\$${value.toStringAsFixed(2)}"),
+      trailing: Text("R\$ ${value.toStringAsFixed(2)}"),
     );
   }
 

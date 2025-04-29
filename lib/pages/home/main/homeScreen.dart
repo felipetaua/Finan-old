@@ -315,7 +315,7 @@ class _GastosPageState extends State<GastosPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.receipt_long),
-              label: 'Receitas',
+              label: 'Gestão',
             ),
           ],
         ),
