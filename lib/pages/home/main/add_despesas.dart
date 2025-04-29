@@ -2,6 +2,7 @@ import 'package:finan/feedback/congratulationsPage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 class AddTransactionPage extends StatefulWidget {
   final Function(Map<String, dynamic>) onSave; // Função para salvar a transação
@@ -165,36 +166,130 @@ class AddTransactionPageState extends State<AddTransactionPage>
           Center(
             child: GestureDetector(
               onTap: () async {
-                final result = await showDialog<String>(
+                await showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
                   builder: (context) {
                     String tempValue = _inputValue;
-                    return AlertDialog(
-                      title: const Text('Digite o valor'),
-                      content: TextField(
-                        autofocus: true,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(hintText: 'Ex: 1050'),
-                        onChanged: (value) => tempValue = value,
+                    final TextEditingController valueController =
+                        TextEditingController(text: tempValue);
+
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                        left: 20,
+                        right: 20,
                       ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('Cancelar'),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
-                        ElevatedButton(
-                          onPressed: () => Navigator.pop(context, tempValue),
-                          child: const Text('OK'),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const Text(
+                              'Digite o valor',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            TextField(
+                              controller: valueController,
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+[\.,]?\d{0,2}'),
+                                ),
+                              ],
+                              decoration: InputDecoration(
+                                labelText: "Valor",
+                                labelStyle: const TextStyle(
+                                  color: Colors.black38,
+                                ),
+                                prefixIcon: const Icon(Icons.attach_money),
+                                suffix: Text("reais"),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.blueAccent,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                // Substitui ',' por '.' para padronizar o valor
+                                tempValue = value.replaceAll(',', '.');
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text(
+                                      "Cancelar",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, tempValue);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 16,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      "OK",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     );
                   },
-                );
-                if (result != null && result.isNotEmpty) {
-                  setState(() {
-                    _inputValue = result;
-                  });
-                }
+                ).then((result) {
+                  if (result != null && result.isNotEmpty) {
+                    setState(() {
+                      _inputValue = result;
+                    });
+                  }
+                });
               },
               child: Text(
                 _formatCurrency(_inputValue),
