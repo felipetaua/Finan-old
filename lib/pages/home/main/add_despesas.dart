@@ -256,22 +256,25 @@ class AddTransactionPageState extends State<AddTransactionPage>
                             ),
                             const SizedBox(height: 16),
                             TextField(
-                              // autofocus: true, // Removido para não focar automaticamente
+                              cursorColor: Colors.blueAccent,
                               controller: valueController,
-                              keyboardType:
-                                  TextInputType
-                                      .number, // Alterado para TextInputType.number
+                              keyboardType: TextInputType.number,
                               inputFormatters: [
-                                FilteringTextInputFormatter
-                                    .digitsOnly, // Permite apenas dígitos
+                                FilteringTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
                                 labelText: "Valor",
                                 labelStyle: const TextStyle(
                                   color: Colors.black38,
                                 ),
-                                prefixIcon: const Icon(Icons.attach_money),
-                                suffix: Text("reais"),
+                                prefixIcon: const Icon(
+                                  Icons.attach_money,
+                                  color: Colors.blueAccent,
+                                ),
+                                suffix: Text(
+                                  "reais",
+                                  style: TextStyle(color: Colors.blueAccent),
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -374,6 +377,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
           const SizedBox(height: 8),
           TextField(
             onChanged: (value) => _nome = value,
+            cursorColor: Colors.blueAccent,
             decoration: InputDecoration(
               hintText: 'Digite o nome...',
               border: OutlineInputBorder(
@@ -381,7 +385,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.blue, // Cor do foco alterada para verde
+                  color: Colors.blueAccent,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -482,14 +486,17 @@ class AddTransactionPageState extends State<AddTransactionPage>
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
+            dropdownColor: Colors.white,
             onChanged: (value) => _frequencia = value ?? '',
             decoration: InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.blue, // Cor do foco alterada para verde
+                  color: Colors.blueAccent,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -521,6 +528,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
           TextField(
             onChanged: (value) => _observacao = value,
             maxLines: 3,
+            cursorColor: Colors.blueAccent,
             decoration: InputDecoration(
               hintText: 'Digite uma observação...',
               border: OutlineInputBorder(
@@ -528,7 +536,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.blue, // Cor do foco alterada para verde
+                  color: Colors.blueAccent,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),
