@@ -502,7 +502,7 @@ class _PouparPageState extends State<PouparPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  color: const Color.fromARGB(255, 36, 37, 48),
+                  color: const Color(0xFF242530),
                   elevation: 6,
                   shadowColor: Colors.black.withOpacity(0.1),
                   child: Padding(
