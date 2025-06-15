@@ -2,24 +2,7 @@ import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:fl_chart/fl_chart.dart';
-
-class MoneyModel {
-  final String id;
-  final String name;
-  final String description;
-  final double targetValue;
-  double currentValue;
-  final DateTime createdAt;
-
-  MoneyModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.targetValue,
-    required this.currentValue,
-    required this.createdAt,
-  });
-}
+import 'package:intl/intl.dart'; // Importar para NumberFormat
 
 class PouparPage extends StatefulWidget {
   const PouparPage({super.key});
@@ -137,9 +120,7 @@ class _PouparPageState extends State<PouparPage> {
                       Icons.attach_money,
                       color: Colors.blueAccent,
                     ),
-                    suffix: Text(
-                      'reais',
-                    ), // Removido pois o formatter já inclui R$
+                    // suffix: Text('reais'), // Removido pois o MoneyInputFormatter já inclui R$
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -161,14 +142,14 @@ class _PouparPageState extends State<PouparPage> {
                       name: nameController.text,
                       description: descriptionController.text,
                       targetValue:
-                          double.tryParse(
-                            toNumericString(
-                              targetValueController.text,
-                              allowPeriod:
-                                  true, // Permite '.' como separador decimal
-                            ),
-                          ) ??
-                          0.0,
+                          (double.tryParse(
+                                targetValueController.text.replaceAll(
+                                  RegExp(r'[^0-9]'),
+                                  '',
+                                ),
+                              ) ??
+                              0.0) /
+                          100.0,
                       currentValue: 0,
                       createdAt: DateTime.now(),
                     );
@@ -252,7 +233,7 @@ class _PouparPageState extends State<PouparPage> {
                     labelText: "Valor",
                     labelStyle: const TextStyle(color: Colors.black38),
                     prefixIcon: const Icon(Icons.attach_money),
-                    suffix: const Text('reais'),
+                    // suffix: const Text('reais'), // Removido pois o MoneyInputFormatter já inclui R$
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -281,14 +262,12 @@ class _PouparPageState extends State<PouparPage> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
+                          String digitsOnly = valueController.text.replaceAll(
+                            RegExp(r'[^0-9]'),
+                            '',
+                          );
                           double value =
-                              double.tryParse(
-                                toNumericString(
-                                  valueController.text,
-                                  allowPeriod: true,
-                                ),
-                              ) ??
-                              0.0;
+                              (double.tryParse(digitsOnly) ?? 0.0) / 100.0;
                           setState(() {
                             meta.currentValue += value;
                           });
@@ -323,6 +302,11 @@ class _PouparPageState extends State<PouparPage> {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.currency(
+      locale: 'pt_BR',
+      symbol: 'R\$',
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -588,6 +572,10 @@ class _PouparPageState extends State<PouparPage> {
                     final meta = _money[index];
                     final progresso = (meta.currentValue / meta.targetValue)
                         .clamp(0.0, 1.0);
+                    final double restante =
+                        meta.targetValue > meta.currentValue
+                            ? meta.targetValue - meta.currentValue
+                            : 0.0;
 
                     return Container(
                       margin: const EdgeInsets.only(bottom: 16),
@@ -658,19 +646,32 @@ class _PouparPageState extends State<PouparPage> {
                                   const SizedBox(height: 6),
 
                                   Text(
-                                    'Guardado: R\$ ${meta.currentValue.toStringAsFixed(2)}',
+                                    'Guardado: ${currencyFormatter.format(meta.currentValue)}',
                                     style: const TextStyle(
                                       fontSize: 13,
                                       color: Colors.black87,
                                     ),
                                   ),
                                   Text(
-                                    'Meta: R\$ ${meta.targetValue.toStringAsFixed(2)}',
+                                    'Meta: ${currencyFormatter.format(meta.targetValue)}',
                                     style: const TextStyle(
                                       fontSize: 13,
                                       color: Colors.black54,
                                     ),
                                   ),
+                                  if (meta.targetValue >
+                                      0) // Só mostra "Falta" se houver uma meta
+                                    Text(
+                                      'Falta: ${currencyFormatter.format(restante)}',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color:
+                                            restante > 0
+                                                ? Colors.blueAccent
+                                                : Colors.green,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
 
                                   const SizedBox(height: 8),
 
