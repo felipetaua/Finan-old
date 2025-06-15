@@ -327,248 +327,262 @@ class _PouparPageState extends State<PouparPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Barra de busca
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(width: 1, color: Colors.grey),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.search),
-                    hintText: 'Pesquise',
-                    border: InputBorder.none,
-                    suffixIcon: Icon(Icons.filter_list),
+          padding: const EdgeInsets.fromLTRB(
+            20,
+            20,
+            20,
+            0,
+          ), // Ajustado o padding inferior
+          child: SingleChildScrollView(
+            // Adicionado SingleChildScrollView
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Barra de busca
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 1, color: Colors.grey),
+                  ),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.search),
+                      hintText: 'Pesquise',
+                      border: InputBorder.none,
+                      suffixIcon: Icon(Icons.filter_list),
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Gráfico com Card
-              Center(
-                child: const Text(
-                  'Frequência de Depósitos',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                // Gráfico com Card
+                const Center(
+                  child: Text(
+                    'Frequência de Depósitos',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                color: const Color(0xFF1b1d2e),
-                elevation: 6,
-                shadowColor: Colors.black.withOpacity(0.1),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: const Text(
-                          'Ultimas semanas - 2025',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white60,
+                const SizedBox(height: 12),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  color: const Color(0xFF1b1d2e),
+                  elevation: 6,
+                  shadowColor: Colors.black.withOpacity(0.1),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Center(
+                          child: Text(
+                            'Ultimas semanas - 2025',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white60,
+                            ),
+                            textAlign: TextAlign.right,
                           ),
-                          textAlign: TextAlign.right,
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      SizedBox(
-                        height: 200,
-                        child: LineChart(
-                          LineChartData(
-                            lineBarsData: [
-                              LineChartBarData(
-                                spots: const [
-                                  FlSpot(0, 3),
-                                  FlSpot(1, 10),
-                                  FlSpot(2, 7),
-                                  FlSpot(3, 4),
-                                  FlSpot(4, 1),
-                                ],
-                                isCurved: true,
-                                color: Colors.blueAccent,
-                                barWidth: 3,
-                                dotData: FlDotData(show: true),
-                                belowBarData: BarAreaData(
-                                  show: true,
-                                  color: Colors.blue.withOpacity(0.2),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 200,
+                          child: LineChart(
+                            LineChartData(
+                              lineBarsData: [
+                                LineChartBarData(
+                                  spots: const [
+                                    FlSpot(0, 3),
+                                    FlSpot(1, 10),
+                                    FlSpot(2, 7),
+                                    FlSpot(3, 4),
+                                    FlSpot(4, 1),
+                                  ],
+                                  isCurved: true,
+                                  color: Colors.blueAccent,
+                                  barWidth: 3,
+                                  dotData: FlDotData(show: true),
+                                  belowBarData: BarAreaData(
+                                    show: true,
+                                    color: Colors.blue.withOpacity(0.2),
+                                  ),
                                 ),
-                              ),
-                              LineChartBarData(
-                                spots: const [
-                                  FlSpot(1, 2),
-                                  FlSpot(2, 1),
-                                  FlSpot(3, 6),
-                                  FlSpot(4, 3),
-                                ],
-                                isCurved: true,
-                                color: Colors.green,
-                                barWidth: 3,
-                                dotData: FlDotData(show: true),
-                                belowBarData: BarAreaData(
-                                  show: true,
-                                  color: Colors.green.withOpacity(0.2),
+                                LineChartBarData(
+                                  spots: const [
+                                    FlSpot(1, 2),
+                                    FlSpot(2, 1),
+                                    FlSpot(3, 6),
+                                    FlSpot(4, 3),
+                                  ],
+                                  isCurved: true,
+                                  color: Colors.green,
+                                  barWidth: 3,
+                                  dotData: FlDotData(show: true),
+                                  belowBarData: BarAreaData(
+                                    show: true,
+                                    color: Colors.green.withOpacity(0.2),
+                                  ),
                                 ),
-                              ),
-                            ],
-                            titlesData: FlTitlesData(
-                              bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  reservedSize: 28,
-                                  interval: 1,
-                                  getTitlesWidget: (value, meta) {
-                                    const days = [
-                                      'Seg',
-                                      'Ter',
-                                      'Qua',
-                                      'Qui',
-                                      'Sex',
-                                    ];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text(
-                                        days[value.toInt() % days.length],
+                              ],
+                              titlesData: FlTitlesData(
+                                bottomTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    showTitles: true,
+                                    reservedSize: 28,
+                                    interval: 1,
+                                    getTitlesWidget: (value, meta) {
+                                      const days = [
+                                        'Seg',
+                                        'Ter',
+                                        'Qua',
+                                        'Qui',
+                                        'Sex',
+                                      ];
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 8.0,
+                                        ),
+                                        child: Text(
+                                          days[value.toInt() % days.length],
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white54,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                leftTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    showTitles: true,
+                                    interval: 2,
+                                    getTitlesWidget: (value, meta) {
+                                      return Text(
+                                        value.toInt().toString(),
                                         style: const TextStyle(
                                           fontSize: 12,
-                                          color: Colors.white54,
+                                          color: Colors.white60,
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    },
+                                    reservedSize: 28,
+                                  ),
+                                ),
+                                topTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false),
+                                ),
+                                rightTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false),
+                                ),
+                              ),
+                              gridData: FlGridData(
+                                show: true,
+                                drawVerticalLine: true,
+                                horizontalInterval: 2,
+                                verticalInterval: 1,
+                                getDrawingHorizontalLine:
+                                    (value) => FlLine(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      strokeWidth: 1,
+                                    ),
+                                getDrawingVerticalLine:
+                                    (value) => FlLine(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      strokeWidth: 1,
+                                    ),
+                              ),
+                              borderData: FlBorderData(
+                                show: true,
+                                border: Border.all(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  width: 1,
+                                ),
+                              ),
+                              lineTouchData: LineTouchData(
+                                handleBuiltInTouches: true,
+                                touchTooltipData: LineTouchTooltipData(
+                                  tooltipRoundedRadius: 12,
+                                  fitInsideHorizontally: true,
+                                  fitInsideVertically: true,
+                                  showOnTopOfTheChartBoxArea: true,
+                                  tooltipPadding: const EdgeInsets.all(8),
+                                  getTooltipItems: (touchedSpots) {
+                                    return touchedSpots.map((spot) {
+                                      return LineTooltipItem(
+                                        "R\$ ${spot.y.toStringAsFixed(2)}",
+                                        const TextStyle(
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      );
+                                    }).toList();
                                   },
                                 ),
                               ),
-                              leftTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  interval: 2,
-                                  getTitlesWidget: (value, meta) {
-                                    return Text(
-                                      value.toInt().toString(),
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white60,
-                                      ),
-                                    );
-                                  },
-                                  reservedSize: 28,
-                                ),
-                              ),
-                              topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false),
-                              ),
-                              rightTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false),
-                              ),
+                              minY: 0,
+                              maxY: 12,
                             ),
-                            gridData: FlGridData(
-                              show: true,
-                              drawVerticalLine: true,
-                              horizontalInterval: 2,
-                              verticalInterval: 1,
-                              getDrawingHorizontalLine:
-                                  (value) => FlLine(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    strokeWidth: 1,
-                                  ),
-                              getDrawingVerticalLine:
-                                  (value) => FlLine(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    strokeWidth: 1,
-                                  ),
-                            ),
-                            borderData: FlBorderData(
-                              show: true,
-                              border: Border.all(
-                                color: Colors.grey.withOpacity(0.2),
-                                width: 1,
-                              ),
-                            ),
-                            lineTouchData: LineTouchData(
-                              handleBuiltInTouches: true,
-                              touchTooltipData: LineTouchTooltipData(
-                                tooltipRoundedRadius: 12,
-                                fitInsideHorizontally: true,
-                                fitInsideVertically: true,
-                                showOnTopOfTheChartBoxArea: true,
-                                tooltipPadding: const EdgeInsets.all(8),
-                                getTooltipItems: (touchedSpots) {
-                                  return touchedSpots.map((spot) {
-                                    return LineTooltipItem(
-                                      "R\$ ${spot.y.toStringAsFixed(2)}",
-                                      const TextStyle(
-                                        color: Colors.black87,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    );
-                                  }).toList();
-                                },
-                              ),
-                            ),
-                            minY: 0,
-                            maxY: 12,
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Botão para adicionar reservas e objetivos
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showCreateBoxModal();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent, // Cor do botão
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30,
+                        ), // Bordas arredondadas
                       ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 12),
-
-              // Botão para adicionar reservas e objetivos
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    _showCreateBoxModal();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent, // Cor do botão
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        30,
-                      ), // Bordas arredondadas
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 12,
-                    ),
-                  ),
-                  child: const Text(
-                    'Crie sua caixinha de metas',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    child: const Text(
+                      'Crie sua caixinha de metas',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Título reservas
-              const Text(
-                'Reservas e Objetivos',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 5),
+                // Título reservas
+                const Text(
+                  'Reservas e Objetivos',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 5),
 
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 16),
+                ListView.builder(
+                  // Removido o Expanded
+                  shrinkWrap: true, // Adicionado shrinkWrap
+                  physics:
+                      const NeverScrollableScrollPhysics(), // Adicionado physics
+                  padding: const EdgeInsets.only(
+                    bottom: 16,
+                  ), // Padding inferior para o último item
                   itemCount: _money.length,
                   itemBuilder: (context, index) {
                     final meta = _money[index];
@@ -683,8 +697,8 @@ class _PouparPageState extends State<PouparPage> {
                     );
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
