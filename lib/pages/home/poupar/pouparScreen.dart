@@ -59,6 +59,7 @@ class _PouparPageState extends State<PouparPage> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: nameController,
+                  cursorColor: Colors.blueAccent,
                   decoration: InputDecoration(
                     labelText: "Nome do objetivo",
                     labelStyle: const TextStyle(color: Colors.black38),
@@ -81,6 +82,7 @@ class _PouparPageState extends State<PouparPage> {
                 const SizedBox(height: 12),
                 TextField(
                   controller: descriptionController,
+                  cursorColor: Colors.blueAccent,
                   decoration: InputDecoration(
                     labelText: "Descrição",
                     labelStyle: const TextStyle(color: Colors.black38),
@@ -105,6 +107,7 @@ class _PouparPageState extends State<PouparPage> {
                 TextField(
                   controller: targetValueController,
                   keyboardType: TextInputType.number,
+                  cursorColor: Colors.blueAccent,
                   inputFormatters: [
                     MoneyInputFormatter(
                       thousandSeparator: ThousandSeparator.Period,
@@ -120,7 +123,10 @@ class _PouparPageState extends State<PouparPage> {
                       Icons.attach_money,
                       color: Colors.blueAccent,
                     ),
-                    suffix: Text('reais'),
+                    suffix: Text(
+                      'reais',
+                      style: TextStyle(color: Colors.blueAccent),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -220,6 +226,7 @@ class _PouparPageState extends State<PouparPage> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: valueController,
+                  cursorColor: Colors.blueAccent,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     MoneyInputFormatter(
@@ -338,6 +345,7 @@ class _PouparPageState extends State<PouparPage> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: valueController,
+                  cursorColor: Colors.blueAccent,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     MoneyInputFormatter(
@@ -356,7 +364,7 @@ class _PouparPageState extends State<PouparPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Colors.redAccent, // Cor de foco para retirada
+                        color: Colors.blueAccent, // Alterado para azul
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -470,6 +478,7 @@ class _PouparPageState extends State<PouparPage> {
                     border: Border.all(width: 1, color: Colors.grey),
                   ),
                   child: const TextField(
+                    cursorColor: Colors.blueAccent,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search),
                       hintText: 'Pesquise',
