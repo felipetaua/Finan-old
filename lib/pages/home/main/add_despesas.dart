@@ -222,7 +222,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
                   builder: (context) {
                     String tempValue = _inputValue;
                     final TextEditingController valueController =
-                        TextEditingController(text: tempValue);
+                        TextEditingController(text: _formatCurrency(tempValue));
 
                     return Padding(
                       padding: EdgeInsets.only(
@@ -256,14 +256,14 @@ class AddTransactionPageState extends State<AddTransactionPage>
                             ),
                             const SizedBox(height: 16),
                             TextField(
+                              // autofocus: true, // Removido para não focar automaticamente
                               controller: valueController,
-                              keyboardType: TextInputType.numberWithOptions(
-                                decimal: true,
-                              ),
+                              keyboardType:
+                                  TextInputType
+                                      .number, // Alterado para TextInputType.number
                               inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+[\.,]?\d{0,2}'),
-                                ),
+                                FilteringTextInputFormatter
+                                    .digitsOnly, // Permite apenas dígitos
                               ],
                               decoration: InputDecoration(
                                 labelText: "Valor",
@@ -286,6 +286,15 @@ class AddTransactionPageState extends State<AddTransactionPage>
                               onChanged: (value) {
                                 // Substitui ',' por '.' para padronizar o valor
                                 tempValue = value.replaceAll(',', '.');
+                                // value aqui são os dígitos puros devido a FilteringTextInputFormatter.digitsOnly
+                                tempValue = value;
+                                final formattedValue = _formatCurrency(value);
+                                valueController.value = TextEditingValue(
+                                  text: formattedValue,
+                                  selection: TextSelection.fromPosition(
+                                    TextPosition(offset: formattedValue.length),
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(height: 20),
@@ -355,6 +364,28 @@ class AddTransactionPageState extends State<AddTransactionPage>
             child: Text(
               _getTextoValor(),
               style: const TextStyle(color: Colors.black54),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Nome da transação',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            onChanged: (value) => _nome = value,
+            decoration: InputDecoration(
+              hintText: 'Digite o nome...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.blue, // Cor do foco alterada para verde
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
           const SizedBox(height: 24),
@@ -446,28 +477,6 @@ class AddTransactionPageState extends State<AddTransactionPage>
           ),
           const SizedBox(height: 24),
           const Text(
-            'Nome da transação',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            onChanged: (value) => _nome = value,
-            decoration: InputDecoration(
-              hintText: 'Digite o nome...',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.blue, // Cor do foco alterada para verde
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          const Text(
             'Frequência',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -487,6 +496,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
               ),
             ),
             items: const [
+              DropdownMenuItem(value: 'Unicamente', child: Text('Unicamente')),
               DropdownMenuItem(
                 value: 'Diariamente',
                 child: Text('Diariamente'),
