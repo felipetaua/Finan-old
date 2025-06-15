@@ -275,7 +275,11 @@ class _GastosPageState extends State<GastosPage> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: _pages[_selectedIndex],
+        body: IndexedStack(
+          // Alterado para IndexedStack
+          index: _selectedIndex,
+          children: _pages,
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
