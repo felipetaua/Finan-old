@@ -141,10 +141,7 @@ class _GastosPageState extends State<GastosPage> {
     _pages = [
       PouparPage(),
       EducationPage(),
-      _GastosContent(
-        salario: _salario,
-        transacoes: _transacoes,
-      ),
+      _GastosContent(salario: _salario, transacoes: _transacoes),
       InvestimentosPage(),
       AdicionarTransacaoPage(),
     ];
@@ -286,10 +283,8 @@ class _GastosPageState extends State<GastosPage> {
               context,
               MaterialPageRoute(
                 builder:
-                    (context) => AddTransactionPage(
-                      onSave:
-                          _adicionarTransacao, 
-                    ),
+                    (context) =>
+                        AddTransactionPage(onSave: _adicionarTransacao),
               ),
             );
           },
@@ -298,30 +293,32 @@ class _GastosPageState extends State<GastosPage> {
           child: const Icon(Icons.add),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
           selectedItemColor: const Color(0xFF368DF7),
           unselectedItemColor: Colors.grey,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.attach_money_rounded),
-              label: 'Poupar',
+              icon: const Icon(Icons.attach_money_rounded),
+              label: _selectedIndex == 0 ? 'Poupar' : '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school_outlined),
-              label: 'Educação',
+              icon: const Icon(Icons.school_outlined),
+              label: _selectedIndex == 1 ? 'Educação' : '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.swap_horiz),
-              label: 'Gastos',
+              icon: const Icon(Icons.swap_horiz),
+              label: _selectedIndex == 2 ? 'Gastos' : '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart),
-              label: 'Investimentos',
+              icon: const Icon(Icons.show_chart),
+              label: _selectedIndex == 3 ? 'Investimentos' : '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.receipt_long),
-              label: 'Gestão',
+              icon: const Icon(Icons.receipt_long),
+              label: _selectedIndex == 4 ? 'Gestão' : '',
             ),
           ],
         ),
@@ -331,9 +328,8 @@ class _GastosPageState extends State<GastosPage> {
 }
 
 class _GastosContent extends StatelessWidget {
-  final double salario; 
-  final List<Map<String, dynamic>>
-  transacoes; 
+  final double salario;
+  final List<Map<String, dynamic>> transacoes;
 
   const _GastosContent({required this.salario, required this.transacoes});
 
