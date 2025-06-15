@@ -512,6 +512,7 @@ class _PouparPageState extends State<PouparPage> {
                           color: Colors.white,
                         ),
 
+                        // image: 'assets/images/card-invest-favoritos.png', // Removido
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -521,6 +522,7 @@ class _PouparPageState extends State<PouparPage> {
                           color: Colors.white,
                         ),
 
+                        // image: 'assets/images/card-invest-favoritos.png', // Removido
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -530,6 +532,7 @@ class _PouparPageState extends State<PouparPage> {
                           color: Colors.white,
                         ),
 
+                        // image: 'assets/images/card-invest-favoritos.png', // Removido
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -539,6 +542,7 @@ class _PouparPageState extends State<PouparPage> {
                           color: Colors.white,
                         ),
 
+                        // image: 'assets/images/card-invest-favoritos.png', // Removido
                         onTap: () => Navigator.push,
                       ),
                     ],
@@ -1136,10 +1140,12 @@ class ReservaItem extends StatelessWidget {
 class _sujestoesBox extends StatelessWidget {
   final String label;
   final Widget icon;
+  // final String image; // Removido
   final VoidCallback onTap;
 
   const _sujestoesBox({
     required this.label,
+    // required this.image, // Removido
     required this.icon,
     required this.onTap,
   });
