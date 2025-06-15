@@ -1,5 +1,6 @@
 import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class MoneyModel {
@@ -121,6 +122,14 @@ class _PouparPageState extends State<PouparPage> {
                 TextField(
                   controller: targetValueController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    MoneyInputFormatter(
+                      thousandSeparator: ThousandSeparator.Period,
+                      leadingSymbol: 'R\$',
+                      useSymbolPadding: true,
+                      mantissaLength: 2, // Para duas casas decimais
+                    ),
+                  ],
                   decoration: InputDecoration(
                     labelText: "Valor necessário",
                     labelStyle: const TextStyle(color: Colors.black38),
@@ -128,7 +137,9 @@ class _PouparPageState extends State<PouparPage> {
                       Icons.attach_money,
                       color: Colors.blueAccent,
                     ),
-                    suffix: Text('reais'),
+                    suffix: Text(
+                      'reais',
+                    ), // Removido pois o formatter já inclui R$
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -150,7 +161,14 @@ class _PouparPageState extends State<PouparPage> {
                       name: nameController.text,
                       description: descriptionController.text,
                       targetValue:
-                          double.tryParse(targetValueController.text) ?? 0,
+                          double.tryParse(
+                            toNumericString(
+                              targetValueController.text,
+                              allowPeriod:
+                                  true, // Permite '.' como separador decimal
+                            ),
+                          ) ??
+                          0.0,
                       currentValue: 0,
                       createdAt: DateTime.now(),
                     );
@@ -222,6 +240,14 @@ class _PouparPageState extends State<PouparPage> {
                 TextField(
                   controller: valueController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    MoneyInputFormatter(
+                      thousandSeparator: ThousandSeparator.Period,
+                      leadingSymbol: 'R\$',
+                      useSymbolPadding: true,
+                      mantissaLength: 2,
+                    ),
+                  ],
                   decoration: InputDecoration(
                     labelText: "Valor",
                     labelStyle: const TextStyle(color: Colors.black38),
@@ -256,7 +282,13 @@ class _PouparPageState extends State<PouparPage> {
                       child: ElevatedButton(
                         onPressed: () {
                           double value =
-                              double.tryParse(valueController.text) ?? 0;
+                              double.tryParse(
+                                toNumericString(
+                                  valueController.text,
+                                  allowPeriod: true,
+                                ),
+                              ) ??
+                              0.0;
                           setState(() {
                             meta.currentValue += value;
                           });
