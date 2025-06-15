@@ -143,10 +143,10 @@ class _GastosPageState extends State<GastosPage> {
       EducationPage(),
       _GastosContent(
         salario: _salario,
-        transacoes: _transacoes, // Passa a lista de transações atual
+        transacoes: _transacoes,
       ),
       InvestimentosPage(),
-      AdicionarTransacaoPage(), // Esta é a tela de Gerenciamento (gerenciamentoScreen.dart)
+      AdicionarTransacaoPage(),
     ];
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -288,7 +288,7 @@ class _GastosPageState extends State<GastosPage> {
                 builder:
                     (context) => AddTransactionPage(
                       onSave:
-                          _adicionarTransacao, // Passa a função como parâmetro
+                          _adicionarTransacao, 
                     ),
               ),
             );
@@ -331,9 +331,9 @@ class _GastosPageState extends State<GastosPage> {
 }
 
 class _GastosContent extends StatelessWidget {
-  final double salario; // Adicione o parâmetro salário
+  final double salario; 
   final List<Map<String, dynamic>>
-  transacoes; // Adicione o parâmetro transações
+  transacoes; 
 
   const _GastosContent({required this.salario, required this.transacoes});
 

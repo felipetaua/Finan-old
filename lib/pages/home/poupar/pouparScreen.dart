@@ -27,7 +27,7 @@ class _PouparPageState extends State<PouparPage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent, // Para bordas arredondadas
+      backgroundColor: Colors.transparent,
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
@@ -110,7 +110,7 @@ class _PouparPageState extends State<PouparPage> {
                       thousandSeparator: ThousandSeparator.Period,
                       leadingSymbol: 'R\$',
                       useSymbolPadding: true,
-                      mantissaLength: 2, // Para duas casas decimais
+                      mantissaLength: 2,
                     ),
                   ],
                   decoration: InputDecoration(
@@ -120,7 +120,7 @@ class _PouparPageState extends State<PouparPage> {
                       Icons.attach_money,
                       color: Colors.blueAccent,
                     ),
-                    // suffix: Text('reais'), // Removido pois o MoneyInputFormatter já inclui R$
+                    suffix: Text('reais'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -233,7 +233,7 @@ class _PouparPageState extends State<PouparPage> {
                     labelText: "Valor",
                     labelStyle: const TextStyle(color: Colors.black38),
                     prefixIcon: const Icon(Icons.attach_money),
-                    // suffix: const Text('reais'), // Removido pois o MoneyInputFormatter já inclui R$
+                    suffix: const Text('reais'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
