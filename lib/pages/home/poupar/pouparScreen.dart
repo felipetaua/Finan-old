@@ -2,6 +2,7 @@ import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart'; // Importar para NumberFormat
 
 class PouparPage extends StatefulWidget {
@@ -899,6 +900,63 @@ class _PouparPageState extends State<PouparPage> {
                     );
                   },
                 ),
+
+                const Text("asasds"),
+                const Text(
+                  'Sujestões',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Favoritos e Ações
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: // Dentro do Row dos cards
+                      Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _sujestoesBox(
+                        label: 'Populares',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.solidStar,
+                          color: Colors.white,
+                        ),
+                        image: 'assets/images/card-invest-favoritos.png',
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Progresso',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.trophy,
+                          color: Colors.white,
+                        ),
+                        image: 'assets/images/card-invest-fundos.png',
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Dicas',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.book,
+                          color: Colors.white,
+                        ),
+                        image: 'assets/images/card-invest-criptos.png',
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Metas',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.arrowTrendUp,
+                          color: Colors.white,
+                        ),
+                        image: 'assets/images/card-invest-acoes.png',
+                        onTap: () => Navigator.push,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
               ],
             ),
           ),
@@ -1068,6 +1126,54 @@ class ReservaItem extends StatelessWidget {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _sujestoesBox extends StatelessWidget {
+  final String label;
+  final String image;
+  final Widget icon;
+  final VoidCallback onTap;
+
+  const _sujestoesBox({
+    required this.label,
+    required this.image,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 8),
+        width: 150,
+        height: 60,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(12),
+        ),
+
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                shadows: [Shadow(blurRadius: 3, color: Colors.black)],
+              ),
+            ),
+            const SizedBox(width: 20),
+            icon, // Exibe o ícone
           ],
         ),
       ),
