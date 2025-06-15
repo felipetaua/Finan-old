@@ -699,12 +699,11 @@ class _PouparPageState extends State<PouparPage> {
                 const SizedBox(height: 5),
 
                 ListView.builder(
-                  // Removido o Expanded
-                  shrinkWrap: true, // Adicionado shrinkWrap
+                  shrinkWrap: true,
                   physics:
                       const NeverScrollableScrollPhysics(), // Adicionado physics
                   padding: const EdgeInsets.only(
-                    bottom: 16,
+                    bottom: 60,
                   ), // Padding inferior para o último item
                   itemCount: _money.length,
                   itemBuilder: (context, index) {
@@ -734,7 +733,7 @@ class _PouparPageState extends State<PouparPage> {
                           // Ícone ou imagem à esquerda
                           Container(
                             width: 80,
-                            height: 80,
+                            height: 100,
                             margin: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: Colors.blueAccent.withOpacity(0.1),
@@ -825,7 +824,17 @@ class _PouparPageState extends State<PouparPage> {
                                     ],
                                   ),
 
-                                  const SizedBox(height: 6),
+                                  if (meta.description.isNotEmpty)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: Text(
+                                        meta.description,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                    ),
 
                                   Text(
                                     'Guardado: ${currencyFormatter.format(meta.currentValue)}',
@@ -838,7 +847,7 @@ class _PouparPageState extends State<PouparPage> {
                                     'Meta: ${currencyFormatter.format(meta.targetValue)}',
                                     style: const TextStyle(
                                       fontSize: 13,
-                                      color: Colors.black54,
+                                      color: Colors.black87,
                                     ),
                                   ),
                                   if (meta.targetValue > 0)
@@ -854,7 +863,7 @@ class _PouparPageState extends State<PouparPage> {
                                       ),
                                     ),
 
-                                  const SizedBox(height: 8),
+                                  const SizedBox(height: 18),
 
                                   // Barra de progresso
                                   ClipRRect(
@@ -870,6 +879,8 @@ class _PouparPageState extends State<PouparPage> {
                                       ),
                                     ),
                                   ),
+
+                                  const SizedBox(height: 28),
                                 ],
                               ),
                             ),
