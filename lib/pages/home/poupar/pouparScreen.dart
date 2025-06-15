@@ -78,7 +78,10 @@ class _PouparPageState extends State<PouparPage> {
                   decoration: InputDecoration(
                     labelText: "Nome do objetivo",
                     labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(Icons.flag),
+                    prefixIcon: const Icon(
+                      Icons.flag,
+                      color: Colors.blueAccent,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -97,7 +100,10 @@ class _PouparPageState extends State<PouparPage> {
                   decoration: InputDecoration(
                     labelText: "Descrição",
                     labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(Icons.description),
+                    prefixIcon: const Icon(
+                      Icons.description,
+                      color: Colors.blueAccent,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -118,14 +124,17 @@ class _PouparPageState extends State<PouparPage> {
                   decoration: InputDecoration(
                     labelText: "Valor necessário",
                     labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(Icons.attach_money),
+                    prefixIcon: const Icon(
+                      Icons.attach_money,
+                      color: Colors.blueAccent,
+                    ),
                     suffix: Text('reais'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Colors.green,
+                        color: Colors.blueAccent,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(12),
