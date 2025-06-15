@@ -34,7 +34,8 @@ class _GastosPageState extends State<GastosPage> {
   final List<Map<String, dynamic>> _transacoes = []; // Lista de transações
   bool temaEscuro = false; // Controla o estado do tema
 
-  late List<Widget> _pages; // Declare _pages como late
+  List<Widget> _pages =
+      []; // Inicializa com lista vazia ou pode ser late e definida no build
 
   void _onItemTapped(int index) {
     setState(() {
@@ -53,18 +54,6 @@ class _GastosPageState extends State<GastosPage> {
     super.initState();
     _loadAvatar(); // Carrega o avatar
     _carregarSalario(); // Carrega o salário do usuário
-
-    // Inicializa _pages no initState
-    _pages = [
-      PouparPage(),
-      EducationPage(),
-      _GastosContent(
-        salario: _salario,
-        transacoes: _transacoes,
-      ), // Passe o salário e transações como parâmetros
-      InvestimentosPage(),
-      AdicionarTransacaoPage(),
-    ];
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
@@ -147,6 +136,19 @@ class _GastosPageState extends State<GastosPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Define _pages dentro do método build para garantir que _GastosContent
+    // seja reconstruído com a lista de transações atualizada.
+    _pages = [
+      PouparPage(),
+      EducationPage(),
+      _GastosContent(
+        salario: _salario,
+        transacoes: _transacoes, // Passa a lista de transações atual
+      ),
+      InvestimentosPage(),
+      AdicionarTransacaoPage(), // Esta é a tela de Gerenciamento (gerenciamentoScreen.dart)
+    ];
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Color(0xFF368DF7),
