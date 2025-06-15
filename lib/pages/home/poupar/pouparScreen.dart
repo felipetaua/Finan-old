@@ -491,6 +491,61 @@ class _PouparPageState extends State<PouparPage> {
 
                 const SizedBox(height: 24),
 
+                const Text(
+                  'Sujestões',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Favoritos e Ações
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: // Dentro do Row dos cards
+                      Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _sujestoesBox(
+                        label: 'Populares',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.solidStar,
+                          color: Colors.white,
+                        ),
+
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Progresso',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.trophy,
+                          color: Colors.white,
+                        ),
+
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Dicas',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.book,
+                          color: Colors.white,
+                        ),
+
+                        onTap: () => Navigator.push,
+                      ),
+                      _sujestoesBox(
+                        label: 'Metas',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.arrowTrendUp,
+                          color: Colors.white,
+                        ),
+
+                        onTap: () => Navigator.push,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
                 // Gráfico com Card
                 const Center(
                   child: Text(
@@ -902,61 +957,6 @@ class _PouparPageState extends State<PouparPage> {
                 ),
 
                 const Text("asasds"),
-                const Text(
-                  'Sujestões',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 12),
-
-                // Favoritos e Ações
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: // Dentro do Row dos cards
-                      Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _sujestoesBox(
-                        label: 'Populares',
-                        icon: const FaIcon(
-                          FontAwesomeIcons.solidStar,
-                          color: Colors.white,
-                        ),
-                        image: 'assets/images/card-invest-favoritos.png',
-                        onTap: () => Navigator.push,
-                      ),
-                      _sujestoesBox(
-                        label: 'Progresso',
-                        icon: const FaIcon(
-                          FontAwesomeIcons.trophy,
-                          color: Colors.white,
-                        ),
-                        image: 'assets/images/card-invest-fundos.png',
-                        onTap: () => Navigator.push,
-                      ),
-                      _sujestoesBox(
-                        label: 'Dicas',
-                        icon: const FaIcon(
-                          FontAwesomeIcons.book,
-                          color: Colors.white,
-                        ),
-                        image: 'assets/images/card-invest-criptos.png',
-                        onTap: () => Navigator.push,
-                      ),
-                      _sujestoesBox(
-                        label: 'Metas',
-                        icon: const FaIcon(
-                          FontAwesomeIcons.arrowTrendUp,
-                          color: Colors.white,
-                        ),
-                        image: 'assets/images/card-invest-acoes.png',
-                        onTap: () => Navigator.push,
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 12),
               ],
             ),
           ),
@@ -1135,13 +1135,11 @@ class ReservaItem extends StatelessWidget {
 
 class _sujestoesBox extends StatelessWidget {
   final String label;
-  final String image;
   final Widget icon;
   final VoidCallback onTap;
 
   const _sujestoesBox({
     required this.label,
-    required this.image,
     required this.icon,
     required this.onTap,
   });
@@ -1155,8 +1153,25 @@ class _sujestoesBox extends StatelessWidget {
         width: 150,
         height: 60,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(12),
+
+          gradient: LinearGradient(
+            // Adicionado gradiente
+            colors: [
+              Color(0xFF368DF7), // Azul principal do app
+              Color(0xFF2A79D7), // Um tom um pouco mais escuro de azul
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            // Adicionada uma sombra sutil para destaque
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
 
         alignment: Alignment.center,
