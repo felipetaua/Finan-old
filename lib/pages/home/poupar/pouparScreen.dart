@@ -300,6 +300,145 @@ class _PouparPageState extends State<PouparPage> {
     );
   }
 
+  void _showWithdrawMoneyDialog(GoalModel meta) {
+    valueController.clear();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Retirar Dinheiro',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: valueController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    MoneyInputFormatter(
+                      thousandSeparator: ThousandSeparator.Period,
+                      leadingSymbol: 'R\$',
+                      useSymbolPadding: true,
+                      mantissaLength: 2,
+                    ),
+                  ],
+                  decoration: InputDecoration(
+                    labelText: "Valor a retirar",
+                    labelStyle: const TextStyle(color: Colors.black38),
+                    prefixIcon: const Icon(Icons.attach_money),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent, // Cor de foco para retirada
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text(
+                          "Cancelar",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          String digitsOnly = valueController.text.replaceAll(
+                            RegExp(r'[^0-9]'),
+                            '',
+                          );
+                          double valueToWithdraw =
+                              (double.tryParse(digitsOnly) ?? 0.0) / 100.0;
+
+                          if (valueToWithdraw <= 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Por favor, insira um valor válido para retirada.',
+                                ),
+                                backgroundColor: Colors.orangeAccent,
+                              ),
+                            );
+                          } else if (valueToWithdraw > meta.currentValue) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Você não pode retirar mais do que ${NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(meta.currentValue)}.',
+                                ),
+                                backgroundColor: Colors.redAccent,
+                              ),
+                            );
+                          } else {
+                            setState(() {
+                              meta.currentValue -= valueToWithdraw;
+                            });
+                            Navigator.pop(context);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Colors.redAccent, // Cor para retirada
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          "Retirar",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final currencyFormatter = NumberFormat.currency(
@@ -633,12 +772,55 @@ class _PouparPageState extends State<PouparPage> {
                                           ),
                                         ),
                                       ),
-                                      GestureDetector(
-                                        onTap: () => _showAddMoneyDialog(meta),
-                                        child: const Icon(
-                                          Icons.add_circle,
+                                      PopupMenuButton<String>(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.more_vert,
                                           color: Colors.blueAccent,
                                         ),
+                                        onSelected: (value) {
+                                          if (value == 'add') {
+                                            _showAddMoneyDialog(meta);
+                                          } else if (value == 'withdraw') {
+                                            _showWithdrawMoneyDialog(meta);
+                                          }
+                                        },
+                                        itemBuilder:
+                                            (
+                                              BuildContext context,
+                                            ) => <PopupMenuEntry<String>>[
+                                              const PopupMenuItem<String>(
+                                                value: 'add',
+                                                child: ListTile(
+                                                  leading: Icon(
+                                                    Icons.add_circle_outline,
+                                                  ),
+                                                  title: Text(
+                                                    'Adicionar valor',
+                                                  ),
+                                                ),
+                                              ),
+                                              const PopupMenuItem<String>(
+                                                value: 'withdraw',
+                                                child: ListTile(
+                                                  leading: Icon(
+                                                    Icons.remove_circle_outline,
+                                                    color: Colors.red,
+                                                  ),
+                                                  title: Text(
+                                                    'Retirar valor',
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                       ),
                                     ],
                                   ),
@@ -659,8 +841,7 @@ class _PouparPageState extends State<PouparPage> {
                                       color: Colors.black54,
                                     ),
                                   ),
-                                  if (meta.targetValue >
-                                      0) // Só mostra "Falta" se houver uma meta
+                                  if (meta.targetValue > 0)
                                     Text(
                                       'Falta: ${currencyFormatter.format(restante)}',
                                       style: TextStyle(
