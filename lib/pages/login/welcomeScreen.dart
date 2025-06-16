@@ -134,7 +134,6 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    // Corrigido o caminho do asset, assumindo que está em assets/images/
                     icon: Image.asset('assets/icons/google.png', height: 24),
                     label: const Text('Continuar com Google'),
                     style: ElevatedButton.styleFrom(
