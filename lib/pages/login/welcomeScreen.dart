@@ -1,9 +1,36 @@
 import 'package:finan/pages/home/main/homeScreen.dart';
-import 'package:finan/pages/login/foco.dart';
+// import 'package:finan/pages/login/foco.dart';
 import 'package:finan/pages/login/login.dart';
 import 'package:finan/pages/login/register.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart'; // Certifique-se de adicionar no pubspec.yaml
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<UserCredential?> signInWithGoogle() async {
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  try {
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+      // Usuário cancelou o login
+      return null;
+    }
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  } catch (e) {
+    print('Erro durante o login com Google: $e');
+    return null;
+  }
+}
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -101,51 +128,55 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text('or'),
+                const Text('ou'),
                 const SizedBox(height: 16),
                 // Botão Google
                 SizedBox(
                   width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      //login google
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: const Duration(milliseconds: 500),
-                          pageBuilder: (_, __, ___) => const FocoPage(),
-                          transitionsBuilder: (_, animation, __, child) {
-                            const begin = Offset(
-                              1.0,
-                              0.0,
-                            ); // Começa fora da tela à direita
-                            const end = Offset.zero; // Termina no centro
-                            const curve = Curves.ease;
-
-                            final tween = Tween(
-                              begin: begin,
-                              end: end,
-                            ).chain(CurveTween(curve: curve));
-                            final offsetAnimation = animation.drive(tween);
-
-                            return SlideTransition(
-                              position: offsetAnimation,
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    icon: Image.asset('assets/icons/google.png', height: 20),
-                    label: const Text('Continue with Google'),
-                    style: OutlinedButton.styleFrom(
+                  child: ElevatedButton.icon(
+                    // Corrigido o caminho do asset, assumindo que está em assets/images/
+                    icon: Image.asset('assets/icons/google.png', height: 24),
+                    label: const Text('Continuar com Google'),
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.grey,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      foregroundColor: Colors.black,
+                      minimumSize: const Size(double.infinity, 48),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    onPressed: () async {
+                      final userCredential = await signInWithGoogle();
+                      if (userCredential != null &&
+                          userCredential.user != null) {
+                        final prefs = await SharedPreferences.getInstance();
+                        final userId = userCredential.user!.uid;
+                        // Tenta obter o nome de exibição, usa 'Usuário' como fallback
+                        final userName =
+                            userCredential.user!.displayName ?? 'Usuário';
+
+                        await prefs.setString('userId', userId);
+                        await prefs.setString(
+                          'nomeUsuario',
+                          userName,
+                        ); // Salva o nome do usuário
+
+                        // Navegue para a tela principal passando o nome do usuário
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => GastosPage(nomeUsuario: userName),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Falha no login com Google'),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
                 const SizedBox(height: 12),
