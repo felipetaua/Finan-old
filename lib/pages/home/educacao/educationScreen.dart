@@ -32,9 +32,11 @@ class EducationPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: const TextField(
+                    textAlign: TextAlign.start,
+                    textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search),
-                      hintText: 'Pesquise',
+                      hintText: 'Procure cursos, e dicas',
                       border: InputBorder.none,
                       suffixIcon: Icon(Icons.filter_list),
                     ),

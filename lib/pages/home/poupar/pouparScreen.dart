@@ -480,6 +480,8 @@ class _PouparPageState extends State<PouparPage> {
                   ),
                   child: const TextField(
                     cursorColor: Colors.blueAccent,
+                    textAlign: TextAlign.start,
+                    textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search),
                       hintText: 'Pesquise suas metas',
