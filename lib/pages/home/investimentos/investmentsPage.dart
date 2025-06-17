@@ -466,9 +466,11 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
                 child: TextField(
                   controller: _searchController,
                   onChanged: _filterSearch,
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.search),
-                    hintText: 'Pesquise',
+                    hintText: 'Busque por ativos financeiros',
                     border: InputBorder.none,
                     suffixIcon: Icon(Icons.filter_list),
                   ),
