@@ -482,18 +482,11 @@ class _PouparPageState extends State<PouparPage> {
                     cursorColor: Colors.blueAccent,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search),
-                      hintText: 'Pesquise',
+                      hintText: 'Pesquise suas metas',
                       border: InputBorder.none,
                       suffixIcon: Icon(Icons.filter_list),
                     ),
                   ),
-                ),
-
-                const SizedBox(height: 24),
-
-                const Text(
-                  'Sujestões',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
 
                 const SizedBox(height: 12),
