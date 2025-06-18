@@ -87,9 +87,11 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/images/avatar.png'),
+                backgroundImage: AssetImage(
+                  widget.currentAvatar ?? 'assets/avatares/avatar-default.jpg',
+                ), // Usa o avatar atual ou o padrão
               ),
               const SizedBox(height: 20),
               InputField(
