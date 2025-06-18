@@ -7,6 +7,8 @@ class GoalModel {
   final double targetValue;
   double currentValue;
   final DateTime createdAt;
+  final IconData iconData;
+  final Color color;
 
   GoalModel({
     required this.id,
@@ -15,6 +17,8 @@ class GoalModel {
     required this.targetValue,
     required this.currentValue,
     required this.createdAt,
+    this.iconData = Icons.savings, 
+    this.color = Colors.blueAccent, 
   });
 }
 

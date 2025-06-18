@@ -21,179 +21,362 @@ class _PouparPageState extends State<PouparPage> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
 
+  // Lista de ícones e cores para seleção
+  final List<IconData> _availableIcons = [
+    Icons.savings,
+    Icons.account_balance_wallet,
+    Icons.credit_card,
+    Icons.home,
+    Icons.directions_car,
+    Icons.flight,
+    Icons.school,
+    Icons.lightbulb,
+    Icons.shopping_cart,
+    Icons.phone_iphone,
+    Icons.computer,
+    Icons.build,
+    Icons.favorite,
+    Icons.card_giftcard,
+    Icons.pets,
+  ];
+
+  final List<Color> _availableColors = [
+    Colors.blueAccent,
+    Colors.green,
+    Colors.orange,
+    Colors.red,
+    Colors.purple,
+    Colors.teal,
+    Colors.pink,
+    Colors.amber,
+    Colors.cyan,
+    Colors.indigo,
+    Colors.brown,
+    Colors.grey[700]!,
+  ];
+
+  // Variáveis para armazenar a seleção atual no modal
+  IconData _selectedIconForNewGoal = Icons.savings;
+  Color _selectedColorForNewGoal = Colors.blueAccent;
+
   void _showCreateBoxModal() {
     nameController.clear();
     targetValueController.clear();
     descriptionController.clear();
 
+    // Reseta para os padrões ao abrir o modal
+    // Garante que _selectedIconForNewGoal e _selectedColorForNewGoal
+    // sejam os primeiros da lista ou os padrões desejados.
+    _selectedIconForNewGoal = _availableIcons.first;
+    _selectedColorForNewGoal = _availableColors.first;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-            left: 20,
-            right: 20,
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Nova Caixinha',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: nameController,
-                  cursorColor: Colors.blueAccent,
-                  decoration: InputDecoration(
-                    labelText: "Nome do objetivo",
-                    labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(
-                      Icons.flag,
-                      color: Colors.blueAccent,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: descriptionController,
-                  cursorColor: Colors.blueAccent,
-                  decoration: InputDecoration(
-                    labelText: "Descrição",
-                    labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(
-                      Icons.description,
-                      color: Colors.blueAccent,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                TextField(
-                  controller: targetValueController,
-                  keyboardType: TextInputType.number,
-                  cursorColor: Colors.blueAccent,
-                  inputFormatters: [
-                    MoneyInputFormatter(
-                      thousandSeparator: ThousandSeparator.Period,
-                      leadingSymbol: 'R\$',
-                      useSymbolPadding: true,
-                      mantissaLength: 2,
+      builder: (BuildContext context) {
+        // Alterado para receber BuildContext
+        return StatefulBuilder(
+          // Adicionado StatefulBuilder
+          builder: (BuildContext context, StateSetter modalSetState) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                left: 20,
+                right: 20,
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
                     ),
                   ],
-                  decoration: InputDecoration(
-                    labelText: "Valor necessário",
-                    labelStyle: const TextStyle(color: Colors.black38),
-                    prefixIcon: const Icon(
-                      Icons.attach_money,
-                      color: Colors.blueAccent,
-                    ),
-                    suffix: Text(
-                      'reais',
-                      style: TextStyle(color: Colors.blueAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
                 ),
-
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    final goal = GoalModel(
-                      id: DateTime.now().millisecondsSinceEpoch.toString(),
-                      name: nameController.text,
-                      description: descriptionController.text,
-                      targetValue:
-                          (double.tryParse(
-                                targetValueController.text.replaceAll(
-                                  RegExp(r'[^0-9]'),
-                                  '',
-                                ),
-                              ) ??
-                              0.0) /
-                          100.0,
-                      currentValue: 0,
-                      createdAt: DateTime.now(),
-                    );
-                    setState(() {
-                      _money.add(goal);
-                    });
-                    Navigator.pop(context); // Fecha o modal de criação
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => const SuccessPage(
-                              message: 'Caixinha criada com sucesso!',
+                child: SingleChildScrollView(
+                  // Adicionado para evitar overflow com seletores
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        'Nova Caixinha',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: nameController,
+                        cursorColor: Colors.blueAccent,
+                        decoration: InputDecoration(
+                          labelText: "Nome do objetivo",
+                          labelStyle: const TextStyle(color: Colors.black38),
+                          prefixIcon: const Icon(
+                            Icons.flag,
+                            color: Colors.blueAccent,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.blueAccent,
+                              width: 2,
                             ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    "Criar caixinha",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                      const SizedBox(height: 12),
+                      TextField(
+                        controller: descriptionController,
+                        cursorColor: Colors.blueAccent,
+                        decoration: InputDecoration(
+                          labelText: "Descrição",
+                          labelStyle: const TextStyle(color: Colors.black38),
+                          prefixIcon: const Icon(
+                            Icons.description,
+                            color: Colors.blueAccent,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.blueAccent,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      TextField(
+                        controller: targetValueController,
+                        keyboardType: TextInputType.number,
+                        cursorColor: Colors.blueAccent,
+                        inputFormatters: [
+                          MoneyInputFormatter(
+                            thousandSeparator: ThousandSeparator.Period,
+                            leadingSymbol: 'R\$',
+                            useSymbolPadding: true,
+                            mantissaLength: 2,
+                          ),
+                        ],
+                        decoration: InputDecoration(
+                          labelText: "Valor necessário",
+                          labelStyle: const TextStyle(color: Colors.black38),
+                          prefixIcon: const Icon(
+                            Icons.attach_money,
+                            color: Colors.blueAccent,
+                          ),
+                          suffix: Text(
+                            'reais',
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.blueAccent,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        "Escolha um ícone:",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        alignment: WrapAlignment.center,
+                        children:
+                            _availableIcons.map((icon) {
+                              bool isSelected = _selectedIconForNewGoal == icon;
+                              return GestureDetector(
+                                onTap: () {
+                                  modalSetState(() {
+                                    // Usa modalSetState
+                                    _selectedIconForNewGoal = icon;
+                                  });
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        isSelected
+                                            ? _selectedColorForNewGoal
+                                                .withOpacity(0.2)
+                                            : Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(10),
+                                    border:
+                                        isSelected
+                                            ? Border.all(
+                                              color: _selectedColorForNewGoal,
+                                              width: 2,
+                                            )
+                                            : null,
+                                  ),
+                                  child: Icon(
+                                    icon,
+                                    color:
+                                        isSelected
+                                            ? _selectedColorForNewGoal
+                                            : Colors.grey[700],
+                                    size: 30,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        "Escolha uma cor:",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        alignment: WrapAlignment.center,
+                        children:
+                            _availableColors.map((color) {
+                              bool isSelected =
+                                  _selectedColorForNewGoal == color;
+                              return GestureDetector(
+                                onTap: () {
+                                  modalSetState(() {
+                                    // Usa modalSetState
+                                    _selectedColorForNewGoal = color;
+                                  });
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: color,
+                                    borderRadius: BorderRadius.circular(
+                                      20,
+                                    ), // Círculo
+                                    border:
+                                        isSelected
+                                            ? Border.all(
+                                              color: Colors.black.withOpacity(
+                                                0.7,
+                                              ),
+                                              width: 3,
+                                            )
+                                            : Border.all(
+                                              color: Colors.grey.withOpacity(
+                                                0.5,
+                                              ),
+                                              width: 1,
+                                            ),
+                                    boxShadow:
+                                        isSelected
+                                            ? [
+                                              BoxShadow(
+                                                color: color.withOpacity(0.5),
+                                                blurRadius: 5,
+                                                spreadRadius: 1,
+                                              ),
+                                            ]
+                                            : [],
+                                  ),
+                                  child:
+                                      isSelected
+                                          ? const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 24,
+                                          )
+                                          : null,
+                                ),
+                              );
+                            }).toList(),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: () {
+                          final goal = GoalModel(
+                            id:
+                                DateTime.now().millisecondsSinceEpoch
+                                    .toString(),
+                            name: nameController.text,
+                            description: descriptionController.text,
+                            targetValue:
+                                (double.tryParse(
+                                      targetValueController.text.replaceAll(
+                                        RegExp(r'[^0-9]'),
+                                        '',
+                                      ),
+                                    ) ??
+                                    0.0) /
+                                100.0,
+                            currentValue: 0,
+                            createdAt: DateTime.now(),
+                            iconData:
+                                _selectedIconForNewGoal, // Usa o ícone selecionado
+                            color:
+                                _selectedColorForNewGoal, // Usa a cor selecionada
+                          );
+                          setState(() {
+                            // setState da _PouparPageState
+                            _money.add(goal);
+                          });
+                          Navigator.pop(context); // Fecha o modal
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => const SuccessPage(
+                                    message: 'Caixinha criada com sucesso!',
+                                  ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              _selectedColorForNewGoal, // Cor do botão usa a cor selecionada
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          "Criar caixinha",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );
@@ -738,6 +921,8 @@ class _PouparPageState extends State<PouparPage> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
+                      // _selectedIconForNewGoal = _availableIcons.first; // Já é feito no início de _showCreateBoxModal
+                      // _selectedColorForNewGoal = _availableColors.first; // Já é feito no início de _showCreateBoxModal
                       _showCreateBoxModal();
                     },
                     style: ElevatedButton.styleFrom(
@@ -810,12 +995,14 @@ class _PouparPageState extends State<PouparPage> {
                             height: 100,
                             margin: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.blueAccent.withOpacity(0.1),
+                              color: meta.color.withOpacity(
+                                0.1,
+                              ), // Usa a cor da meta
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Icon(
-                              Icons.savings,
-                              color: Colors.blueAccent,
+                            child: Icon(
+                              meta.iconData, // Usa o ícone da meta
+                              color: meta.color, // Usa a cor da meta
                               size: 36,
                             ),
                           ),
@@ -852,9 +1039,10 @@ class _PouparPageState extends State<PouparPage> {
                                             16,
                                           ),
                                         ),
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.more_vert,
-                                          color: Colors.blueAccent,
+                                          color:
+                                              meta.color, // Usa a cor da meta
                                         ),
                                         onSelected: (value) {
                                           if (value == 'add') {
@@ -931,8 +1119,9 @@ class _PouparPageState extends State<PouparPage> {
                                         fontSize: 13,
                                         color:
                                             restante > 0
-                                                ? Colors.blueAccent
-                                                : Colors.green,
+                                                ? meta.color
+                                                : Colors
+                                                    .green, // Usa a cor da meta
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -949,7 +1138,7 @@ class _PouparPageState extends State<PouparPage> {
                                       valueColor: AlwaysStoppedAnimation<Color>(
                                         progresso >= 1.0
                                             ? Colors.green
-                                            : Colors.blueAccent,
+                                            : meta.color, // Usa a cor da meta
                                       ),
                                     ),
                                   ),
