@@ -183,7 +183,7 @@ class _GastosPageState extends State<GastosPage> {
                                     leading: const Icon(Icons.person),
                                     title: const Text('Ver perfil'),
                                     onTap: () {
-                                      Navigator.pop(context); // Fecha o modal
+                                      Navigator.pop(context);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -199,8 +199,8 @@ class _GastosPageState extends State<GastosPage> {
                                     leading: const Icon(Icons.edit),
                                     title: const Text('Editar avatar'),
                                     onTap: () {
-                                      Navigator.pop(context); // Fecha o modal
-                                      _openAvatarSelector(); // Abre a página de seleção de avatar
+                                      Navigator.pop(context);
+                                      _openAvatarSelector();
                                     },
                                   ),
                                   ListTile(
@@ -227,7 +227,9 @@ class _GastosPageState extends State<GastosPage> {
                                 ],
                               ),
                             ),
-                      );
+                      ).then((_) {
+                        FocusScope.of(context).unfocus();
+                      });
                     },
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
