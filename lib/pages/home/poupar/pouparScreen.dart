@@ -1,3 +1,4 @@
+import 'package:finan/feedback/sucessPage.dart';
 import 'package:finan/pages/home/poupar/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
@@ -163,7 +164,16 @@ class _PouparPageState extends State<PouparPage> {
                     setState(() {
                       _money.add(goal);
                     });
-                    Navigator.pop(context);
+                    Navigator.pop(context); // Fecha o modal de criação
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => const SuccessPage(
+                              message: 'Caixinha criada com sucesso!',
+                            ),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
@@ -1026,7 +1036,6 @@ class ReservaItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Título e imagem
             Row(
               children: [
                 CircleAvatar(backgroundImage: AssetImage(image), radius: 22),
@@ -1051,7 +1060,7 @@ class ReservaItem extends StatelessWidget {
             // Barra de progresso
             LayoutBuilder(
               builder: (context, constraints) {
-                final maxWidth = constraints.maxWidth; // Largura disponível
+                final maxWidth = constraints.maxWidth;
                 return Stack(
                   children: [
                     Container(
@@ -1064,12 +1073,7 @@ class ReservaItem extends StatelessWidget {
                     ),
                     Container(
                       height: 10,
-                      width:
-                          maxWidth *
-                          progresso.clamp(
-                            0.0,
-                            1.0,
-                          ), // Garante que progresso esteja entre 0.0 e 1.0
+                      width: maxWidth * progresso.clamp(0.0, 1.0),
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(6),
@@ -1084,11 +1088,11 @@ class ReservaItem extends StatelessWidget {
 
             // Informações de valores
             Text(
-              'Faltam: R\$ ${valorRestante.toStringAsFixed(2)}', // Exibe com 2 casas decimais
+              'Faltam: R\$ ${valorRestante.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
             Text(
-              'Meta: R\$ ${valorTotal.toStringAsFixed(2)}', // Exibe com 2 casas decimais
+              'Meta: R\$ ${valorTotal.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
 
