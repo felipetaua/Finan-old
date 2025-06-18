@@ -339,6 +339,29 @@ class _GastosContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Colors.grey),
+              color: Colors.white70,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: TextField(
+              // controller: _searchController,
+              // onChanged: _filterSearch,
+              textAlign: TextAlign.start,
+              textAlignVertical: TextAlignVertical.center,
+              cursorColor: Colors.blueAccent,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.search),
+                hintText: 'Busque gastos e rendas',
+                border: InputBorder.none,
+                suffixIcon: Icon(Icons.filter_list),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+
           const Text(
             'Suas rendas',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
