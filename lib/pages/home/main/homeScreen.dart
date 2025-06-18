@@ -69,7 +69,7 @@ class _GastosPageState extends State<GastosPage> {
     setState(() {
       _currentAvatar =
           prefs.getString('avatarPath') ??
-          'assets/images/profile.png'; // Avatar padrão
+          'assets/avatares/avatar-default.jpg'; // Avatar padrão
     });
   }
 
@@ -233,7 +233,7 @@ class _GastosPageState extends State<GastosPage> {
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
                         _currentAvatar ??
-                            'assets/images/profile.png', // Avatar atual ou padrão
+                            'assets/avatares/avatar-default.jpg', // Avatar atual ou padrão
                       ),
                       radius: 25,
                     ),
