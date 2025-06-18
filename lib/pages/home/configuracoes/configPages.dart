@@ -31,8 +31,13 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Configurações'),
-        backgroundColor: Colors.white, // Fundo do AppBar branco
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        toolbarHeight: 80,
         elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

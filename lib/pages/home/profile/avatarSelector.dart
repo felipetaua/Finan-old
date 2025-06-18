@@ -58,7 +58,15 @@ class AvatarSelectorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Selecionar Avatar')),
+      appBar: AppBar(
+        title: const Text('Selecionar Avatar'),
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        toolbarHeight: 80,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
