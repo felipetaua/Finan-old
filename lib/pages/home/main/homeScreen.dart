@@ -28,14 +28,13 @@ class GastosPage extends StatefulWidget {
 }
 
 class _GastosPageState extends State<GastosPage> {
-  int _selectedIndex = 2; // Começa na aba de Gastos
-  String? _currentAvatar; // Para armazenar o avatar atual
-  double _salario = 0.0; // Para armazenar o salário
-  final List<Map<String, dynamic>> _transacoes = []; // Lista de transações
-  bool temaEscuro = false; // Controla o estado do tema
+  int _selectedIndex = 2;
+  String? _currentAvatar;
+  double _salario = 0.0;
+  final List<Map<String, dynamic>> _transacoes = [];
+  bool temaEscuro = false;
 
-  List<Widget> _pages =
-      []; // Inicializa com lista vazia ou pode ser late e definida no build
+  List<Widget> _pages = [];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -45,7 +44,7 @@ class _GastosPageState extends State<GastosPage> {
 
   void _adicionarTransacao(Map<String, dynamic> novaTransacao) {
     setState(() {
-      _transacoes.add(novaTransacao); // Adiciona a nova transação à lista
+      _transacoes.add(novaTransacao);
     });
   }
 
@@ -439,9 +438,15 @@ class _GastosContent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Transações',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                'Transações',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Text('Detalhes', style: TextStyle(color: Color(0xFF368DF7))),
+            ],
           ),
           const SizedBox(height: 12),
           Column(
