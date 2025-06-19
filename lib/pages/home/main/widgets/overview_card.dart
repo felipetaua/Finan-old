@@ -29,22 +29,19 @@ class OverviewCard extends StatelessWidget {
                 'Visão Geral',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
-              IconButton(
-                icon: const Icon(Icons.more_horiz),
-                onPressed: () {},
-              ),
+              IconButton(icon: const Icon(Icons.more_horiz), onPressed: () {}),
             ],
           ),
           const SizedBox(height: 20),
           SizedBox(
-            height: 180,
+            height: 200,
             child: Stack(
               children: [
                 PieChart(
                   PieChartData(
                     sections: _buildChartSections(),
-                    centerSpaceRadius: 60,
-                    sectionsSpace: 2,
+                    centerSpaceRadius: 70,
+                    sectionsSpace: 4,
                     startDegreeOffset: -90,
                   ),
                 ),
@@ -98,25 +95,30 @@ class OverviewCard extends StatelessWidget {
   }
 
   List<PieChartSectionData> _buildChartSections() {
-    // Esses dados viriam do seu estado ou backend
     final double earnings = 1582.67;
     final double spend = 595.11;
     final double total = earnings + spend;
 
     return [
       PieChartSectionData(
-        color: const Color(0xFF4A90E2), // Ganhos (Azul)
+        color: const Color(0xFF4A90E2),
         value: (earnings / total) * 100,
         title: '${((earnings / total) * 100).toStringAsFixed(0)}%',
-        radius: 25,
-        titleStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        radius: 30,
+        titleStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
       ),
       PieChartSectionData(
-        color: const Color(0xFFD0021B), // Gastos (Vermelho)
+        color: const Color(0xFFD0021B),
         value: (spend / total) * 100,
         title: '${((spend / total) * 100).toStringAsFixed(0)}%',
-        radius: 25,
-        titleStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        radius: 30,
+        titleStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
       ),
     ];
   }
@@ -141,7 +143,10 @@ class _FinancialInfo extends StatelessWidget {
           children: [
             CircleAvatar(radius: 5, backgroundColor: color),
             const SizedBox(width: 8),
-            Text(label, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.grey, fontSize: 14),
+            ),
           ],
         ),
         const SizedBox(height: 5),
