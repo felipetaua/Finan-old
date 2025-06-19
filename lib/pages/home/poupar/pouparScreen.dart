@@ -281,7 +281,7 @@ class _PouparPageState extends State<PouparPage> {
                                         isSelected
                                             ? Border.all(
                                               color: Colors.black.withOpacity(
-                                                0.7,
+                                                0.1,
                                               ),
                                               width: 3,
                                             )
