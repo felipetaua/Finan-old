@@ -925,12 +925,9 @@ class _PouparPageState extends State<PouparPage> {
 
                 const SizedBox(height: 12),
 
-                // Botão para adicionar reservas e objetivos
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // _selectedIconForNewGoal = _availableIcons.first; // Já é feito no início de _showCreateBoxModal
-                      // _selectedColorForNewGoal = _availableColors.first; // Já é feito no início de _showCreateBoxModal
                       _showCreateBoxModal();
                     },
                     style: ElevatedButton.styleFrom(
@@ -1211,10 +1208,10 @@ class ReservaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1239,7 +1236,6 @@ class ReservaItem extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            // Barra de progresso
             LayoutBuilder(
               builder: (context, constraints) {
                 final maxWidth = constraints.maxWidth;
@@ -1268,7 +1264,6 @@ class ReservaItem extends StatelessWidget {
 
             const SizedBox(height: 6),
 
-            // Informações de valores
             Text(
               'Faltam: R\$ ${valorRestante.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 12, color: Colors.grey),
