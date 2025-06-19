@@ -44,8 +44,7 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
   String _expression = '';
   String _result = '';
-  // ignore: prefer_final_fields
-  List<String> _history = [];
+  final List<String> _history = [];
 
   final formatter = NumberFormat.decimalPattern();
 
@@ -70,7 +69,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
           _result = 'Erro';
         }
       } else {
-        // Evitar múltiplos operadores seguidos
         if (_isOperator(value)) {
           if (_expression.isEmpty ||
               _isOperator(_expression[_expression.length - 1])) {
@@ -78,13 +76,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
           }
         }
 
-        // Evita ponto duplicado
         if (value == '.') {
           final parts = _expression.split(RegExp(r'[+\-*/]'));
           if (parts.isNotEmpty && parts.last.contains('.')) return;
         }
 
-        // Evita zeros desnecessários
         if (value == '0') {
           if (_expression.endsWith('00')) return;
         }
@@ -98,7 +94,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
     try {
       String finalExpr = expr.replaceAll('×', '*').replaceAll('÷', '/');
 
-      // Evita divisão por zero
       if (finalExpr.contains(RegExp(r'/0(?!\d)'))) {
         _result = 'Erro: Divisão por zero';
         return null;

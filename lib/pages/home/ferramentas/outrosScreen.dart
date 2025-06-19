@@ -136,8 +136,8 @@ class OutrosScreen extends StatelessWidget {
                   FaIcon(
                     FontAwesomeIcons.userGroup,
                     size: 16,
-                  ), // Ícone de pessoa
-                  SizedBox(width: 8), // Espaço entre o ícone e o texto
+                  ), 
+                  SizedBox(width: 8),
                   Text("Carla Ribeiro"),
                 ],
               ),
@@ -147,8 +147,8 @@ class OutrosScreen extends StatelessWidget {
                     FontAwesomeIcons.star,
                     size: 16,
                     color: Colors.amber,
-                  ), // Ícone de estrela
-                  SizedBox(width: 8), // Espaço entre o ícone e o texto
+                  ), 
+                  SizedBox(width: 8), 
                   Text("4.8"),
                 ],
               ),
@@ -164,14 +164,14 @@ class OutrosScreen extends StatelessWidget {
     final selectedDay = DateTime.now().weekday - 1;
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // Habilita o scroll horizontal
+      scrollDirection: Axis.horizontal, 
       child: Row(
         children: List.generate(days.length, (index) {
           final isSelected = index == selectedDay;
           return Padding(
             padding: const EdgeInsets.only(
               right: 8,
-            ), // Espaçamento entre os itens
+            ), 
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(

@@ -14,8 +14,7 @@ class _PorcentagemCalculadoraPageState
   final TextEditingController _porcentagemController = TextEditingController();
 
   String _resultado = '';
-  // ignore: prefer_final_fields
-  List<String> _historico = [];
+  final List<String> _historico = [];
 
   void _calcularPorcentagem() {
     final valor = double.tryParse(_valorController.text.replaceAll(',', '.'));
@@ -75,11 +74,10 @@ class _PorcentagemCalculadoraPageState
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _limparCampos,
-              // ignore: sort_child_properties_last
-              child: const Text('Limpar'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
               ),
+              child: const Text('Limpar'),
             ),
             const SizedBox(height: 20),
             Text(

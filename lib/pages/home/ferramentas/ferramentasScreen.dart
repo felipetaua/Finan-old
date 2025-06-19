@@ -52,8 +52,8 @@ class FavoritesPage extends StatelessWidget {
               Expanded(
                 child: GridView(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 colunas
-                    mainAxisSpacing: 16, // Espaçamento vertical entre os cards
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16, 
                     crossAxisSpacing: 16,
                   ),
                   children: [
@@ -80,13 +80,12 @@ class FavoritesPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder:
                                   (context) =>
-                                      const PorcentagemCalculadoraPage(), // Página do conversor
+                                      const PorcentagemCalculadoraPage(), 
                             ),
                           );
                         },
                       ),
                     ),
-                    // Card de Conversor (1x1)
                     ToolCard(
                       title: 'Conversor',
                       iconPath: 'assets/images/conversor.png',
@@ -101,7 +100,7 @@ class FavoritesPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder:
                                 (context) =>
-                                    const ConversorMoedasPage(), // Página do conversor
+                                    const ConversorMoedasPage(), 
                           ),
                         );
                       },
@@ -120,7 +119,7 @@ class FavoritesPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder:
                                 (context) =>
-                                    const CalculadoraPage(), // Página da calculadora
+                                    const CalculadoraPage(),
                           ),
                         );
                       },
@@ -138,7 +137,7 @@ class FavoritesPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder:
-                                (context) => AddPage(), // Página de exemplo
+                                (context) => AddPage(),
                           ),
                         );
                       },
@@ -159,7 +158,6 @@ class FavoritesPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              // Explore Crypto com PageView
               SizedBox(
                 height: 150,
                 child: PageView(
@@ -227,20 +225,20 @@ class ToolCard extends StatelessWidget {
   final String title;
   final String iconPath;
   final Gradient background;
-  final VoidCallback onTap; // Função de callback para navegação
+  final VoidCallback onTap;
 
   const ToolCard({
     super.key,
     required this.title,
     required this.iconPath,
     required this.background,
-    required this.onTap, // Adicione o parâmetro onTap
+    required this.onTap, 
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Executa a função ao clicar no card
+      onTap: onTap, 
       child: Container(
         decoration: BoxDecoration(
           gradient: background,

@@ -4,8 +4,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class ConversorMoedasApp extends StatelessWidget {
-  // ignore: use_super_parameters
-  const ConversorMoedasApp({Key? key}) : super(key: key);
+  const ConversorMoedasApp({super.key});
 
   @override
   Widget build(BuildContext context) {

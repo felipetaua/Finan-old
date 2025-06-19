@@ -12,7 +12,6 @@ class AdicionarTransacaoPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Conteúdo da OutrosScreen
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -133,7 +132,6 @@ class AdicionarTransacaoPage extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Histórico de gastos
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
@@ -208,7 +206,7 @@ class AdicionarTransacaoPage extends StatelessWidget {
         onPressed: () {},
         backgroundColor: const Color(0xFF368DF7),
         shape: const CircleBorder(),
-        heroTag: 'adicionar_transacao_fab', // Tag única para este botão
+        heroTag: 'adicionar_transacao_fab',
         child: const Icon(Icons.add),
       ),
     );

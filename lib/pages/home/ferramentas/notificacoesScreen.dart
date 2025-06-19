@@ -135,7 +135,7 @@ class NotificacoesPage extends StatelessWidget {
           backgroundImage: AssetImage(imagemPath),
           radius: 25,
           onBackgroundImageError: (_, __) {
-            // print('Erro ao carregar a imagem: $imagemPath');
+            print('Erro ao carregar a imagem: $imagemPath');
           },
           child: const Icon(Icons.error, color: Colors.red),
         ),
