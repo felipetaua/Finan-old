@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 
 class AddTransactionPage extends StatefulWidget {
-  final Function(Map<String, dynamic>) onSave; 
+  final Function(Map<String, dynamic>) onSave;
 
   const AddTransactionPage({super.key, required this.onSave});
 
@@ -26,37 +26,37 @@ class AddTransactionPageState extends State<AddTransactionPage>
   bool _mostrarTodasCategorias = false;
 
   final Map<IconData, Color> _categorias = {
-    Icons.fastfood: Colors.amber, 
-    Icons.shopping_cart: Colors.blue, 
-    Icons.home: Colors.brown, 
-    Icons.lightbulb: Colors.amber, 
-    Icons.water_drop: Colors.lightBlueAccent, 
-    Icons.gas_meter: Colors.deepOrangeAccent, 
-    Icons.phone: Colors.lightBlue, 
-    Icons.local_gas_station: Colors.orange, 
-    Icons.cleaning_services: Colors.teal, 
-    Icons.lock: Colors.grey, 
+    Icons.fastfood: Colors.amber,
+    Icons.shopping_cart: Colors.blue,
+    Icons.home: Colors.brown,
+    Icons.lightbulb: Colors.amber,
+    Icons.water_drop: Colors.lightBlueAccent,
+    Icons.gas_meter: Colors.deepOrangeAccent,
+    Icons.phone: Colors.lightBlue,
+    Icons.local_gas_station: Colors.orange,
+    Icons.cleaning_services: Colors.teal,
+    Icons.lock: Colors.grey,
     Icons.build: Colors.blueGrey,
 
-    Icons.directions_car: Colors.purpleAccent, 
-    Icons.directions_bus: Colors.redAccent, 
-    Icons.directions_railway: Colors.indigoAccent, 
-    Icons.directions_bike: Colors.greenAccent, 
-    Icons.electric_bike: Colors.blueAccent, 
+    Icons.directions_car: Colors.purpleAccent,
+    Icons.directions_bus: Colors.redAccent,
+    Icons.directions_railway: Colors.indigoAccent,
+    Icons.directions_bike: Colors.greenAccent,
+    Icons.electric_bike: Colors.blueAccent,
     Icons.electric_car: Colors.deepPurpleAccent,
     Icons.car_rental: Colors.cyan,
-    Icons.flight: Colors.deepPurple, 
-    Icons.map: Colors.purple, 
+    Icons.flight: Colors.deepPurple,
+    Icons.map: Colors.purple,
     Icons.directions_boat: Colors.cyanAccent,
 
-    Icons.local_hospital: Colors.pink,    
+    Icons.local_hospital: Colors.pink,
     Icons.health_and_safety: Colors.red,
-    Icons.work: Colors.teal, 
+    Icons.work: Colors.teal,
     Icons.attach_money: Colors.green,
     Icons.paid: Colors.green,
     Icons.percent: Colors.red,
     Icons.money_off: Colors.redAccent,
-    Icons.credit_card: Colors.purpleAccent, 
+    Icons.credit_card: Colors.purpleAccent,
     Icons.account_balance: Colors.indigo,
     Icons.savings: Colors.greenAccent,
     Icons.receipt: Colors.deepOrange,
@@ -69,7 +69,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
     Icons.baby_changing_station: Colors.pink,
     Icons.pets: Colors.deepOrange,
 
-    Icons.movie: Colors.lime, 
+    Icons.movie: Colors.lime,
     Icons.music_note: Colors.lightGreen,
     Icons.beach_access: Colors.tealAccent,
     Icons.cake: Colors.pinkAccent,
@@ -122,7 +122,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
       case 0:
         return Colors.redAccent;
       case 1:
-        return Colors.green; 
+        return Colors.green;
       case 2:
         return Colors.grey;
       default:
@@ -217,9 +217,12 @@ class AddTransactionPageState extends State<AddTransactionPage>
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
                   builder: (context) {
-                    String tempValue = _inputValue;
-                    final TextEditingController valueController =
-                        TextEditingController(text: _formatCurrency(tempValue));
+                    String tempValue =
+                        _inputValue; 
+                    final TextEditingController
+                    valueController = TextEditingController(
+                      text: tempValue == '0' ? '' : _formatCurrency(tempValue),
+                    ); 
 
                     return Padding(
                       padding: EdgeInsets.only(
@@ -284,13 +287,25 @@ class AddTransactionPageState extends State<AddTransactionPage>
                                 ),
                               ),
                               onChanged: (value) {
-                                tempValue = value.replaceAll(',', '.');
-                                tempValue = value;
-                                final formattedValue = _formatCurrency(value);
+                                String displayValueInTextField;
+                                if (value.isEmpty) {
+                                  displayValueInTextField =
+                                      ''; 
+                                  tempValue =
+                                      '0'; 
+                                } else {
+                                  displayValueInTextField = _formatCurrency(
+                                    value,
+                                  ); 
+                                  tempValue =
+                                      value; 
+                                }
                                 valueController.value = TextEditingValue(
-                                  text: formattedValue,
+                                  text: displayValueInTextField,
                                   selection: TextSelection.fromPosition(
-                                    TextPosition(offset: formattedValue.length),
+                                    TextPosition(
+                                      offset: displayValueInTextField.length,
+                                    ),
                                   ),
                                 );
                               },
@@ -340,15 +355,22 @@ class AddTransactionPageState extends State<AddTransactionPage>
                     );
                   },
                 ).then((result) {
-                  if (result != null && result.isNotEmpty) {
+                  if (result != null) {
                     setState(() {
-                      _inputValue = result;
+                      _inputValue =
+                          result;
                     });
                   }
                 });
               },
               child: Text(
                 _formatCurrency(_inputValue),
+                semanticsLabel:
+                    _inputValue == '0'
+                        ? ''
+                        : _formatCurrency(
+                          _inputValue,
+                        ),
                 style: const TextStyle(
                   fontSize: 36,
                   color: Colors.black,
