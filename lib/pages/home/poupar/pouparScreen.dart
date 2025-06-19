@@ -64,9 +64,6 @@ class _PouparPageState extends State<PouparPage> {
     targetValueController.clear();
     descriptionController.clear();
 
-    // Reseta para os padrões ao abrir o modal
-    // Garante que _selectedIconForNewGoal e _selectedColorForNewGoal
-    // sejam os primeiros da lista ou os padrões desejados.
     _selectedIconForNewGoal = _availableIcons.first;
     _selectedColorForNewGoal = _availableColors.first;
 
@@ -75,9 +72,7 @@ class _PouparPageState extends State<PouparPage> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        // Alterado para receber BuildContext
         return StatefulBuilder(
-          // Adicionado StatefulBuilder
           builder: (BuildContext context, StateSetter modalSetState) {
             return Padding(
               padding: EdgeInsets.only(
@@ -99,7 +94,6 @@ class _PouparPageState extends State<PouparPage> {
                   ],
                 ),
                 child: SingleChildScrollView(
-                  // Adicionado para evitar overflow com seletores
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -214,7 +208,7 @@ class _PouparPageState extends State<PouparPage> {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6.0,
-                              ), // Espaçamento entre ícones
+                              ),
                               child: GestureDetector(
                                 onTap: () {
                                   modalSetState(() {
@@ -278,7 +272,7 @@ class _PouparPageState extends State<PouparPage> {
                       ),
                       const SizedBox(height: 8),
                       SizedBox(
-                        height: 50, // Altura definida para o carrossel de cores
+                        height: 50,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: _availableColors.length,
@@ -288,7 +282,7 @@ class _PouparPageState extends State<PouparPage> {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6.0,
-                              ), // Espaçamento entre cores
+                              ),
                               child: GestureDetector(
                                 onTap: () {
                                   modalSetState(() {
@@ -300,9 +294,7 @@ class _PouparPageState extends State<PouparPage> {
                                   height: 40,
                                   decoration: BoxDecoration(
                                     color: color,
-                                    borderRadius: BorderRadius.circular(
-                                      20,
-                                    ), // Círculo
+                                    borderRadius: BorderRadius.circular(20),
                                     border:
                                         isSelected
                                             ? Border.all(
@@ -361,16 +353,14 @@ class _PouparPageState extends State<PouparPage> {
                                 100.0,
                             currentValue: 0,
                             createdAt: DateTime.now(),
-                            iconData:
-                                _selectedIconForNewGoal, // Usa o ícone selecionado
-                            color:
-                                _selectedColorForNewGoal, // Usa a cor selecionada
+                            iconData: _selectedIconForNewGoal,
+                            color: _selectedColorForNewGoal,
                           );
                           setState(() {
                             // setState da _PouparPageState
                             _money.add(goal);
                           });
-                          Navigator.pop(context); // Fecha o modal
+                          Navigator.pop(context);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -382,8 +372,7 @@ class _PouparPageState extends State<PouparPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              _selectedColorForNewGoal, // Cor do botão usa a cor selecionada
+                          backgroundColor: _selectedColorForNewGoal,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -585,7 +574,7 @@ class _PouparPageState extends State<PouparPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Colors.blueAccent, // Alterado para azul
+                        color: Colors.blueAccent,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -641,8 +630,7 @@ class _PouparPageState extends State<PouparPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Colors.redAccent, // Cor para retirada
+                          backgroundColor: Colors.redAccent,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -679,14 +667,8 @@ class _PouparPageState extends State<PouparPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            20,
-            20,
-            20,
-            0,
-          ), // Ajustado o padding inferior
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: SingleChildScrollView(
-            // Adicionado SingleChildScrollView
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -716,8 +698,7 @@ class _PouparPageState extends State<PouparPage> {
                 // Favoritos e Ações
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: // Dentro do Row dos cards
-                      Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _sujestoesBox(
@@ -953,11 +934,9 @@ class _PouparPageState extends State<PouparPage> {
                       _showCreateBoxModal();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent, // Cor do botão
+                      backgroundColor: Colors.blueAccent,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          30,
-                        ), // Bordas arredondadas
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -986,11 +965,8 @@ class _PouparPageState extends State<PouparPage> {
 
                 ListView.builder(
                   shrinkWrap: true,
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Adicionado physics
-                  padding: const EdgeInsets.only(
-                    bottom: 60,
-                  ), // Padding inferior para o último item
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 60),
                   itemCount: _money.length,
                   itemBuilder: (context, index) {
                     final meta = _money[index];
@@ -1016,25 +992,21 @@ class _PouparPageState extends State<PouparPage> {
                       ),
                       child: Row(
                         children: [
-                          // Ícone ou imagem à esquerda
                           Container(
                             width: 80,
-                            height: 100,
+                            height: 80,
                             margin: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: meta.color.withOpacity(
-                                0.1,
-                              ), // Usa a cor da meta
+                              color: meta.color.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Icon(
-                              meta.iconData, // Usa o ícone da meta
-                              color: meta.color, // Usa a cor da meta
+                              meta.iconData,
+                              color: meta.color,
                               size: 36,
                             ),
                           ),
 
-                          // Informações da meta
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -1045,7 +1017,6 @@ class _PouparPageState extends State<PouparPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Título e botão de adicionar
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -1068,8 +1039,7 @@ class _PouparPageState extends State<PouparPage> {
                                         ),
                                         icon: Icon(
                                           Icons.more_vert,
-                                          color:
-                                              meta.color, // Usa a cor da meta
+                                          color: meta.color,
                                         ),
                                         onSelected: (value) {
                                           if (value == 'add') {
@@ -1147,15 +1117,13 @@ class _PouparPageState extends State<PouparPage> {
                                         color:
                                             restante > 0
                                                 ? meta.color
-                                                : Colors
-                                                    .green, // Usa a cor da meta
+                                                : Colors.green,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
 
                                   const SizedBox(height: 18),
 
-                                  // Barra de progresso
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: LinearProgressIndicator(
@@ -1165,7 +1133,7 @@ class _PouparPageState extends State<PouparPage> {
                                       valueColor: AlwaysStoppedAnimation<Color>(
                                         progresso >= 1.0
                                             ? Colors.green
-                                            : meta.color, // Usa a cor da meta
+                                            : meta.color,
                                       ),
                                     ),
                                   ),
@@ -1180,8 +1148,6 @@ class _PouparPageState extends State<PouparPage> {
                     );
                   },
                 ),
-
-                const Text("asasds"),
               ],
             ),
           ),
@@ -1197,7 +1163,7 @@ final List<Map<String, dynamic>> reservas = [
     'titulo': 'Viagem',
     'local': 'Fortaleza',
     'progresso': 0.33,
-    'valorTotal': 5000.0, // Certifique-se de que é um double
+    'valorTotal': 5000.0,
     'valorRestante': 3350.0,
     'data': '15/01/2026',
     'image': 'assets/viagem.png',
@@ -1206,7 +1172,7 @@ final List<Map<String, dynamic>> reservas = [
     'titulo': 'Casa própria',
     'local': 'Fortaleza',
     'progresso': 0.15,
-    'valorTotal': 200000.0, // Certifique-se de que é um double
+    'valorTotal': 200000.0,
     'valorRestante': 170000.0,
     'data': '31/09/2028',
     'image': 'assets/casa.png',
@@ -1215,7 +1181,7 @@ final List<Map<String, dynamic>> reservas = [
     'titulo': 'Carro',
     'local': 'Fortaleza',
     'progresso': 0.80,
-    'valorTotal': 20000.0, // Certifique-se de que é um double
+    'valorTotal': 20000.0,
     'valorRestante': 4000.0,
     'data': '20/08/2026',
     'image': 'assets/carro.png',
@@ -1225,7 +1191,7 @@ final List<Map<String, dynamic>> reservas = [
 class ReservaItem extends StatelessWidget {
   final String titulo;
   final String local;
-  final double progresso; // Deve ser um valor entre 0.0 e 1.0
+  final double progresso;
   final double valorTotal;
   final double valorRestante;
   final String data;
@@ -1314,21 +1280,14 @@ class ReservaItem extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // Botão Adicionar Dinheiro
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: () {
-                  // Ação ao clicar no botão()
-                  // _showAddMoneyDialog();
-                  // print('Adicionar dinheiro para $titulo');
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent, // Cor do botão
+                  backgroundColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      30,
-                    ), // Bordas arredondadas
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -1377,16 +1336,11 @@ class _sujestoesBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
 
           gradient: LinearGradient(
-            // Adicionado gradiente
-            colors: [
-              Color(0xFF368DF7), // Azul principal do app
-              Color(0xFF2A79D7), // Um tom um pouco mais escuro de azul
-            ],
+            colors: [Color(0xFF368DF7), Color(0xFF2A79D7)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
-            // Adicionada uma sombra sutil para destaque
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               blurRadius: 5,
