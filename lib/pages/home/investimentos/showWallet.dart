@@ -152,8 +152,8 @@ class ShowWalletPage extends StatelessWidget {
   Widget _buildBarChart() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1b1d2e), // Fundo do gráfico
-        borderRadius: BorderRadius.circular(20), // Bordas arredondadas
+        color: const Color(0xFF1b1d2e),
+        borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(16),
       child: BarChart(
@@ -163,7 +163,7 @@ class ShowWalletPage extends StatelessWidget {
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: false,
-              ), // Remove os títulos do eixo Y
+              ), 
             ),
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),

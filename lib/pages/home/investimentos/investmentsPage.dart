@@ -435,7 +435,7 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
             (context) => ListaDetalhadaPage(
               titulo: titulo,
               ativos: lista,
-              imagens: imagens, // adiciona isso
+              imagens: imagens, 
             ),
       ),
     );
@@ -533,10 +533,9 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
 
               const SizedBox(height: 12),
 
-              // Favoritos e Ações
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: // Dentro do Row dos cards
+                child: 
                     Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -622,7 +621,6 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
 
               const SizedBox(height: 12),
 
-              // Explore Crypto com PageView
               SizedBox(
                 height: 180,
                 child: Column(
@@ -825,14 +823,14 @@ class _AtivoItem extends StatefulWidget {
 }
 
 class _AtivoItemState extends State<_AtivoItem> {
-  bool _isExpanded = false; // Controla se o item está expandido
+  bool _isExpanded = false; 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _isExpanded = !_isExpanded; // Alterna entre expandido e contraído
+          _isExpanded = !_isExpanded; 
         });
       },
       child: AnimatedContainer(

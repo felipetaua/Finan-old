@@ -89,7 +89,7 @@ class PortfolioCard extends StatelessWidget {
     required this.percentage,
     required this.amountChange,
     required this.isPositive,
-    this.lineColor = Colors.blue, // Valor padrão para evitar null
+    this.lineColor = Colors.blue,
   });
 
   @override
@@ -113,7 +113,7 @@ class PortfolioCard extends StatelessWidget {
             children: [
               const CircleAvatar(
                 radius: 16,
-                backgroundImage: AssetImage('assets/avatar.png'), // avatar fixo
+                backgroundImage: AssetImage('assets/avatar.png'), 
               ),
               const SizedBox(width: 10),
               Expanded(
