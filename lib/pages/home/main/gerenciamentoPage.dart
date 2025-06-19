@@ -27,7 +27,6 @@ class GerenciamentoScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Gráfico de Pizza
             SizedBox(
               height: 200,
               child: PieChart(
@@ -117,8 +116,6 @@ class GerenciamentoScreen extends StatelessWidget {
             child: const Text('Excluir'),
             onPressed: () {
               Navigator.of(context).pop();
-              // Aqui você pode adicionar lógica para remover a transação
-              // e atualizar a interface
             },
           ),
         ],

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 
 class AddTransactionPage extends StatefulWidget {
-  final Function(Map<String, dynamic>) onSave; // Função para salvar a transação
+  final Function(Map<String, dynamic>) onSave; 
 
   const AddTransactionPage({super.key, required this.onSave});
 
@@ -26,60 +26,59 @@ class AddTransactionPageState extends State<AddTransactionPage>
   bool _mostrarTodasCategorias = false;
 
   final Map<IconData, Color> _categorias = {
-    Icons.fastfood: Colors.amber, // Alimentação
-    Icons.shopping_cart: Colors.blue, // Compras
-    Icons.home: Colors.brown, // Moradia
-    Icons.lightbulb: Colors.amber, // Conta de luz
-    Icons.water_drop: Colors.lightBlueAccent, // Conta de água
-    Icons.gas_meter: Colors.deepOrangeAccent, // Gás
-    Icons.phone: Colors.lightBlue, // Telefone / Internet
-    Icons.local_gas_station: Colors.orange, // Combustível
-    Icons.cleaning_services: Colors.teal, // Limpeza / Serviços
-    Icons.lock: Colors.grey, // Seguro residencial
-    Icons.build: Colors.blueGrey, // Manutenção / Reformas
+    Icons.fastfood: Colors.amber, 
+    Icons.shopping_cart: Colors.blue, 
+    Icons.home: Colors.brown, 
+    Icons.lightbulb: Colors.amber, 
+    Icons.water_drop: Colors.lightBlueAccent, 
+    Icons.gas_meter: Colors.deepOrangeAccent, 
+    Icons.phone: Colors.lightBlue, 
+    Icons.local_gas_station: Colors.orange, 
+    Icons.cleaning_services: Colors.teal, 
+    Icons.lock: Colors.grey, 
+    Icons.build: Colors.blueGrey,
 
-    Icons.directions_car: Colors.purpleAccent, // Transporte (carro)
-    Icons.directions_bus: Colors.redAccent, // Transporte público
-    Icons.directions_railway: Colors.indigoAccent, // Trem / Metrô
-    Icons.directions_bike: Colors.greenAccent, // Bicicleta
-    Icons.electric_bike: Colors.blueAccent, // Bike elétrica
-    Icons.electric_car: Colors.deepPurpleAccent, // Carro elétrico
-    Icons.car_rental: Colors.cyan, // Aluguel de carro
-    Icons.flight: Colors.deepPurple, // Viagens aéreas
-    Icons.map: Colors.purple, // Viagens / Localizações
-    Icons.directions_boat: Colors.cyanAccent, // Barco / Passeios
+    Icons.directions_car: Colors.purpleAccent, 
+    Icons.directions_bus: Colors.redAccent, 
+    Icons.directions_railway: Colors.indigoAccent, 
+    Icons.directions_bike: Colors.greenAccent, 
+    Icons.electric_bike: Colors.blueAccent, 
+    Icons.electric_car: Colors.deepPurpleAccent,
+    Icons.car_rental: Colors.cyan,
+    Icons.flight: Colors.deepPurple, 
+    Icons.map: Colors.purple, 
+    Icons.directions_boat: Colors.cyanAccent,
 
-    Icons.local_hospital: Colors.pink, // Saúde
-    Icons.health_and_safety: Colors.red, // Seguro saúde
-    Icons.work: Colors.teal, // Trabalho / Renda fixa
-    Icons.attach_money: Colors.green, // Renda extra / Ganhos
-    Icons.paid: Colors.green, // Pagamento recebido
-    Icons.percent: Colors.red, // Juros / Impostos
-    Icons.money_off: Colors.redAccent, // Multas / Dívidas
-    Icons.credit_card: Colors.purpleAccent, // Cartão de crédito
-    Icons.account_balance: Colors.indigo, // Banco / Conta
-    Icons.savings: Colors.greenAccent, // Poupança / Reservas
+    Icons.local_hospital: Colors.pink,    
+    Icons.health_and_safety: Colors.red,
+    Icons.work: Colors.teal, 
+    Icons.attach_money: Colors.green,
+    Icons.paid: Colors.green,
+    Icons.percent: Colors.red,
+    Icons.money_off: Colors.redAccent,
+    Icons.credit_card: Colors.purpleAccent, 
+    Icons.account_balance: Colors.indigo,
+    Icons.savings: Colors.greenAccent,
+    Icons.receipt: Colors.deepOrange,
+    Icons.redeem: Colors.cyan,
+    Icons.favorite: Colors.green,
+    Icons.handshake: Colors.deepPurple,
 
-    Icons.receipt: Colors.deepOrange, // Contas / Faturas
-    Icons.redeem: Colors.cyan, // Recompensas / Cashback
-    Icons.favorite: Colors.green, // Doações / Causas
-    Icons.handshake: Colors.deepPurple, // Contratos / Parcerias
+    Icons.school: Colors.indigo,
+    Icons.book: Colors.blueGrey,
+    Icons.baby_changing_station: Colors.pink,
+    Icons.pets: Colors.deepOrange,
 
-    Icons.school: Colors.indigo, // Educação
-    Icons.book: Colors.blueGrey, // Materiais / Estudos
-    Icons.baby_changing_station: Colors.pink, // Despesas com filhos
-    Icons.pets: Colors.deepOrange, // Pets
-
-    Icons.movie: Colors.lime, // Cinema / Entretenimento
-    Icons.music_note: Colors.lightGreen, // Música / Streaming
-    Icons.beach_access: Colors.tealAccent, // Férias / Viagens
-    Icons.cake: Colors.pinkAccent, // Presentes / Festas
-    Icons.camera: Colors.orangeAccent, // Fotografia / Hobby
-    Icons.computer: Colors.yellow, // Eletrônicos
-    Icons.emoji_events: Colors.yellowAccent, // Prêmios / Incentivos
-    Icons.store: Colors.brown, // Loja / Negócio próprio
-    Icons.eco: Colors.lightGreenAccent, // Sustentabilidade
-    Icons.article: Colors.grey, // Outros / Geral
+    Icons.movie: Colors.lime, 
+    Icons.music_note: Colors.lightGreen,
+    Icons.beach_access: Colors.tealAccent,
+    Icons.cake: Colors.pinkAccent,
+    Icons.camera: Colors.orangeAccent,
+    Icons.computer: Colors.yellow,
+    Icons.emoji_events: Colors.yellowAccent,
+    Icons.store: Colors.brown,
+    Icons.eco: Colors.lightGreenAccent,
+    Icons.article: Colors.grey,
   };
 
   @override
@@ -88,7 +87,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) return;
-      setState(() {}); // Atualiza o estado para refletir a aba atual
+      setState(() {});
     });
   }
 
@@ -121,13 +120,13 @@ class AddTransactionPageState extends State<AddTransactionPage>
   Color _getBackgroundColor() {
     switch (_tabController.index) {
       case 0:
-        return Colors.redAccent; // Cor para Despesas
+        return Colors.redAccent;
       case 1:
-        return Colors.green; // Cor para Receitas
+        return Colors.green; 
       case 2:
-        return Colors.grey; // Cor para Transferências
+        return Colors.grey;
       default:
-        return Colors.white; // Cor padrão
+        return Colors.white;
     }
   }
 
@@ -155,19 +154,17 @@ class AddTransactionPageState extends State<AddTransactionPage>
     _adicionarTransacao(novaTransacao);
     widget.onSave(novaTransacao);
 
-    // Navega para a tela de carregamento
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterExpensePage()),
     ).then((_) {
-      // Retorna para a tela anterior após o carregamento
       Navigator.pop(context);
     });
   }
 
   void _adicionarTransacao(Map<String, dynamic> novaTransacao) {
     setState(() {
-      _transacoes.add(novaTransacao); // Adiciona a nova transação à lista
+      _transacoes.add(novaTransacao);
     });
   }
 
@@ -176,7 +173,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: _getBackgroundColor(), // Cor dinâmica
+        backgroundColor: _getBackgroundColor(),
         elevation: 0,
         title: const Text(
           'Controle de Gastos',
@@ -287,9 +284,7 @@ class AddTransactionPageState extends State<AddTransactionPage>
                                 ),
                               ),
                               onChanged: (value) {
-                                // Substitui ',' por '.' para padronizar o valor
                                 tempValue = value.replaceAll(',', '.');
-                                // value aqui são os dígitos puros devido a FilteringTextInputFormatter.digitsOnly
                                 tempValue = value;
                                 final formattedValue = _formatCurrency(value);
                                 valueController.value = TextEditingValue(
