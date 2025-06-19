@@ -7,6 +7,7 @@ import 'package:finan/pages/home/gastos/gerenciamentoScreen.dart';
 import 'package:finan/pages/home/investimentos/investimentosSceenCard.dart';
 import 'package:finan/pages/home/investimentos/investmentsPage.dart';
 import 'package:finan/pages/home/main/add_despesas.dart';
+import 'package:finan/pages/home/main/detalhesTransacoes.dart';
 import 'package:finan/pages/home/poupar/pouparScreen.dart';
 import 'package:finan/pages/home/profile/avatarSelector.dart';
 import 'package:finan/pages/home/profile/perfil.dart';
@@ -51,13 +52,13 @@ class _GastosPageState extends State<GastosPage> {
   @override
   void initState() {
     super.initState();
-    _loadAvatar(); 
-    _carregarSalario(); 
+    _loadAvatar();
+    _carregarSalario();
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF368DF7), 
-        statusBarIconBrightness: Brightness.light, 
+        statusBarColor: Color(0xFF368DF7),
+        statusBarIconBrightness: Brightness.light,
       ),
     );
   }
@@ -66,19 +67,17 @@ class _GastosPageState extends State<GastosPage> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentAvatar =
-          prefs.getString('avatarPath') ??
-          'assets/avatares/avatar-default.jpg';
+          prefs.getString('avatarPath') ?? 'assets/avatares/avatar-default.jpg';
     });
   }
 
   Future<void> _carregarSalario() async {
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString('userId'); 
+    final userId = prefs.getString('userId');
 
     if (userId == null) {
       setState(() {
-        _salario =
-            0.0; 
+        _salario = 0.0;
       });
       return;
     }
@@ -93,18 +92,16 @@ class _GastosPageState extends State<GastosPage> {
       if (resposta.statusCode == 200) {
         final dados = jsonDecode(resposta.body);
         setState(() {
-          _salario =
-              (dados['salario'] ?? 0)
-                  .toDouble();
+          _salario = (dados['salario'] ?? 0).toDouble();
         });
       } else {
         setState(() {
-          _salario = 0.0; 
+          _salario = 0.0;
         });
       }
     } catch (e) {
       setState(() {
-        _salario = 0.0; 
+        _salario = 0.0;
       });
     }
   }
@@ -119,12 +116,9 @@ class _GastosPageState extends State<GastosPage> {
 
     if (newAvatar != null && newAvatar is String) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(
-        'avatarPath',
-        newAvatar,
-      ); 
+      await prefs.setString('avatarPath', newAvatar);
       setState(() {
-        _currentAvatar = newAvatar; 
+        _currentAvatar = newAvatar;
       });
     }
   }
@@ -227,8 +221,7 @@ class _GastosPageState extends State<GastosPage> {
                     },
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
-                        _currentAvatar ??
-                            'assets/avatares/avatar-default.jpg', 
+                        _currentAvatar ?? 'assets/avatares/avatar-default.jpg',
                       ),
                       radius: 25,
                     ),
@@ -459,12 +452,25 @@ class _GastosContent extends StatelessWidget {
           const SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'Transações',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Text('Detalhes', style: TextStyle(color: Color(0xFF368DF7))),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetalhesTransacoes(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Detalhes',
+                  style: TextStyle(color: Color(0xFF368DF7)),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
