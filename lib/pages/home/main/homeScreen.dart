@@ -51,36 +51,34 @@ class _GastosPageState extends State<GastosPage> {
   @override
   void initState() {
     super.initState();
-    _loadAvatar(); // Carrega o avatar
-    _carregarSalario(); // Carrega o salário do usuário
+    _loadAvatar(); 
+    _carregarSalario(); 
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF368DF7), // Cor da barra de status
-        statusBarIconBrightness: Brightness.light, // Ícones brancos
+        statusBarColor: Color(0xFF368DF7), 
+        statusBarIconBrightness: Brightness.light, 
       ),
     );
   }
 
-  // Função para carregar o avatar armazenado
   Future<void> _loadAvatar() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentAvatar =
           prefs.getString('avatarPath') ??
-          'assets/avatares/avatar-default.jpg'; // Avatar padrão
+          'assets/avatares/avatar-default.jpg';
     });
   }
 
-  // Função para carregar o salário do usuário
   Future<void> _carregarSalario() async {
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString('userId'); // Recupera o ID do usuário salvo
+    final userId = prefs.getString('userId'); 
 
     if (userId == null) {
       setState(() {
         _salario =
-            0.0; // Define o salário como 0 se o usuário não estiver identificado
+            0.0; 
       });
       return;
     }
@@ -97,21 +95,20 @@ class _GastosPageState extends State<GastosPage> {
         setState(() {
           _salario =
               (dados['salario'] ?? 0)
-                  .toDouble(); // Define o salário ou 0 como padrão
+                  .toDouble();
         });
       } else {
         setState(() {
-          _salario = 0.0; // Define o salário como 0 em caso de erro
+          _salario = 0.0; 
         });
       }
     } catch (e) {
       setState(() {
-        _salario = 0.0; // Define o salário como 0 em caso de exceção
+        _salario = 0.0; 
       });
     }
   }
 
-  // Função para abrir a página de seleção de avatar
   void _openAvatarSelector() async {
     final newAvatar = await Navigator.push(
       context,
@@ -120,23 +117,20 @@ class _GastosPageState extends State<GastosPage> {
       ),
     );
 
-    // Se um novo avatar for selecionado, salvar e atualizar o estado
     if (newAvatar != null && newAvatar is String) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(
         'avatarPath',
         newAvatar,
-      ); // Salva o avatar no SharedPreferences
+      ); 
       setState(() {
-        _currentAvatar = newAvatar; // Atualiza o estado com o novo avatar
+        _currentAvatar = newAvatar; 
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Define _pages dentro do método build para garantir que _GastosContent
-    // seja reconstruído com a lista de transações atualizada.
     _pages = [
       PouparPage(),
       EducationPage(),
@@ -234,7 +228,7 @@ class _GastosPageState extends State<GastosPage> {
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
                         _currentAvatar ??
-                            'assets/avatares/avatar-default.jpg', // Avatar atual ou padrão
+                            'assets/avatares/avatar-default.jpg', 
                       ),
                       radius: 25,
                     ),
@@ -384,7 +378,7 @@ class _GastosContent extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'R\$${salario.toStringAsFixed(2).replaceAll('.', ',')}', // Exibe o salário formatado
+                      'R\$${salario.toStringAsFixed(2).replaceAll('.', ',')}',
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -531,7 +525,7 @@ class _TransacaoCardState extends State<TransacaoCard> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _isExpanded = !_isExpanded; // Alterna entre expandido e contraído
+          _isExpanded = !_isExpanded;
         });
       },
       child: AnimatedContainer(
@@ -601,7 +595,7 @@ class _TransacaoCardState extends State<TransacaoCard> {
             ),
             if (_isExpanded) ...[
               const SizedBox(height: 16),
-              const Divider(), // Linha horizontal
+              const Divider(),
               const SizedBox(height: 8),
               const Text(
                 'Detalhes da Transação:',
