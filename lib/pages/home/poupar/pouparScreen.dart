@@ -202,36 +202,57 @@ class _PouparPageState extends State<PouparPage> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        alignment: WrapAlignment.center,
-                        children:
-                            _availableIcons.map((icon) {
-                              bool isSelected = _selectedIconForNewGoal == icon;
-                              return GestureDetector(
+                      SizedBox(
+                        height:
+                            60, // Altura definida para o carrossel de ícones
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _availableIcons.length,
+                          itemBuilder: (context, index) {
+                            final icon = _availableIcons[index];
+                            bool isSelected = _selectedIconForNewGoal == icon;
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                              ), // Espaçamento entre ícones
+                              child: GestureDetector(
                                 onTap: () {
                                   modalSetState(() {
-                                    // Usa modalSetState
                                     _selectedIconForNewGoal = icon;
                                   });
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.all(10),
+                                  width: 50,
+                                  height: 50,
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color:
                                         isSelected
                                             ? _selectedColorForNewGoal
                                                 .withOpacity(0.2)
                                             : Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(12),
                                     border:
                                         isSelected
                                             ? Border.all(
                                               color: _selectedColorForNewGoal,
                                               width: 2,
                                             )
-                                            : null,
+                                            : Border.all(
+                                              color: Colors.grey[300]!,
+                                              width: 1,
+                                            ),
+                                    boxShadow:
+                                        isSelected
+                                            ? [
+                                              BoxShadow(
+                                                color: _selectedColorForNewGoal
+                                                    .withOpacity(0.3),
+                                                blurRadius: 4,
+                                                spreadRadius: 1,
+                                              ),
+                                            ]
+                                            : [],
                                   ),
                                   child: Icon(
                                     icon,
@@ -239,11 +260,13 @@ class _PouparPageState extends State<PouparPage> {
                                         isSelected
                                             ? _selectedColorForNewGoal
                                             : Colors.grey[700],
-                                    size: 30,
+                                    size: 28,
                                   ),
                                 ),
-                              );
-                            }).toList(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -254,18 +277,21 @@ class _PouparPageState extends State<PouparPage> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        alignment: WrapAlignment.center,
-                        children:
-                            _availableColors.map((color) {
-                              bool isSelected =
-                                  _selectedColorForNewGoal == color;
-                              return GestureDetector(
+                      SizedBox(
+                        height: 50, // Altura definida para o carrossel de cores
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _availableColors.length,
+                          itemBuilder: (context, index) {
+                            final color = _availableColors[index];
+                            bool isSelected = _selectedColorForNewGoal == color;
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                              ), // Espaçamento entre cores
+                              child: GestureDetector(
                                 onTap: () {
                                   modalSetState(() {
-                                    // Usa modalSetState
                                     _selectedColorForNewGoal = color;
                                   });
                                 },
@@ -281,21 +307,20 @@ class _PouparPageState extends State<PouparPage> {
                                         isSelected
                                             ? Border.all(
                                               color: Colors.black.withOpacity(
-                                                0.1,
+                                                0.2,
                                               ),
                                               width: 3,
                                             )
                                             : Border.all(
-                                              color: Colors.grey.withOpacity(
-                                                0.5,
-                                              ),
+                                              color: Colors.grey.shade400
+                                                  .withOpacity(0.6),
                                               width: 1,
                                             ),
                                     boxShadow:
                                         isSelected
                                             ? [
                                               BoxShadow(
-                                                color: color.withOpacity(0.5),
+                                                color: color.withOpacity(0.6),
                                                 blurRadius: 5,
                                                 spreadRadius: 1,
                                               ),
@@ -311,8 +336,10 @@ class _PouparPageState extends State<PouparPage> {
                                           )
                                           : null,
                                 ),
-                              );
-                            }).toList(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton(
