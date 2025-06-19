@@ -12,11 +12,19 @@ class DetalhesTransacoes extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            // Ação para voltar
+            Navigator.pop(context);
           },
         ),
-        title: const Text('Dashboard'),
+        title: const Text('Detalhes'),
         centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.horizontal(
+            left: Radius.circular(16),
+            right: Radius.circular(16),
+          ),
+        ),
       ),
       body: const SingleChildScrollView(
         child: Padding(
