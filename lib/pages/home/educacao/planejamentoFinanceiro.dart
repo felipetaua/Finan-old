@@ -21,35 +21,30 @@ class PlanejamentoFinanceiro extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Card 1: Defina seus objetivos
           _buildFinanceCard(
             title: '1. Defina seus objetivos',
             description:
                 'Tenha metas claras: economizar, investir, quitar dívidas ou expandir seu negócio.',
           ),
 
-          // Card 2: Crie um orçamento realista
           _buildFinanceCard(
             title: '2. Crie um orçamento realista',
             description:
                 'Anote tudo o que entra e sai. Separe gastos fixos, variáveis e possíveis investimentos.',
           ),
 
-          // Card 3: Use planilhas ou aplicativos
           _buildFinanceCard(
             title: '3. Use planilhas ou aplicativos',
             description:
                 'Ferramentas digitais ajudam a acompanhar melhor seu dinheiro e evitar esquecimentos.',
           ),
 
-          // Card 4: Estabeleça uma reserva de emergência
           _buildFinanceCard(
             title: '4. Estabeleça uma reserva de emergência',
             description:
                 'O ideal é guardar o equivalente a 3 a 6 meses de gastos fixos.',
           ),
 
-          // Card 5: Dicas rápidas (accordion)
           ExpansionTile(
             title: const Text('5. Dicas rápidas'),
             children: const [
@@ -75,7 +70,6 @@ class PlanejamentoFinanceiro extends StatelessWidget {
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: () {
-              // Exemplo de navegação futura
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Mais funcionalidades em breve!')),
               );

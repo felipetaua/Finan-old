@@ -1,10 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class RegisterExpensePage extends StatefulWidget {
   const RegisterExpensePage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _RegisterExpensePageState createState() => _RegisterExpensePageState();
 }
 
@@ -18,7 +19,6 @@ class _RegisterExpensePageState extends State<RegisterExpensePage> {
   }
 
   Future<void> _simulateRegisterExpense() async {
-    // Simula o tempo de registro do gasto
     await Future.delayed(Duration(seconds: 2));
     setState(() {
       _isLoading = false;

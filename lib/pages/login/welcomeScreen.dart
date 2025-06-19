@@ -98,8 +98,8 @@ class WelcomeScreen extends StatelessWidget {
                             const begin = Offset(
                               1.0,
                               0.0,
-                            ); // Começa fora da tela à direita
-                            const end = Offset.zero; // Termina no centro
+                            ); 
+                            const end = Offset.zero; 
                             const curve = Curves.ease;
 
                             final tween = Tween(
@@ -130,7 +130,6 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 const Text('ou'),
                 const SizedBox(height: 16),
-                // Botão Google
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
@@ -150,7 +149,6 @@ class WelcomeScreen extends StatelessWidget {
                           userCredential.user != null) {
                         final prefs = await SharedPreferences.getInstance();
                         final userId = userCredential.user!.uid;
-                        // Tenta obter o nome de exibição, usa 'Usuário' como fallback
                         final userName =
                             userCredential.user!.displayName ?? 'Usuário';
 
@@ -158,9 +156,8 @@ class WelcomeScreen extends StatelessWidget {
                         await prefs.setString(
                           'nomeUsuario',
                           userName,
-                        ); // Salva o nome do usuário
+                        );
 
-                        // Navegue para a tela principal passando o nome do usuário
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -184,7 +181,6 @@ class WelcomeScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      // login com Aplle
                       Navigator.push(
                         context,
                         PageRouteBuilder(
@@ -195,8 +191,8 @@ class WelcomeScreen extends StatelessWidget {
                             const begin = Offset(
                               1.0,
                               0.0,
-                            ); // Começa fora da tela à direita
-                            const end = Offset.zero; // Termina no centro
+                            ); 
+                            const end = Offset.zero;
                             const curve = Curves.ease;
 
                             final tween = Tween(
@@ -243,8 +239,8 @@ class WelcomeScreen extends StatelessWidget {
                               const begin = Offset(
                                 1.0,
                                 0.0,
-                              ); // Começa fora da tela à direita
-                              const end = Offset.zero; // Termina no centro
+                              ); 
+                              const end = Offset.zero;
                               const curve = Curves.ease;
 
                               final tween = Tween(

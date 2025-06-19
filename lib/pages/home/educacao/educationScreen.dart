@@ -23,7 +23,6 @@ class EducationPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Barra de busca
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
@@ -45,7 +44,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                // Educação doméstica
                 const Text(
                   'Educação doméstica',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -140,7 +138,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Indicador deslizante
                 Center(
                   child: SmoothPageIndicator(
                     controller: pageController,
@@ -157,7 +154,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                // Categorias
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -202,14 +198,12 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                // Cursos e conteúdo
                 const Text(
                   'Cursos e conteúdo',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
 
-                // Card 1: Controle de gastos de forma eficiente
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -256,7 +250,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Card 2: Formas de conseguir poupar
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -303,7 +296,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Card 3: Cortando gastos pela raiz
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -350,7 +342,6 @@ class EducationPage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Card 4: Como utilizar cartão de crédito da maneira correta
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

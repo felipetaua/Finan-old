@@ -44,7 +44,7 @@ class FeedbackPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
-                  ); // Volta para a tela de login
+                  ); 
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF368DF7),

@@ -65,10 +65,10 @@ class _RegisterPageState extends State<RegisterPage> {
     int hash = 0;
 
     for (int i = 0; i < dados.length; i++) {
-      hash = 31 * hash + dados.codeUnitAt(i); // Gera um hash simples
+      hash = 31 * hash + dados.codeUnitAt(i); 
     }
 
-    return hash.toString(); // Retorna o hash como string
+    return hash.toString();
   }
 
   @override

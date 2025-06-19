@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 50,
                 backgroundImage: AssetImage(
                   widget.currentAvatar ?? 'assets/avatares/avatar-default.jpg',
-                ), // Usa o avatar atual ou o padrão
+                ), 
               ),
               const SizedBox(height: 20),
               InputField(

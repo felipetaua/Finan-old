@@ -43,7 +43,7 @@ class SuccessPage extends StatelessWidget {
                         30,
                       ), 
                     ),
-                    elevation: 5, // Adiciona uma leve sombra
+                    elevation: 5, 
                   ),
                   child: const Text(
                     'OK',

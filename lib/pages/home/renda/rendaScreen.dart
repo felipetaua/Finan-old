@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RendaScreen extends StatefulWidget {
   final String categoria;
-  final VoidCallback onSalarioAtualizado; // Função de callback
+  final VoidCallback onSalarioAtualizado; 
 
   const RendaScreen({
     super.key,
@@ -80,7 +80,6 @@ class _RendaScreenState extends State<RendaScreen> {
       if (resposta.statusCode == 200) {
         _mostrarSnackBar('Salário enviado com sucesso!', Colors.green);
 
-        // Chama a função de callback para notificar a atualização do salário
         widget.onSalarioAtualizado();
 
         Future.delayed(const Duration(seconds: 1), () {
@@ -144,7 +143,6 @@ class _RendaScreenState extends State<RendaScreen> {
                 controller: _salarioController,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
-                  // ignore: deprecated_member_use
                   MoneyInputFormatter(
                     leadingSymbol: 'R\$',
                     thousandSeparator: ThousandSeparator.Period,

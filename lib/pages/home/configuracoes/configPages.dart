@@ -54,7 +54,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                 onChanged: (bool value) {
                   widget.onTemaAlterado(
                     value,
-                  ); // Chama a função passada para alterar o tema
+                  );
                 },
                 activeTrackColor: const Color(0xFF368DF7),
               ),
@@ -219,9 +219,9 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
           borderRadius: BorderRadius.circular(12),
           border:
               title ==
-                      'Sair da Conta' // Verifica se é o card "Sair da Conta"
-                  ? Border.all(color: Colors.red, width: 2) // Borda vermelha
-                  : null, // Sem borda para os outros cards
+                      'Sair da Conta' 
+                  ? Border.all(color: Colors.red, width: 2) 
+                  : null,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -250,7 +250,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     );
   }
 
-  // Exibir o diálogo de logout
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,

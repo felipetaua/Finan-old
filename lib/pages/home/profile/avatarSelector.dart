@@ -52,7 +52,7 @@ class AvatarSelectorPage extends StatelessWidget {
     } else {
       await prefs.setString('avatarPath', path);
     }
-    Navigator.pop(context, path); // Retorna o avatar selecionado
+    Navigator.pop(context, path); 
   }
 
   @override
@@ -106,7 +106,7 @@ class AvatarSelectorPage extends StatelessWidget {
             ),
             ElevatedButton.icon(
               onPressed: () async {
-                await _saveAvatar(context, null); // Remover o avatar
+                await _saveAvatar(context, null); 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Avatar removido com sucesso!'),
