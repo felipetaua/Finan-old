@@ -41,7 +41,9 @@ class _BillsSectionState extends State<BillsSection> with SingleTickerProviderSt
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                
+              },
               child: const Text('Ver Todas'),
             ),
           ],
