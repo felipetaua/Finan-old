@@ -43,7 +43,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Course(
       title: "Investindo para Iniciantes",
       instructor: "Ricardo Financeiro",
-      imageAsset: "assets/images/Educacao/planejamento-financeiro.png",
+      imageAsset: "assets/images/Educacao/educacao-financeira.png",
       completed: 0.45,
       lessons: [
         Lesson("1. O que é um investimento?", "Investimentos"),
@@ -54,7 +54,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Course(
       title: "Orçamento Pessoal Inteligente",
       instructor: "Clara Contas",
-      imageAsset: "assets/images/Educacao/planejamento-financeiro.png",
+      imageAsset: "assets/images/Educacao/educacao-financeira.png",
       completed: 0.70,
       lessons: [
         Lesson("1. Planilha de Gastos", "Orçamento"),
@@ -183,7 +183,7 @@ class _CourseCardState extends State<CourseCard> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
+                  child: Image.asset(
                     widget.course.imageAsset,
                     width: 60,
                     height: 60,

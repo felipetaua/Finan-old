@@ -13,8 +13,8 @@ class CourseDetailsScreen extends StatelessWidget {
             left: 0,
             right: 0,
             height: MediaQuery.of(context).size.height * 0.4,
-            child: Image.network(
-              "assets/images/Educacao/planejamento-financeiro.png",
+            child: Image.asset(
+              "assets/images/Educacao/educacao-financeira.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -171,7 +171,7 @@ class CourseDetailsScreen extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(
+            child: Image.asset(
               "assets/images/Educacao/planejamento-financeiro.png",
               width: 50,
               height: 50,
