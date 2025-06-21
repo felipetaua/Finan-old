@@ -59,9 +59,13 @@ class NotificacoesPage extends StatelessWidget {
                   border: Border.all(width: 1, color: Colors.grey),
                 ),
                 child: const TextField(
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  cursorColor: Colors.blueAccent,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     hintText: 'Pesquise',
+
                     border: InputBorder.none,
                   ),
                 ),
@@ -126,37 +130,49 @@ class NotificacoesPage extends StatelessWidget {
     String imagemPath,
   ) {
     return Card(
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(vertical: 8),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(12),
-        leading: CircleAvatar(
-          backgroundImage: AssetImage(imagemPath),
-          radius: 25,
-          onBackgroundImageError: (_, __) {
-            print('Erro ao carregar a imagem: $imagemPath');
-          },
-          child: const Icon(Icons.error, color: Colors.red),
-        ),
-        title: Text(
-          titulo,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(descricao),
-            const SizedBox(height: 4),
-            LinearProgressIndicator(
-              value: 1,
-              color: barraCor,
-              backgroundColor: Colors.grey.shade200,
-              minHeight: 5,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withAlpha((0.2 * 255).toInt()),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
-        trailing: Text(data),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(12),
+          leading: CircleAvatar(
+            backgroundImage: AssetImage(imagemPath),
+            radius: 25,
+            onBackgroundImageError: (_, __) {
+              print('Erro ao carregar a imagem: $imagemPath');
+            },
+            child: const Icon(Icons.error, color: Colors.red),
+          ),
+          title: Text(
+            titulo,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(descricao),
+              const SizedBox(height: 4),
+              LinearProgressIndicator(
+                value: 1,
+                color: barraCor,
+                backgroundColor: Colors.grey.shade200,
+                minHeight: 5,
+              ),
+            ],
+          ),
+          trailing: Text(data),
+        ),
       ),
     );
   }
