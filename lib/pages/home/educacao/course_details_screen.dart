@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CourseDetailsScreen extends StatelessWidget {
   const CourseDetailsScreen({super.key});
@@ -34,8 +35,19 @@ class CourseDetailsScreen extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.black38,
                   child: IconButton(
-                    icon: const Icon(Icons.more_horiz, color: Colors.white),
-                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.share,
+                      color: Colors.white,
+                    ), 
+                    onPressed: () async {
+                      final String courseTitle = "Curso de Investimentos";
+                      final String shareText =
+                          "Confira este curso incrível: $courseTitle! #FinanApp #EducacaoFinanceira";
+                      final String shareUrl =
+                          "https://finanapp.com/cursos/investimentos";
+
+                      await Share.share('$shareText\n$shareUrl');
+                    },
                   ),
                 ),
               ],
