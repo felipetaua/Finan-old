@@ -1,4 +1,3 @@
-// lib/screens/course_details_screen.dart
 import 'package:flutter/material.dart';
 
 class CourseDetailsScreen extends StatelessWidget {
@@ -15,7 +14,7 @@ class CourseDetailsScreen extends StatelessWidget {
             right: 0,
             height: MediaQuery.of(context).size.height * 0.4,
             child: Image.network(
-              "https://storage.googleapis.com/gemini-generative-ai-public/images/4a74205a-8b9a-4c2a-8924-f7b57954999f",
+              "assets/images/Educacao/planejamento-financeiro.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -173,7 +172,7 @@ class CourseDetailsScreen extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              "https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421",
+              "assets/images/Educacao/planejamento-financeiro.png",
               width: 50,
               height: 50,
               fit: BoxFit.cover,

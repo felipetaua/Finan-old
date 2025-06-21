@@ -1,8 +1,6 @@
-// lib/screens/course_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-// --- Modelos de Dados (para simular dados reais) ---
 class Lesson {
   final String title;
   final String category;
@@ -45,8 +43,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Course(
       title: "Investindo para Iniciantes",
       instructor: "Ricardo Financeiro",
-      imageAsset:
-          "https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421", // Reutilizando imagem
+      imageAsset: "assets/images/Educacao/planejamento-financeiro.png",
       completed: 0.45,
       lessons: [
         Lesson("1. O que é um investimento?", "Investimentos"),
@@ -57,8 +54,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Course(
       title: "Orçamento Pessoal Inteligente",
       instructor: "Clara Contas",
-      imageAsset:
-          "https://storage.googleapis.com/gemini-generative-ai-public/images/2e04e9c3-9fd6-455b-b9d2-b06de22d4f80", // Reutilizando imagem
+      imageAsset: "assets/images/Educacao/planejamento-financeiro.png",
       completed: 0.70,
       lessons: [
         Lesson("1. Planilha de Gastos", "Orçamento"),
