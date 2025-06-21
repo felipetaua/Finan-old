@@ -118,16 +118,15 @@ class _CourseListScreenState extends State<CourseListScreen> {
           });
         },
         backgroundColor: Colors.white,
-        selectedColor: Theme.of(context).primaryColor.withOpacity(0.1),
+        selectedColor: Colors.blueAccent.withOpacity(0.1),
         labelStyle: TextStyle(
-          color: isSelected ? Theme.of(context).primaryColor : Colors.black,
+          color: isSelected ? Colors.blueAccent : Colors.black,
           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color:
-                isSelected ? Theme.of(context).primaryColor : Colors.grey[300]!,
+            color: isSelected ? Colors.blueAccent : Colors.grey[300]!,
           ),
         ),
       ),
@@ -228,7 +227,7 @@ class _CourseCardState extends State<CourseCard> {
                     lineHeight: 8,
                     barRadius: const Radius.circular(4),
                     backgroundColor: Colors.grey[200],
-                    progressColor: const Color(0xFF8A2BE2),
+                    progressColor: Colors.blueAccent,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -285,8 +284,8 @@ class _CourseCardState extends State<CourseCard> {
                 icon: const Icon(Icons.play_circle_outline, size: 18),
                 label: const Text('Play'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Theme.of(context).primaryColor,
-                  side: BorderSide(color: Theme.of(context).primaryColor),
+                  foregroundColor: Colors.blueAccent,
+                  side: BorderSide(color: Colors.blueAccent),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
