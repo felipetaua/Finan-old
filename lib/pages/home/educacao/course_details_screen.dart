@@ -96,7 +96,7 @@ class CourseDetailsScreen extends StatelessWidget {
                         Text(
                           "Ver Todas",
                           style: TextStyle(
-                            color: Colors.deepPurple,
+                            color: Colors.blueAccent,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -203,7 +203,7 @@ class CourseDetailsScreen extends StatelessWidget {
             ),
             child: const Icon(
               Icons.play_arrow_rounded,
-              color: Colors.deepPurple,
+              color: Colors.blueAccent,
             ),
           ),
         ],
