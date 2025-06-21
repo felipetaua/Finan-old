@@ -78,7 +78,7 @@ class EducationPage extends StatelessWidget {
                           ),
                         ),
                         Image.asset(
-                          'assets/images/Educacao/planejamento-financeiro.png',
+                          'assets/images/globo-estudo.png',
                           height: 50,
                           width: 50,
                         ),
