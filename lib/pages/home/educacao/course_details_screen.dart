@@ -9,7 +9,6 @@ class CourseDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Positioned(
             top: 0,
             left: 0,
@@ -64,12 +63,21 @@ class CourseDetailsScreen extends StatelessWidget {
                   children: [
                     const Text(
                       "Curso de Investimentos",
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     _buildInfoRow(),
                     const SizedBox(height: 24),
-                    const Text("Descrição", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const Text(
+                      "Descrição",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       "Um curso para quem quer começar a investir do zero, entendendo os principais conceitos do mercado financeiro para tomar decisões mais inteligentes com seu dinheiro. Aprenda sobre Renda Fixa, Ações, Fundos Imobiliários e mais...",
@@ -79,30 +87,59 @@ class CourseDetailsScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
-                         Text("Aulas (27)", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                         Text("Ver Todas", style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                        Text(
+                          "Aulas (27)",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "Ver Todas",
+                          style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
-                    _buildLessonItem("1. Introdução aos Investimentos", "Comece por aqui"),
+                    _buildLessonItem(
+                      "1. Introdução aos Investimentos",
+                      "Comece por aqui",
+                    ),
                     const SizedBox(height: 12),
-                    _buildLessonItem("2. Renda Fixa: Segurança", "CDB, Tesouro Direto"),
-                     const SizedBox(height: 12),
-                    _buildLessonItem("3. Renda Variável: Riscos", "Ações e dividendos"),
+                    _buildLessonItem(
+                      "2. Renda Fixa: Segurança",
+                      "CDB, Tesouro Direto",
+                    ),
+                    const SizedBox(height: 12),
+                    _buildLessonItem(
+                      "3. Renda Variável: Riscos",
+                      "Ações e dividendos",
+                    ),
                     const SizedBox(height: 30),
-                     SizedBox(
-                       width: double.infinity,
-                       child: ElevatedButton(
-                         onPressed: (){},
-                         style: ElevatedButton.styleFrom(
-                           padding: const EdgeInsets.symmetric(vertical: 16),
-                           backgroundColor: const Color(0xFF2C2C2C),
-                           foregroundColor: Colors.white,
-                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))
-                         ),
-                         child: const Text("Inscreva-se Agora - R\$199/ano", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                       ),
-                     )
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          backgroundColor: const Color(0xFF2C2C2C),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: const Text(
+                          "Inscreva-se Agora - R\$199/ano",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -124,37 +161,51 @@ class CourseDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLessonItem(String title, String subtitle){
+  Widget _buildLessonItem(String title, String subtitle) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(12)
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network("https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421", width: 50, height: 50, fit: BoxFit.cover),
+            child: Image.network(
+              "https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421",
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  subtitle,
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
               ],
             ),
           ),
           OutlinedButton(
-            onPressed: (){},
+            onPressed: () {},
             style: OutlinedButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(12),
-              side: BorderSide(color: Colors.grey[300]!)
+              side: BorderSide(color: Colors.grey[300]!),
             ),
-            child: const Icon(Icons.play_arrow_rounded, color: Colors.deepPurple),
+            child: const Icon(
+              Icons.play_arrow_rounded,
+              color: Colors.deepPurple,
+            ),
           ),
         ],
       ),

@@ -1,7 +1,6 @@
 // lib/screens/course_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:gimini/screens/course_details_screen.dart'; // Mude 'gimini'
 
 // --- Modelos de Dados (para simular dados reais) ---
 class Lesson {
@@ -16,7 +15,13 @@ class Course {
   final String imageAsset;
   final double completed;
   final List<Lesson> lessons;
-  Course({required this.title, required this.instructor, required this.imageAsset, required this.completed, required this.lessons});
+  Course({
+    required this.title,
+    required this.instructor,
+    required this.imageAsset,
+    required this.completed,
+    required this.lessons,
+  });
 }
 
 // --- Tela Principal ---
@@ -28,14 +33,20 @@ class CourseListScreen extends StatefulWidget {
 }
 
 class _CourseListScreenState extends State<CourseListScreen> {
-  final List<String> _filters = ["Todos", "Orçamento", "Investimentos", "Dívidas"];
+  final List<String> _filters = [
+    "Todos",
+    "Orçamento",
+    "Investimentos",
+    "Dívidas",
+  ];
   int _selectedFilterIndex = 0;
 
   final List<Course> _courses = [
     Course(
       title: "Investindo para Iniciantes",
       instructor: "Ricardo Financeiro",
-      imageAsset: "https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421", // Reutilizando imagem
+      imageAsset:
+          "https://storage.googleapis.com/gemini-generative-ai-public/images/9944a9fd-e09b-4654-be81-6bfd7ca19421", // Reutilizando imagem
       completed: 0.45,
       lessons: [
         Lesson("1. O que é um investimento?", "Investimentos"),
@@ -46,7 +57,8 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Course(
       title: "Orçamento Pessoal Inteligente",
       instructor: "Clara Contas",
-      imageAsset: "https://storage.googleapis.com/gemini-generative-ai-public/images/2e04e9c3-9fd6-455b-b9d2-b06de22d4f80", // Reutilizando imagem
+      imageAsset:
+          "https://storage.googleapis.com/gemini-generative-ai-public/images/2e04e9c3-9fd6-455b-b9d2-b06de22d4f80", // Reutilizando imagem
       completed: 0.70,
       lessons: [
         Lesson("1. Planilha de Gastos", "Orçamento"),
@@ -61,7 +73,10 @@ class _CourseListScreenState extends State<CourseListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meus Cursos', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Meus Cursos',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -114,7 +129,10 @@ class _CourseListScreenState extends State<CourseListScreen> {
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: isSelected ? Theme.of(context).primaryColor : Colors.grey[300]!),
+          side: BorderSide(
+            color:
+                isSelected ? Theme.of(context).primaryColor : Colors.grey[300]!,
+          ),
         ),
       ),
     );
@@ -149,10 +167,7 @@ class _CourseCardState extends State<CourseCard> {
         ],
       ),
       child: Column(
-        children: [
-          _buildHeader(context),
-          if (_isExpanded) _buildLessonList(),
-        ],
+        children: [_buildHeader(context), if (_isExpanded) _buildLessonList()],
       ),
     );
   }
@@ -172,19 +187,40 @@ class _CourseCardState extends State<CourseCard> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(widget.course.imageAsset, width: 60, height: 60, fit: BoxFit.cover),
+                  child: Image.network(
+                    widget.course.imageAsset,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(width: 15),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.course.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                      Text('instrutor: ${widget.course.instructor}', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                      Text(
+                        widget.course.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'instrutor: ${widget.course.instructor}',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Icon(_isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
+                Icon(
+                  _isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -200,9 +236,12 @@ class _CourseCardState extends State<CourseCard> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text('Concluído: ${(widget.course.completed * 100).toInt()}%', style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                Text(
+                  'Concluído: ${(widget.course.completed * 100).toInt()}%',
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -221,14 +260,27 @@ class _CourseCardState extends State<CourseCard> {
           final lesson = widget.course.lessons[index];
           return Row(
             children: [
-              Text("0${index + 1}", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey)),
+              Text(
+                "0${index + 1}",
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
               const SizedBox(width: 20),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(lesson.title, style: const TextStyle(fontWeight: FontWeight.w600)),
-                    Text(lesson.category, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                    Text(
+                      lesson.title,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      lesson.category,
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
                   ],
                 ),
               ),
@@ -239,9 +291,11 @@ class _CourseCardState extends State<CourseCard> {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Theme.of(context).primaryColor,
                   side: BorderSide(color: Theme.of(context).primaryColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
-              )
+              ),
             ],
           );
         },
