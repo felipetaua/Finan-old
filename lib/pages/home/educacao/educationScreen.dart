@@ -1,4 +1,5 @@
 import 'package:finan/pages/home/educacao/course_list_screen.dart';
+import 'package:finan/pages/home/educacao/course_details_screen.dart';
 import 'package:finan/pages/home/educacao/dicasInvestimentos.dart';
 import 'package:finan/pages/home/educacao/planejamentoFinanceiro.dart';
 import 'package:finan/pages/home/educacao/reservaEmergencia.dart';
@@ -233,7 +234,16 @@ class EducationPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                            const CourseDetailsScreen(),
+                                  ),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.grey[500],
                                 foregroundColor: Colors.white,
@@ -279,7 +289,16 @@ class EducationPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                            const CourseDetailsScreen(),
+                                  ),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.grey[500],
                                 foregroundColor: Colors.white,
@@ -325,7 +344,16 @@ class EducationPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                            const CourseDetailsScreen(),
+                                  ),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.grey[500],
                                 foregroundColor: Colors.white,
@@ -371,7 +399,16 @@ class EducationPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                            const CourseDetailsScreen(),
+                                  ),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.grey[500],
                                 foregroundColor: Colors.white,
