@@ -1,5 +1,3 @@
-// lib/widgets/statistics_card.dart
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -164,8 +162,9 @@ class StatisticsCard extends StatelessWidget {
         break;
     }
     return SideTitleWidget(
-      fitInside: meta.axisSide,
-      meta: null,
+      fitInside: SideTitleFitInsideData.fromTitleMeta(meta),
+      space: 4,
+      meta: meta,
       child: Text(text, style: style),
     );
   }

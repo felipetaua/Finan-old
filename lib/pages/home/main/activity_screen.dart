@@ -1,5 +1,7 @@
 // lib/screens/activity_screen.dart
 
+import 'package:finan/pages/home/main/widgets/analytics_section.dart';
+import 'package:finan/pages/home/main/widgets/statistics_card.dart';
 import 'package:flutter/material.dart';
 
 class ActivityScreen extends StatelessWidget {
@@ -33,9 +35,9 @@ class ActivityScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 10),
-              // StatisticsCard(),
+              StatisticsCard(),
               SizedBox(height: 30),
-              // AnalyticsSection(),
+              AnalyticsSection(),
             ],
           ),
         ),
