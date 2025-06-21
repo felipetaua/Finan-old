@@ -1,3 +1,4 @@
+import 'package:finan/pages/home/educacao/course_list_screen.dart';
 import 'package:finan/pages/home/educacao/dicasInvestimentos.dart';
 import 'package:finan/pages/home/educacao/planejamentoFinanceiro.dart';
 import 'package:finan/pages/home/educacao/reservaEmergencia.dart';
@@ -50,29 +51,39 @@ class EducationPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF3B53E),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Tutoriais e\nCursos',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CourseListScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF3B53E),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Tutoriais e\nCursos',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Image.asset(
-                        'assets/images/globo-estudo.png',
-                        height: 50,
-                        width: 50,
-                      ),
-                    ],
+                        Image.asset(
+                          'assets/images/Educacao/planejamento-financeiro.png',
+                          height: 50,
+                          width: 50,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
