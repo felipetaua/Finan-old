@@ -87,6 +87,7 @@ flutter:
     - assets/images/emprestimo.png
     - assets/images/faculdade.png
     - assets/images/seguro.png
+    - assets/images/Educacao/
 
 fonts:
   - family: Madimi One
