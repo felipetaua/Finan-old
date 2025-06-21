@@ -53,7 +53,7 @@ class FavoritesPage extends StatelessWidget {
                 child: GridView(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 16, 
+                    mainAxisSpacing: 16,
                     crossAxisSpacing: 16,
                   ),
                   children: [
@@ -80,7 +80,7 @@ class FavoritesPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder:
                                   (context) =>
-                                      const PorcentagemCalculadoraPage(), 
+                                      const PorcentagemCalculadoraPage(),
                             ),
                           );
                         },
@@ -90,7 +90,7 @@ class FavoritesPage extends StatelessWidget {
                       title: 'Conversor',
                       iconPath: 'assets/images/conversor.png',
                       background: const LinearGradient(
-                        colors: [Colors.orange, Colors.red],
+                        colors: [Colors.limeAccent, Colors.green],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -98,9 +98,7 @@ class FavoritesPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder:
-                                (context) =>
-                                    const ConversorMoedasPage(), 
+                            builder: (context) => const ConversorMoedasPage(),
                           ),
                         );
                       },
@@ -117,9 +115,7 @@ class FavoritesPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder:
-                                (context) =>
-                                    const CalculadoraPage(),
+                            builder: (context) => const CalculadoraPage(),
                           ),
                         );
                       },
@@ -135,10 +131,7 @@ class FavoritesPage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => AddPage(),
-                          ),
+                          MaterialPageRoute(builder: (context) => AddPage()),
                         );
                       },
                     ),
@@ -232,13 +225,13 @@ class ToolCard extends StatelessWidget {
     required this.title,
     required this.iconPath,
     required this.background,
-    required this.onTap, 
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, 
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           gradient: background,
