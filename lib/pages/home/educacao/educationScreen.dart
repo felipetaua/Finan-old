@@ -35,6 +35,7 @@ class EducationPage extends StatelessWidget {
                   child: const TextField(
                     textAlign: TextAlign.start,
                     textAlignVertical: TextAlignVertical.center,
+                    cursorColor: Colors.blueAccent,
                     decoration: InputDecoration(
                       icon: Icon(Icons.search),
                       hintText: 'Procure cursos, e dicas',

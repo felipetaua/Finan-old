@@ -435,7 +435,7 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
             (context) => ListaDetalhadaPage(
               titulo: titulo,
               ativos: lista,
-              imagens: imagens, 
+              imagens: imagens,
             ),
       ),
     );
@@ -468,6 +468,7 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
                   onChanged: _filterSearch,
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
+                  cursorColor: Colors.blueAccent,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.search),
                     hintText: 'Busque por ativos financeiros',
@@ -535,8 +536,7 @@ class _InvestimentosPageState extends State<InvestimentosPage> {
 
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: 
-                    Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _InvestimentoBox(
@@ -823,14 +823,14 @@ class _AtivoItem extends StatefulWidget {
 }
 
 class _AtivoItemState extends State<_AtivoItem> {
-  bool _isExpanded = false; 
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _isExpanded = !_isExpanded; 
+          _isExpanded = !_isExpanded;
         });
       },
       child: AnimatedContainer(
