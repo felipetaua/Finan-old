@@ -336,7 +336,7 @@ class _GastosContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextField(
-              // controller: _searchController,
+              // controller: _searchControlle-r,
               // onChanged: _filterSearch,
               textAlign: TextAlign.start,
               textAlignVertical: TextAlignVertical.center,
@@ -427,7 +427,7 @@ class _GastosContent extends StatelessWidget {
                           MaterialPageRoute(
                             builder:
                                 (context) =>
-                                    InvestimentosScreenCard(), //InvestimentosScreenCard
+                                    InvestimentosScreenCard(), 
                           ),
                         );
                       },
@@ -487,11 +487,10 @@ class _GastosContent extends StatelessWidget {
   }
 }
 
-// Widget de categoria de renda
 class _RendaCategoria extends StatelessWidget {
   final String label;
   final IconData icon;
-  final VoidCallback onTap; // Função personalizada para navegação
+  final VoidCallback onTap;
 
   const _RendaCategoria({
     required this.label,
@@ -502,7 +501,7 @@ class _RendaCategoria extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Executa a função personalizada ao clicar
+      onTap: onTap,
       child: Column(
         children: [
           Icon(icon, size: 28, color: Colors.blueGrey),
@@ -524,7 +523,7 @@ class TransacaoCard extends StatefulWidget {
 }
 
 class _TransacaoCardState extends State<TransacaoCard> {
-  bool _isExpanded = false; // Controla se o card está expandido
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -553,7 +552,6 @@ class _TransacaoCardState extends State<TransacaoCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Cabeçalho do card
             Row(
               children: [
                 CircleAvatar(
