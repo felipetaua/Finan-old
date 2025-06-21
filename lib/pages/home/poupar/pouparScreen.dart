@@ -707,8 +707,9 @@ class _PouparPageState extends State<PouparPage> {
                           FontAwesomeIcons.solidStar,
                           color: Colors.white,
                         ),
+                        backgroundColor: const Color(0xFFF3B53E),
 
-                        // image: 'assets/images/card-invest-favoritos.png', // Removido
+                        // image: 'assets/images/card-invest-favoritos.png',
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -717,8 +718,9 @@ class _PouparPageState extends State<PouparPage> {
                           FontAwesomeIcons.trophy,
                           color: Colors.white,
                         ),
+                        backgroundColor: const Color(0xFFF33D3D),
 
-                        // image: 'assets/images/card-invest-favoritos.png', // Removido
+                        // image: 'assets/images/card-invest-favoritos.png',
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -727,8 +729,9 @@ class _PouparPageState extends State<PouparPage> {
                           FontAwesomeIcons.book,
                           color: Colors.white,
                         ),
+                        backgroundColor: const Color(0xFF4CAF50),
 
-                        // image: 'assets/images/card-invest-favoritos.png', // Removido
+                        // image: 'assets/images/card-invest-favoritos.png',
                         onTap: () => Navigator.push,
                       ),
                       _sujestoesBox(
@@ -737,8 +740,9 @@ class _PouparPageState extends State<PouparPage> {
                           FontAwesomeIcons.arrowTrendUp,
                           color: Colors.white,
                         ),
+                        backgroundColor: const Color(0xFF2196F3),
 
-                        // image: 'assets/images/card-invest-favoritos.png', // Removido
+                        // image: 'assets/images/card-invest-favoritos.png',
                         onTap: () => Navigator.push,
                       ),
                     ],
@@ -1309,14 +1313,14 @@ class ReservaItem extends StatelessWidget {
 class _sujestoesBox extends StatelessWidget {
   final String label;
   final Widget icon;
-  // final String image; // Removido
   final VoidCallback onTap;
+  final Color backgroundColor; // NOVO
 
   const _sujestoesBox({
     required this.label,
-    // required this.image, // Removido
     required this.icon,
     required this.onTap,
+    required this.backgroundColor, // NOVO
   });
 
   @override
@@ -1329,12 +1333,7 @@ class _sujestoesBox extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-
-          gradient: LinearGradient(
-            colors: [Color(0xFF368DF7), Color(0xFF2A79D7)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: backgroundColor, // Use a cor recebida
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
@@ -1343,7 +1342,6 @@ class _sujestoesBox extends StatelessWidget {
             ),
           ],
         ),
-
         alignment: Alignment.center,
         padding: const EdgeInsets.all(10),
         child: Row(
@@ -1358,7 +1356,7 @@ class _sujestoesBox extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            icon, // Exibe o ícone
+            icon,
           ],
         ),
       ),
