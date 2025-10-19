@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-const Color finanBlue = Color(0xFF1E88E5);
-const Color darkText = Color(0xFF1D1D1D);
-const Color lightGrayText = Color(0xFF5A5A5A);
+import 'package:finan/theme/app_colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -92,7 +89,7 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Container(
-              color: finanBlue.withOpacity(0.03),
+              color: AppColors.primary.withOpacity(0.03),
               child: Align(
                 alignment: const Alignment(0, 0.25),
                 child: Image.asset(
@@ -101,13 +98,13 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
                   alignment: Alignment.center,
                   errorBuilder:
                       (context, error, stackTrace) => Container(
-                        color: finanBlue.withOpacity(0.1),
+                        color: AppColors.primary.withOpacity(0.1),
                         child: const Center(
                           child: Text(
-                            'Mockup\\n(Placeholder)',
+                            'Mockup\n(Placeholder)',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: finanBlue,
+                              color: AppColors.primary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -126,7 +123,7 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
               style: TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.w900,
-                color: finanBlue,
+                color: AppColors.primary,
               ),
             ),
           ),
@@ -150,7 +147,7 @@ class _CtaButton extends StatelessWidget {
           debugPrint('Iniciar Pressionado');
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: finanBlue,
+          backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
