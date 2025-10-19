@@ -10,13 +10,17 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final overlay = SystemUiOverlayStyle(
+      statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
+      statusBarColor: Colors.transparent,
+    );
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent,
-      ),
+      value: overlay,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,22 +46,25 @@ class WelcomeScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 34,
                           fontWeight: FontWeight.w900,
-                          color: darkText,
+                          color: Theme.of(context).colorScheme.onBackground,
                           height: 1.2,
                         ),
                       ),
 
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
-                      // Descrição
                       Text(
                         'Com um planejamento eficiente mude sua vida para melhor, tenha liberdade e qualidade de vida.',
-                        style: TextStyle(fontSize: 16, color: lightGrayText),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onBackground.withOpacity(0.7),
+                        ),
                       ),
 
                       SizedBox(height: 20),
 
-                      // Botão CTA (Iniciar)
                       _CtaButton(),
 
                       SizedBox(height: 20),
