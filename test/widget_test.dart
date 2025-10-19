@@ -7,14 +7,14 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:finan/main.dart';
+import 'package:finan/app.dart';
 
 void main() {
   testWidgets('App shows initialization text', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const FinanApp());
 
-    // Verify our HomeScreen displays the expected text.
-    expect(find.text('Firebase initialized — app default'), findsOneWidget);
+    // Verify the welcome screen displays the app title.
+    expect(find.text('Finan'), findsOneWidget);
   });
 }
