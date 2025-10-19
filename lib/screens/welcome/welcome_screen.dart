@@ -24,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
               Expanded(
                 flex: 5,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(top: 0),
                   child: _AppHeaderImagePlaceholder(),
                 ),
               ),
