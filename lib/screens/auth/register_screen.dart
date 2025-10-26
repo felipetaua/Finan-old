@@ -244,7 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 32),
                 CustomButton(
-                  label: 'Quero Mudar Minha Vida Financeira',
+                  label: 'Mudar Minha Vida Financeira',
                   onPressed: _isLoading ? null : _handleRegister,
                   isLoading: _isLoading,
                 ),
