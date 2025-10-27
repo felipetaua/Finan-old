@@ -209,12 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // TODO: Implementar fluxo de "Esqueceu a senha?"
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Redefinir senha - Em breve'),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/forgot-password');
                     },
                     child: Text(
                       'Esqueceu a senha?',
