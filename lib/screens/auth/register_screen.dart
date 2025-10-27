@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Icons.arrow_back,
             color: Theme.of(context).colorScheme.onBackground,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/'),
         ),
       ),
       body: SingleChildScrollView(
