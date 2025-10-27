@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
@@ -87,17 +87,16 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Espaço para animação Lottie
               Container(
                 width: double.infinity,
                 height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: AppColors.primary.withOpacity(0.05),
+                  color: AppColors.primary.withOpacity(0.5),
                 ),
                 child: Lottie.asset(
                   'assets/animations/login.json',
@@ -105,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   repeat: true,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
               Text(
                 'Bem-vindo(a) de volta!',
                 style: TextStyle(
@@ -117,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Vamos organizar as contas.',
+                'Vamos organizar as contas. Sua liberdade financeira está a um toque de distância.',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -127,15 +126,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
-                'Sua liberdade financeira está a um toque de distância.',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 40),
               Text(
                 'E-mail',
                 style: TextStyle(
@@ -151,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: Icons.email_outlined,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
               Text(
                 'Senha',
                 style: TextStyle(
@@ -222,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 28),
               CustomButton(
                 label: 'Entrar',
                 onPressed: _isLoading ? null : _handleLogin,
