@@ -193,7 +193,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   color: AppColors.primary.withOpacity(0.05),
                 ),
                 child: Lottie.asset(
-                  'assets/animations/login.json',
+                  'assets/animations/security.json',
                   fit: BoxFit.contain,
                   repeat: true,
                 ),
@@ -243,15 +243,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               const SizedBox(height: 24),
               Center(
-                child: GestureDetector(
-                  onTap: _handleBackToLogin,
-                  child: Text(
-                    'Lembrou sua senha? Voltar ao Login',
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'Lembrou sua senha? ',
                     style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.primary,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontWeight: FontWeight.w600,
                     ),
+                    children: [
+                      TextSpan(
+                        text: 'Voltar ao Login',
+                        style: const TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        recognizer:
+                            TapGestureRecognizer()..onTap = _handleBackToLogin,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -284,13 +295,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 0),
               Container(
-                width: 160,
+                width: 180,
                 height: 160,
                 decoration: BoxDecoration(
                   color: AppColors.primary.withOpacity(0.1),
@@ -298,11 +309,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Center(
-                  child: Icon(
-                    Icons.mail_outline,
-                    color: AppColors.primary,
-                    size: 100,
-                  ),
+                  child: Image.asset('assets/images/send-email.png'),
                 ),
               ),
               const SizedBox(height: 40),
