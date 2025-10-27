@@ -231,14 +231,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             recognizer:
                                 TapGestureRecognizer()
                                   ..onTap = () {
-                                    // TODO: Abrir página de Termos de Uso
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          'Termos de Uso - Em breve',
-                                        ),
-                                      ),
-                                    );
+                                    Navigator.pushNamed(context, '/terms');
                                   },
                           ),
                         ],
