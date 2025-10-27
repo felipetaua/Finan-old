@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/welcome/welcome_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
+import 'screens/auth/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/splash/splash_screen.dart';
 import 'screens/legal/terms_of_use_screen.dart';
@@ -24,6 +25,7 @@ class FinanApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/home': (context) => const HomeScreen(),
         '/terms': (context) => const TermsOfUseScreen(),
       },
