@@ -4,6 +4,7 @@ import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/splash/splash_screen.dart';
+import 'screens/legal/terms_of_use_screen.dart';
 import 'theme/app_theme.dart';
 
 class FinanApp extends StatelessWidget {
@@ -24,6 +25,7 @@ class FinanApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
+        '/terms': (context) => const TermsOfUseScreen(),
       },
     );
   }
