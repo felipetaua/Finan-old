@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:finan/theme/app_colors.dart';
 import 'package:finan/widgets/custom_button.dart';
 import 'package:finan/widgets/custom_text_field.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -96,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: AppColors.primary.withOpacity(0.5),
+                  color: AppColors.primary.withOpacity(0.4),
                 ),
                 child: Lottie.asset(
                   'assets/animations/login.json',
@@ -235,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _SocialLoginButton(
-                    icon: Icons.g_mobiledata,
+                    icon: FontAwesomeIcons.google,
                     label: 'Google',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -246,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   _SocialLoginButton(
-                    icon: Icons.apple,
+                    icon: FontAwesomeIcons.apple,
                     label: 'Apple',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -257,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   _SocialLoginButton(
-                    icon: Icons.facebook,
+                    icon: FontAwesomeIcons.facebook,
                     label: 'Facebook',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -322,7 +324,7 @@ class _SocialLoginButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         width: 80,
-        height: 60,
+        height: 70,
         decoration: BoxDecoration(
           border: Border.all(
             color: Theme.of(context).colorScheme.outline,
@@ -333,7 +335,7 @@ class _SocialLoginButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: AppColors.primary, size: 28),
+            Icon(icon, color: AppColors.primary, size: 24),
             const SizedBox(height: 4),
             Text(
               label,
