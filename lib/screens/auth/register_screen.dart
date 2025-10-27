@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:finan/theme/app_colors.dart';
 import 'package:finan/widgets/custom_button.dart';
@@ -101,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -110,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: AppColors.primary.withOpacity(0.05),
+                  color: AppColors.primary.withOpacity(0.4),
                 ),
                 child: Lottie.asset(
                   'assets/animations/register.json',
@@ -118,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   repeat: true,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
               Text(
                 'Crie sua Conta Finan',
                 style: TextStyle(
@@ -140,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 1.3,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 12),
               Text(
                 'Nome',
                 style: TextStyle(
@@ -156,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 keyboardType: TextInputType.name,
                 prefixIcon: Icons.person_outline,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
               Text(
                 'E-mail',
                 style: TextStyle(
@@ -172,7 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: Icons.email_outlined,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
               Text(
                 'Senha',
                 style: TextStyle(
@@ -193,7 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   setState(() => _obscurePassword = !_obscurePassword);
                 },
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -211,7 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: RichText(
                       text: TextSpan(
@@ -240,7 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 28),
               CustomButton(
                 label: 'Mudar Minha Vida Financeira',
                 onPressed: _isLoading ? null : _handleRegister,
@@ -263,7 +264,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _SocialSignupButton(
-                    icon: Icons.g_mobiledata,
+                    icon: FontAwesomeIcons.google,
                     label: 'Google',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -274,7 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   _SocialSignupButton(
-                    icon: Icons.apple,
+                    icon: FontAwesomeIcons.apple,
                     label: 'Apple',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -285,7 +286,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   _SocialSignupButton(
-                    icon: Icons.facebook,
+                    icon: FontAwesomeIcons.facebook,
                     label: 'Facebook',
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -350,7 +351,7 @@ class _SocialSignupButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         width: 80,
-        height: 60,
+        height: 70,
         decoration: BoxDecoration(
           border: Border.all(
             color: Theme.of(context).colorScheme.outline,
@@ -361,7 +362,7 @@ class _SocialSignupButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: AppColors.primary, size: 28),
+            Icon(icon, color: AppColors.primary, size: 24),
             const SizedBox(height: 4),
             Text(
               label,
