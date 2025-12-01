@@ -6,6 +6,7 @@ import 'screens/auth/register_screen.dart';
 import 'screens/auth/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/legal/terms_of_use_screen.dart';
+import 'screens/legal/privacy_policy_screen.dart';
 import 'theme/app_theme.dart';
 
 class FinanApp extends StatelessWidget {
@@ -27,6 +28,7 @@ class FinanApp extends StatelessWidget {
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/home': (context) => const HomeScreen(),
         '/terms': (context) => const TermsOfUseScreen(),
+        '/privacy': (context) => const PrivacyPolicyScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/login-password') {
