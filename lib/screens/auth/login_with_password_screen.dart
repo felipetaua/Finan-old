@@ -42,10 +42,7 @@ class _LoginWithPasswordScreenState extends State<LoginWithPasswordScreen> {
     Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login bem-sucedido! (Simulado)')),
-        );
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/home');
       }
     });
   }
