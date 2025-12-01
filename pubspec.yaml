@@ -64,6 +64,8 @@ flutter:
     - assets/avatares/
     - assets/fonts/
     - assets/animations/
+    - assets/images/global/
+    - assets/images/paterns/
 
   fonts:
     - family: Madimi One
