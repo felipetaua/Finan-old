@@ -5,7 +5,6 @@ import 'screens/auth/login_with_password_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/auth/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
-import 'screens/splash/splash_screen.dart';
 import 'screens/legal/terms_of_use_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -20,10 +19,9 @@ class FinanApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: '/splash',
+      initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
-        '/splash': (context) => const SplashScreen(),
         '/login': (context) => const AuthEntryScreen(),
         '/register': (context) => const RegisterScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
