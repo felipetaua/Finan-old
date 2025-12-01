@@ -174,7 +174,7 @@ class _AuthEntryScreenState extends State<AuthEntryScreen>
 
                 // Link de Ajuda
                 GestureDetector(
-                  onTap: () => _showSnackbar('Abrindo tela de ajuda...'),
+                  onTap: () => Navigator.pushNamed(context, '/help'),
                   child: const Text(
                     'Precisa de Ajuda para criar conta?',
                     style: TextStyle(
