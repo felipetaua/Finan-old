@@ -168,6 +168,7 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
                 fontSize: 48,
                 fontWeight: FontWeight.w900,
                 color: AppColors.primary,
+                fontFamily: 'Madimi One',
               ),
             ),
           ),
