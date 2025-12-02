@@ -2,23 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:finan/theme/app_colors.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with TickerProviderStateMixin {
+  late final AnimationController _slideController;
+  late final Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _slideController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(-1.5, 0),
+    ).animate(
+      CurvedAnimation(parent: _slideController, curve: Curves.easeInCubic),
+    );
+  }
+
+  @override
+  void dispose() {
+    _slideController.dispose();
+    super.dispose();
+  }
+
+  void _triggerSlideAnimation() {
+    _slideController.forward().then((_) {
+      Navigator.pushNamed(context, '/login');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final overlay = SystemUiOverlayStyle(
-      statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
-      statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
-      statusBarColor: Colors.transparent,
+
+    // Defina o estilo da barra de status
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+        statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
+        systemNavigationBarIconBrightness:
+            isDark ? Brightness.light : Brightness.dark,
+      ),
     );
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: overlay,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SafeArea(
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SlideTransition(
+        position: _slideAnimation,
+        child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,7 +106,7 @@ class WelcomeScreen extends StatelessWidget {
 
                       SizedBox(height: 20),
 
-                      _CtaButton(),
+                      _CtaButton(onPressed: _triggerSlideAnimation),
 
                       SizedBox(height: 20),
                     ],
@@ -124,6 +168,7 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
                 fontSize: 48,
                 fontWeight: FontWeight.w900,
                 color: AppColors.primary,
+                fontFamily: 'Madimi One',
               ),
             ),
           ),
@@ -134,7 +179,9 @@ class _AppHeaderImagePlaceholder extends StatelessWidget {
 }
 
 class _CtaButton extends StatelessWidget {
-  const _CtaButton();
+  final VoidCallback onPressed;
+
+  const _CtaButton({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +189,11 @@ class _CtaButton extends StatelessWidget {
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/login');
-          debugPrint('Iniciar Pressionado');
-        },
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(32),
           ),
           elevation: 5,
         ),
